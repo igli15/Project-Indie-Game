@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
 	{
 		m_rb.MovePosition(transform.position + m_velocity * Time.fixedDeltaTime);
 		Rotate();
-		
  	}
 
 	public void SetVelocity(Vector3 velocity)
@@ -40,9 +39,10 @@ public class PlayerController : MonoBehaviour
 		if (m_velocity != Vector3.zero)
 		{
 			m_targetRotation = Quaternion.LookRotation(m_velocity);
-			m_rb.rotation =Quaternion.Euler(
+			m_rb.rotation = m_targetRotation;
+			/*m_rb.rotation =Quaternion.Euler(
 				Vector3.up * Mathf.MoveTowardsAngle(m_rb.rotation.eulerAngles.y, m_targetRotation.eulerAngles.y, 
-													m_rotationSpeed * Time.fixedDeltaTime));
+													m_rotationSpeed * Time.fixedDeltaTime));*/
 		}
 
 	}
