@@ -6,8 +6,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+	private float m_rotationSpeed = 0 ;
+	
 	private Vector3 m_velocity;
 	private Rigidbody m_rb;
+	private Quaternion m_targetRotation;
 	
 	// Use this for initialization
 	void Start ()
@@ -18,10 +21,29 @@ public class PlayerController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		m_rb.MovePosition(transform.position + m_velocity * Time.fixedDeltaTime);
-	}
+		Rotate();
+		
+ 	}
 
 	public void SetVelocity(Vector3 velocity)
 	{
 		m_velocity = velocity;
+	}
+
+	public void SetRotationSpeed(float rotationSpeed)
+	{
+		m_rotationSpeed = rotationSpeed;
+	}
+
+	void Rotate()
+	{
+		if (m_velocity != Vector3.zero)
+		{
+			m_targetRotation = Quaternion.LookRotation(m_velocity);
+			m_rb.rotation =Quaternion.Euler(
+				Vector3.up * Mathf.MoveTowardsAngle(m_rb.rotation.eulerAngles.y, m_targetRotation.eulerAngles.y, 
+													m_rotationSpeed * Time.fixedDeltaTime));
+		}
+
 	}
 }
