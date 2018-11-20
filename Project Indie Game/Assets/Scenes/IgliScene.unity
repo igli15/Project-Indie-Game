@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveSpeed: 4
-  m_rotationSpeed: 700
+  m_rotationSpeed: 800
 --- !u!65 &1774658606
 BoxCollider:
   m_ObjectHideFlags: 0
