@@ -43,4 +43,9 @@ public class Player : MonoBehaviour
 		
 	}
 
+	public Vector3 GetVelocity()
+	{
+		return m_vel;
+	}
+
 }
