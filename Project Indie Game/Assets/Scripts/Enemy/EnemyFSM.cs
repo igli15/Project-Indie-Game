@@ -13,7 +13,7 @@ public class EnemyFSM : MonoBehaviour, IAgent {
     }
 
     void Update() {
-
+        if (Input.GetKeyDown(KeyCode.S)) m_fsm.ChangeState<EnemyMeleeState>();
     }
 
     public Fsm<EnemyFSM> fsm{ get{ return m_fsm; } }

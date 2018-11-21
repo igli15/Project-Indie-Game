@@ -13,7 +13,7 @@ public class EnemyMeleeAttack : MonoBehaviour
     public Action OnAttackEnds;
 
     private float m_damage = 1;
-    private float m_reloadTime = 0.5f;
+    private float m_reloadTime = 2f;
     private float m_lastTimeAttacked;
 
 	void Start () {
@@ -33,7 +33,7 @@ public class EnemyMeleeAttack : MonoBehaviour
         Health health = collider.GetComponent<Health>();
 
         if (health == null) { return; }
-
+        Debug.Log("Deal Damage");
         m_lastTimeAttacked = Time.time;
         health.InflictDamage(m_damage);
         if (OnAttackEnds != null) OnAttackEnds();

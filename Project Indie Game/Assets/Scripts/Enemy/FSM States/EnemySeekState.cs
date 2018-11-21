@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Enemy))]
 public class EnemySeekState : AbstractState<EnemyFSM>
@@ -24,14 +25,19 @@ public class EnemySeekState : AbstractState<EnemyFSM>
         base.Enter(pAgent);
         m_seekTarget = GetComponent<Enemy>().target;
         Debug.Log("     START FOLLOW_TARGET");
+        m_enemyMovement.navMeshAgent.enabled = true;
         StartCoroutine( FollowTarget(m_seekTarget.transform) );
-        
+
+
     }
 
     public override void Exit(IAgent pAgent)
     {
         Debug.Log("EXIT SEEK_STATE");
         base.Exit(pAgent);
+        m_enemyMovement.ResetPath();
+        m_enemyMovement.navMeshAgent.enabled = false;
+
         StopAllCoroutines();
     }
 
@@ -41,9 +47,10 @@ public class EnemySeekState : AbstractState<EnemyFSM>
 
         while (true)
         {
-            if (Vector3.SqrMagnitude(transform.position - target.position) < 0.1f)
+            if ((transform.position - target.position).magnitude <2)
             {
                 Debug.Log("END OF FOLLOWING");
+
                 m_enemyFSM.fsm.ChangeState<EnemyMeleeState>();
                 yield return null;
             }
@@ -52,7 +59,6 @@ public class EnemySeekState : AbstractState<EnemyFSM>
                 m_enemyMovement.SetDestination(target.position);
                 previousTargetPosition = target.position;
             }
-            Debug.Log("COROUTINE");
             yield return new WaitForSeconds(0.1f);
         }
     }

@@ -10,7 +10,6 @@ public class EnemyDamageCollider : MonoBehaviour {
 
     private void OnTriggerStay(Collider collider)
     {
-        Debug.Log("COLLISION WITH DAMAGE BOX");
         if (OnEnemyTriggerStay != null) OnEnemyTriggerStay(collider);
     }
 }

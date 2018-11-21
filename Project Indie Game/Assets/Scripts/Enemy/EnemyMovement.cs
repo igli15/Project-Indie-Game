@@ -27,4 +27,10 @@ public class EnemyMovement : MonoBehaviour
     {
         m_navMeshAgent.SetDestination(destination);
     }
+    public void ResetPath()
+    {
+        m_navMeshAgent.ResetPath();
+    }
+
+    public NavMeshAgent navMeshAgent { get { return m_navMeshAgent; } }
 }
