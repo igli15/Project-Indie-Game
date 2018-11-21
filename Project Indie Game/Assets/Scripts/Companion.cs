@@ -9,26 +9,25 @@ using UnityEngine.AI;
 public class Companion : MonoBehaviour,ICompanion
 {
 	[SerializeField] 
-	private CompanionManager m_manager; 
+	protected CompanionManager m_manager; 
 
 	[SerializeField]
-	private float m_throwRange = 10;
+	protected float m_throwRange = 10;
 
 	[SerializeField]
-	private float m_throwSpeed = 20;
+	protected float m_throwSpeed = 20;
 
-	private CompanionSteering m_steering;
+	protected CompanionSteering m_steering;
 
-	private Rigidbody m_rb;
+	protected Rigidbody m_rb;
 
-	private bool m_isThrown = false;
+	protected bool m_isThrown = false;
 
-	private Vector3 m_throwPos = Vector3.zero;
+	protected Vector3 m_throwPos = Vector3.zero;
 
-	private Material m_material;
+	protected Material m_material;
 
-	private int m_index;
-
+	protected int m_index;
 
 	public Action<Companion> OnSpawn;
 	public Action<Companion> OnDisable;
@@ -36,9 +35,10 @@ public class Companion : MonoBehaviour,ICompanion
 	public Action<Companion> OnThrow;
 	public Action<Companion> OnSelected;
 	public Action<Companion> OnDeSelected;
+	public Action<Companion> OnRangeReached;
 	
 	// Use this for initialization
-	void Awake ()
+	protected void Awake ()
 	{
 		m_isThrown = false;
 		m_material = GetComponent<Renderer>().material;
@@ -51,7 +51,7 @@ public class Companion : MonoBehaviour,ICompanion
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	protected void Update ()
 	{
 		if (!m_isThrown)
 		{
@@ -65,17 +65,11 @@ public class Companion : MonoBehaviour,ICompanion
 
 	public virtual void Throw(Vector3 dir)
 	{
-		if (!m_isThrown)
-		{
-			if (OnThrow != null) OnThrow(this);
+		if (OnThrow != null) OnThrow(this);
 			
-			m_manager.SelectCompanion(m_index + 1);
-			m_steering.StopAgent();
-			m_throwPos = transform.position;
-			m_rb.velocity = dir * m_throwSpeed;   //CHANGE TRANSFORM FORWARD TO MOUSE POINT
-			m_isThrown = true;
-		}
-
+		m_manager.SelectCompanion(m_index + 1);
+		m_steering.StopAgent();
+		m_isThrown = true;
 	}
 
 	public virtual void Activate()
@@ -92,8 +86,7 @@ public class Companion : MonoBehaviour,ICompanion
 			if (Vector3.Distance(m_throwPos, transform.position) >= m_throwRange)
 			{
 				m_manager.DisableCompanion(this);
-				
-				//maybe put on activate events here.....
+				if(OnRangeReached != null) OnRangeReached(this);
 			}
 		}
 	}
@@ -108,7 +101,7 @@ public class Companion : MonoBehaviour,ICompanion
 
 
 
-	public void Spawn()
+	public virtual void Spawn()
 	{
 		if (OnSpawn != null) OnSpawn(this);
 		Reset();

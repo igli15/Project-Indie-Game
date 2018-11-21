@@ -36,6 +36,7 @@ public class CompanionController : MonoBehaviour
 
 			if (dir != Vector3.negativeInfinity)
 			{
+				if(!m_manager.GetSelectedCompanion().IsThrown)
 				m_manager.GetSelectedCompanion().Throw(dir.normalized);
 			}
 		}
