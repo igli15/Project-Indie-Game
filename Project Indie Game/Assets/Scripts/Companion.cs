@@ -8,20 +8,11 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CompanionSteering))]
 public class Companion : MonoBehaviour,ICompanion
 {
-
-	[SerializeField] 
-	private Transform m_parentFeetPos;
-
 	[SerializeField] 
 	private CompanionManager m_manager; 
-
-	[SerializeField] 
-	private Player m_playerScript;
-	
-	[SerializeField] 
-	private float m_distRadius;
 
 	[SerializeField]
 	private float m_throwRange = 10;
@@ -29,12 +20,7 @@ public class Companion : MonoBehaviour,ICompanion
 	[SerializeField]
 	private float m_throwSpeed = 20;
 
-	[SerializeField] 
-	private float m_respawnTime = 3;
-
-	private Vector3 m_randomPos;
-
-	private NavMeshAgent m_navMeshAgent;
+	private CompanionSteering m_steering;
 
 	private Rigidbody m_rb;
 
@@ -47,23 +33,15 @@ public class Companion : MonoBehaviour,ICompanion
 	void Awake ()
 	{
 		m_rb = GetComponent<Rigidbody>();
-		m_navMeshAgent = GetComponent<NavMeshAgent>();
+		m_steering = GetComponent<CompanionSteering>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!m_isThrown && Vector3.Distance(transform.position,m_parentFeetPos.position) > m_distRadius + m_navMeshAgent.stoppingDistance && m_playerScript.GetVelocity().magnitude > 0f)
+		if (!m_isThrown)
 		{
-			ResetDestination();
-			/*if (Vector3.Dot(m_parentFeetPos.forward, m_parentFeetPos.position - transform.position) >= 0)
-			{
-				m_navMeshAgent.SetDestination(m_parentFeetPos.position + m_randomPos);
-			}
-			else
-			{
-				m_navMeshAgent.SetDestination(m_parentFeetPos.position + m_randomPos * -1);
-			}*/
+			m_steering.ResetDestination();
 		}
 
 		CheckIfOutOfRange();
@@ -72,27 +50,9 @@ public class Companion : MonoBehaviour,ICompanion
 		//For testing Only
 		if (Input.GetKeyDown(KeyCode.F))
 		{
-			m_navMeshAgent.ResetPath();
 			Throw();
 		}
 
-	}
-
-
-	public void FindRandomPositionAroundParent()
-	{
-		Vector2 randomCircle = Random.insideUnitCircle.normalized * m_distRadius;
-		m_randomPos = new Vector3(randomCircle.x,0,randomCircle.y);
-		transform.position = m_randomPos + m_parentFeetPos.position;
-		
-		m_randomPos.y = m_parentFeetPos.position.y;
-		m_navMeshAgent.SetDestination(m_parentFeetPos.position + m_randomPos);
-	}
-
-	public void ResetDestination()
-	{
-		m_navMeshAgent.ResetPath();
-		m_navMeshAgent.SetDestination(m_parentFeetPos.position + m_randomPos);
 	}
 
 	public void Throw()
@@ -100,7 +60,7 @@ public class Companion : MonoBehaviour,ICompanion
 		if (!m_isThrown)
 		{
 			m_throwPos = transform.position;
-			m_rb.velocity = transform.forward * m_throwSpeed;   //CHANGE TRANSFORM FORWARD TO MOUSE POINT
+			m_rb.velocity = m_manager.gameObject.transform.forward * m_throwSpeed;   //CHANGE TRANSFORM FORWARD TO MOUSE POINT
 			m_isThrown = true;
 		}
 
@@ -118,6 +78,8 @@ public class Companion : MonoBehaviour,ICompanion
 			if (Vector3.Distance(m_throwPos, transform.position) >= m_throwRange)
 			{
 				m_manager.DisableCompanion(this);
+				
+				//maybe put on activate events here.....
 			}
 		}
 	}
@@ -135,7 +97,7 @@ public class Companion : MonoBehaviour,ICompanion
 	public void Respawn()
 	{
 		Reset();
-		FindRandomPositionAroundParent();
+		m_steering.FindRandomPositionAroundParent();
 	}
 
 }
