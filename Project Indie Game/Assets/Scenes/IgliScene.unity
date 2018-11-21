@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8ba38ccf78540f0ae5ca34265786b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_manager: {fileID: 0}
+  m_manager: {fileID: 1774658612}
   m_throwRange: 10
   m_throwSpeed: 20
 --- !u!195 &982909052
