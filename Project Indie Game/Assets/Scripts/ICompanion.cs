@@ -7,5 +7,5 @@ public interface ICompanion
     void Activate();
     void CheckIfOutOfRange();
     void Reset();
-    void Respawn();
+    void Spawn();
 }

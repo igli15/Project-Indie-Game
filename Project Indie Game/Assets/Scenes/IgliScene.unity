@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 635550510}
   - component: {fileID: 635550509}
   - component: {fileID: 635550508}
+  - component: {fileID: 635550511}
   m_Layer: 0
   m_Name: Companion
   m_TagString: Companion
@@ -437,12 +438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88ab3653b8fa4509855b677680f0488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_parentFeetPos: {fileID: 368805044}
-  m_playerScript: {fileID: 1774658605}
-  m_distRadius: 2
+  m_manager: {fileID: 1774658612}
   m_throwRange: 20
   m_throwSpeed: 20
-  m_respawnTime: 3
 --- !u!195 &635550509
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -479,6 +477,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &635550511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 635550504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d27fe2aaeb7f48338add294c707120f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_parentFeetPos: {fileID: 368805044}
+  m_distRadius: 2
+  m_playerScript: {fileID: 1774658605}
 --- !u!1 &660406649
 GameObject:
   m_ObjectHideFlags: 0

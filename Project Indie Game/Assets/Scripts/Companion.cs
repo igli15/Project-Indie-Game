@@ -28,6 +28,11 @@ public class Companion : MonoBehaviour,ICompanion
 
 	private Vector3 m_throwPos = Vector3.zero;
 
+
+	public Action<Companion> OnSpawn;
+	public Action<Companion> OnDisable;
+	public Action<Companion> OnActivate;
+	public Action<Companion> OnThrow;
 	
 	// Use this for initialization
 	void Awake ()
@@ -55,10 +60,12 @@ public class Companion : MonoBehaviour,ICompanion
 
 	}
 
-	public void Throw()
+	public virtual void Throw()
 	{
 		if (!m_isThrown)
 		{
+			if (OnThrow != null) OnThrow(this);
+			
 			m_throwPos = transform.position;
 			m_rb.velocity = m_manager.gameObject.transform.forward * m_throwSpeed;   //CHANGE TRANSFORM FORWARD TO MOUSE POINT
 			m_isThrown = true;
@@ -66,8 +73,10 @@ public class Companion : MonoBehaviour,ICompanion
 
 	}
 
-	public void Activate()
+	public virtual void Activate()
 	{
+		if (OnActivate != null) OnActivate(this);
+		
 		Debug.Log("Activate");
 	}
 
@@ -94,8 +103,9 @@ public class Companion : MonoBehaviour,ICompanion
 
 
 
-	public void Respawn()
+	public void Spawn()
 	{
+		if (OnSpawn != null) OnSpawn(this);
 		Reset();
 		m_steering.FindRandomPositionAroundParent();
 	}

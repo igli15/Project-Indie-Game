@@ -26,11 +26,13 @@ public class CompanionManager : MonoBehaviour
 	public void SpawnCompanion(Companion companion)
 	{
 		companion.gameObject.SetActive(true);
-		companion.Respawn();
+		companion.Spawn();
 	}
 
 	public void DisableCompanion(Companion companion)
 	{
+		if (companion.OnDisable != null) companion.OnDisable(companion);
+		
 		companion.gameObject.SetActive(false);
 		StartCoroutine(ReSpawnCooldown(companion));
 
