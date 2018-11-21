@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SeekerCompanion : Companion
@@ -50,11 +51,22 @@ public class SeekerCompanion : Companion
 		{
 			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
 
+			List<GameObject> enemiesInRange =  new List<GameObject>();
+
+			for (int i = 0; i < inRangeColliders.Length; i++)
+			{
+				if (inRangeColliders[i].gameObject.CompareTag("Enemy") && inRangeColliders[i].transform != other.transform)
+				{
+					enemiesInRange.Add(inRangeColliders[i].gameObject);
+				}
+			}
+
 			other.GetComponent<Health>().InflictDamage(20);
 			
 			m_bounceAmount -= 1;
 			
-			if (inRangeColliders.Length == 0 || m_bounceAmount <= 0)
+			
+			if (enemiesInRange.Count == 0 || m_bounceAmount <= 0)
 			{
 				m_manager.DisableCompanion(this);
 			}
@@ -62,18 +74,17 @@ public class SeekerCompanion : Companion
 			else
 			{
 				Vector3 targetDir = Vector3.forward * m_seekRange * 2; 
-				for (int i = 0; i < inRangeColliders.Length; i++)
+				for (int i = 0; i < enemiesInRange.Count; i++)
 				{
-					if (inRangeColliders[i].CompareTag("Enemy") && inRangeColliders[i].transform != other.transform)
+					if (enemiesInRange[i].transform != other.transform)
 					{
 						if (targetDir.magnitude >=
-						    (inRangeColliders[i].transform.position - other.transform.position).magnitude)
+						    (enemiesInRange[i].transform.position - other.transform.position).magnitude)
 						{
-							targetDir = inRangeColliders[i].transform.position - other.transform.position;
+							targetDir = enemiesInRange[i].transform.position - other.transform.position;
 						}
 					}
 				}
-				
 				Throw(targetDir.normalized);
 			}
 			
