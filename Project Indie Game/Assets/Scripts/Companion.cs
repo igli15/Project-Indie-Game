@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Assertions.Must;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
+
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -34,6 +30,8 @@ public class Companion : MonoBehaviour,ICompanion
 	public Action<Companion> OnDisable;
 	public Action<Companion> OnActivate;
 	public Action<Companion> OnThrow;
+	public Action<Companion> OnSelected;
+	public Action<Companion> OnDeSelected;
 	
 	// Use this for initialization
 	void Awake ()
@@ -52,23 +50,17 @@ public class Companion : MonoBehaviour,ICompanion
 
 		CheckIfOutOfRange();
 		
-		
-		//For testing Only
-		if (Input.GetKeyDown(KeyCode.F))
-		{
-			Throw();
-		}
 
 	}
 
-	public virtual void Throw()
+	public virtual void Throw(Vector3 dir)
 	{
 		if (!m_isThrown)
 		{
 			if (OnThrow != null) OnThrow(this);
 			m_steering.StopAgent();
 			m_throwPos = transform.position;
-			m_rb.velocity = m_manager.gameObject.transform.forward * m_throwSpeed;   //CHANGE TRANSFORM FORWARD TO MOUSE POINT
+			m_rb.velocity = dir * m_throwSpeed;   //CHANGE TRANSFORM FORWARD TO MOUSE POINT
 			m_isThrown = true;
 		}
 

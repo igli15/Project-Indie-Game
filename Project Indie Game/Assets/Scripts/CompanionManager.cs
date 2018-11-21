@@ -52,4 +52,13 @@ public class CompanionManager : MonoBehaviour
 	{
 		return m_selectedCompanion;
 	}
+
+	public void SelectCompanion(int index)
+	{
+		if(m_selectedCompanion.OnDeSelected != null) m_selectedCompanion.OnDeSelected(m_selectedCompanion);
+		
+		m_selectedCompanion = m_companions[index - 1];
+		
+		if(m_selectedCompanion.OnSelected != null) m_selectedCompanion.OnSelected(m_selectedCompanion);
+	}
 }
