@@ -8,6 +8,8 @@ public class CompanionManager : MonoBehaviour
 	[SerializeField]
 	private List<Companion> m_companions = new List<Companion>();
 
+	private Companion m_selectedCompanion;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -15,6 +17,8 @@ public class CompanionManager : MonoBehaviour
 		{
 			SpawnCompanion(m_companions[i]);
 		}
+
+		m_selectedCompanion = m_companions[0];
 	}
 	
 	// Update is called once per frame
@@ -42,5 +46,10 @@ public class CompanionManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(3);
 		SpawnCompanion(companion);
+	}
+
+	public Companion GetSelectedCompanion()
+	{
+		return m_selectedCompanion;
 	}
 }

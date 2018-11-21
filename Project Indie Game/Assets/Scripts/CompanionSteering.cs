@@ -34,6 +34,16 @@ public class CompanionSteering : MonoBehaviour
 	{
 		
 	}
+
+	public void StopAgent()
+	{
+		m_navMeshAgent.isStopped = true;
+	}
+
+	public void ResumeAgent()
+	{
+		m_navMeshAgent.isStopped = false;
+	}
 	
 	public void FindRandomPositionAroundParent()
 	{

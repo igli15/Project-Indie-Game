@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -65,7 +66,7 @@ public class Companion : MonoBehaviour,ICompanion
 		if (!m_isThrown)
 		{
 			if (OnThrow != null) OnThrow(this);
-			
+			m_steering.StopAgent();
 			m_throwPos = transform.position;
 			m_rb.velocity = m_manager.gameObject.transform.forward * m_throwSpeed;   //CHANGE TRANSFORM FORWARD TO MOUSE POINT
 			m_isThrown = true;
@@ -96,7 +97,7 @@ public class Companion : MonoBehaviour,ICompanion
 	public void Reset()
 	{
 		m_isThrown = false;
-		
+		m_steering.ResumeAgent();
 		if(m_rb!= null)
 		m_rb.velocity = Vector3.zero;
 	}
