@@ -50,14 +50,11 @@ public class SeekerCompanion : Companion
 		{
 			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
 
-			m_bounceAmount -= 1;
-
-			if (m_bounceAmount <= 0)
-			{
-				m_manager.DisableCompanion(this);
-			}
+			other.GetComponent<Health>().InflictDamage(20);
 			
-			if (inRangeColliders.Length == 0)
+			m_bounceAmount -= 1;
+			
+			if (inRangeColliders.Length == 0 || m_bounceAmount <= 0)
 			{
 				m_manager.DisableCompanion(this);
 			}
