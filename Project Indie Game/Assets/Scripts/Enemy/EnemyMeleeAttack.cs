@@ -1,18 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMeleeAttack : MonoBehaviour
 {
-    private Rigidbody m_rigidbody;
+    [SerializeField]
+    private EnemyDamageCollider m_enemyDamageCollider;
+
+    public Action OnAttackStart;
+    public Action OnAttackEnds;
 
     private float m_damage = 1;
     private float m_reloadTime = 0.5f;
     private float m_lastTimeAttacked;
 
 	void Start () {
-        m_rigidbody = GetComponent<Rigidbody>();
+        m_enemyDamageCollider.OnEnemyTriggerStay += OnEnemyTriggerStay;
         m_lastTimeAttacked = Time.time;
     }
 	
@@ -21,16 +26,18 @@ public class EnemyMeleeAttack : MonoBehaviour
 	}
 
 
-    public void OnCollisionStay(Collision collision)
+    public void OnEnemyTriggerStay(Collider collider)
     {
         if (m_lastTimeAttacked + m_reloadTime > Time.time) return;
 
-        Health health = collision.collider.GetComponent<Health>();
+        Health health = collider.GetComponent<Health>();
 
         if (health == null) { return; }
 
         m_lastTimeAttacked = Time.time;
         health.InflictDamage(m_damage);
-
+        if (OnAttackEnds != null) OnAttackEnds();
     }
+
+
 }

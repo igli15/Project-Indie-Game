@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class GoombaSeekState : EnemySeekState {
 
+    [SerializeField]
+    private BoxCollider m_damageCollider;
+
+    public GoombaSeekState()
+    {
+
+    }
+
     public override void Enter(IAgent pAgent)
     {
         base.Enter(pAgent);

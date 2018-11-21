@@ -8,11 +8,12 @@ public class EnemySeekState : AbstractState<EnemyFSM>
     private EnemyMovement m_enemyMovement;
     private EnemyMeleeAttack m_enemyMeleeAttack;
     private GameObject m_seekTarget;
+    private EnemyFSM m_enemyFSM;
 
-    Vector3 destionation;
 
     void Awake()
     {
+        m_enemyFSM = GetComponent<EnemyFSM>();
         m_enemyMovement = GetComponent<EnemyMovement>();
         m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
     }
@@ -40,20 +41,20 @@ public class EnemySeekState : AbstractState<EnemyFSM>
 
         while (true)
         {
+            if (Vector3.SqrMagnitude(transform.position - target.position) < 0.1f)
+            {
+                Debug.Log("END OF FOLLOWING");
+                m_enemyFSM.fsm.ChangeState<EnemyMeleeState>();
+                yield return null;
+            }
             if (Vector3.SqrMagnitude(previousTargetPosition - target.position) > 0.1f)
             {
                 m_enemyMovement.SetDestination(target.position);
                 previousTargetPosition = target.position;
-                destionation = previousTargetPosition;
             }
-
+            Debug.Log("COROUTINE");
             yield return new WaitForSeconds(0.1f);
         }
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color=(Color.red);
-        Gizmos.DrawSphere(destionation, 1);
     }
 
 }

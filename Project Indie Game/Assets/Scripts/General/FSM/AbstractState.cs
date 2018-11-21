@@ -7,6 +7,7 @@ using UnityEngine;
     {
         [HideInInspector]
         public T target;
+        
 
         public virtual void Enter(IAgent pAgent)
         {
