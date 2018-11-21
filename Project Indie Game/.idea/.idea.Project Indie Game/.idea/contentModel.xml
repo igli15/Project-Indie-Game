@@ -11,6 +11,27 @@
           <e p="CompanionController.cs" t="Include" />
           <e p="CompanionManager.cs" t="Include" />
           <e p="CompanionSteering.cs" t="Include" />
+          <e p="Enemy" t="Include">
+            <e p="Enemy.cs" t="Include" />
+            <e p="EnemyDamageCollider.cs" t="Include" />
+            <e p="EnemyFSM.cs" t="Include" />
+            <e p="EnemyMeleeAttack.cs" t="Include" />
+            <e p="EnemyMovement.cs" t="Include" />
+            <e p="FSM States" t="Include">
+              <e p="EnemyMeleeState.cs" t="Include" />
+              <e p="EnemySeekState.cs" t="Include" />
+              <e p="GoombaSeekState.cs" t="Include" />
+            </e>
+            <e p="PrototypeColorManager.cs" t="Include" />
+          </e>
+          <e p="General" t="Include">
+            <e p="FSM" t="Include">
+              <e p="AbstractState.cs" t="Include" />
+              <e p="Fsm.cs" t="Include" />
+              <e p="IAgent.cs" t="Include" />
+            </e>
+            <e p="Health.cs" t="Include" />
+          </e>
           <e p="ICompanion.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />

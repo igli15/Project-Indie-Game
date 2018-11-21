@@ -91,7 +91,7 @@ public class Companion : MonoBehaviour,ICompanion
 		}
 	}
 
-	public void Reset()
+	public virtual void Reset()
 	{
 		m_isThrown = false;
 		m_steering.ResumeAgent();
