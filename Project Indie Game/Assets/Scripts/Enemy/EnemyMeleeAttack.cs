@@ -31,13 +31,15 @@ public class EnemyMeleeAttack : MonoBehaviour
         if (m_lastTimeAttacked + m_reloadTime > Time.time) return;
 
         Health health = collider.GetComponent<Health>();
-
         if (health == null) { return; }
-        Debug.Log("Deal Damage");
-        m_lastTimeAttacked = Time.time;
+
         health.InflictDamage(m_damage);
+
+        m_lastTimeAttacked = Time.time;
+
         if (OnAttackEnds != null) OnAttackEnds();
     }
 
+    public float reloadTime { get { return m_reloadTime; } set { m_reloadTime = value; } }
 
 }

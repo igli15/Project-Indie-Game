@@ -8,9 +8,12 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private float m_moveSpeed = 5;
+    [SerializeField]
+    private float m_reloadTime = 0.5f;
 
     private GameObject m_target;
     private EnemyMovement m_enemyMovement;
+    private EnemyMeleeAttack m_meleeAttack;
 
     private bool m_afterStart = false;
 
@@ -23,6 +26,9 @@ public class Enemy : MonoBehaviour
 
         m_enemyMovement = GetComponent<EnemyMovement>();
         m_enemyMovement.SetMoveSpeed(m_moveSpeed);
+
+        m_meleeAttack = GetComponent<EnemyMeleeAttack>();
+        m_meleeAttack.reloadTime = m_reloadTime;
         //m_enemyMovement.SetDestination(m_target.transform.position);
     }
 

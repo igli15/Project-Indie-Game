@@ -21,10 +21,8 @@ public class EnemySeekState : AbstractState<EnemyFSM>
 
     public override void Enter(IAgent pAgent)
     {
-        Debug.Log("ENTER SEEK_STATE");
         base.Enter(pAgent);
         m_seekTarget = GetComponent<Enemy>().target;
-        Debug.Log("     START FOLLOW_TARGET");
         m_enemyMovement.navMeshAgent.enabled = true;
         StartCoroutine( FollowTarget(m_seekTarget.transform) );
 
@@ -33,7 +31,6 @@ public class EnemySeekState : AbstractState<EnemyFSM>
 
     public override void Exit(IAgent pAgent)
     {
-        Debug.Log("EXIT SEEK_STATE");
         base.Exit(pAgent);
         m_enemyMovement.ResetPath();
         m_enemyMovement.navMeshAgent.enabled = false;
@@ -47,9 +44,8 @@ public class EnemySeekState : AbstractState<EnemyFSM>
 
         while (true)
         {
-            if ((transform.position - target.position).magnitude <2)
+            if ((transform.position - target.position).magnitude <2) //TODO: CHANGE 2 to varaible, 2 is distance to go to MeleeAttackState
             {
-                Debug.Log("END OF FOLLOWING");
 
                 m_enemyFSM.fsm.ChangeState<EnemyMeleeState>();
                 yield return null;

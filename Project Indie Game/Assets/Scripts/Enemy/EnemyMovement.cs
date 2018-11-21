@@ -10,7 +10,6 @@ public class EnemyMovement : MonoBehaviour
     private NavMeshAgent m_navMeshAgent;
 
 	void Awake () {
-        Debug.Log("EnemyMovement gets NavMeshAgent");
         m_navMeshAgent = GetComponent<NavMeshAgent>();
 
     }
