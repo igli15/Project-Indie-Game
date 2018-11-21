@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 635550508}
   m_Layer: 0
   m_Name: Companion
-  m_TagString: Untagged
+  m_TagString: Companion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,8 +438,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_parentFeetPos: {fileID: 368805044}
-  m_distRadius: 2
   m_playerScript: {fileID: 1774658605}
+  m_distRadius: 2
+  m_throwRange: 20
+  m_throwSpeed: 20
+  m_respawnTime: 3
 --- !u!195 &635550509
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -576,6 +579,7 @@ GameObject:
   - component: {fileID: 1774658606}
   - component: {fileID: 1774658610}
   - component: {fileID: 1774658605}
+  - component: {fileID: 1774658612}
   - component: {fileID: 1774658604}
   - component: {fileID: 1774658611}
   m_Layer: 0
@@ -708,3 +712,16 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1774658612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1774658603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fbb0833a496d4ecf9107e506a840851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_companions:
+  - {fileID: 635550508}

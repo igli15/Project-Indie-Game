@@ -8,6 +8,8 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Companion.cs" t="Include" />
+          <e p="CompanionManager.cs" t="Include" />
+          <e p="ICompanion.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
         </e>
