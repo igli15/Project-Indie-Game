@@ -37,6 +37,7 @@ public class CompanionSteering : MonoBehaviour
 
 	public void StopAgent()
 	{
+		if(m_navMeshAgent.gameObject.activeSelf)
 		m_navMeshAgent.isStopped = true;
 	}
 

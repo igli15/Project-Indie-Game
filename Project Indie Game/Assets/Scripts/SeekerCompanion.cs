@@ -7,8 +7,13 @@ public class SeekerCompanion : Companion
 
 	[SerializeField]
 	private float m_seekRange = 3;
+
+	[SerializeField] 
+	private float m_bounceAmount = 4;
 	
 	private Collider m_collider;
+
+	private float m_initbounceAmount = 0;
 	
 	private void Awake()
 	{
@@ -18,9 +23,9 @@ public class SeekerCompanion : Companion
 	}
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
-		
+		m_initbounceAmount = m_bounceAmount;
 	}
 
 	public override void Throw(Vector3 dir)
@@ -40,14 +45,23 @@ public class SeekerCompanion : Companion
 	private void OnTriggerEnter(Collider other)
 	{
 		Activate();
+
 		if (other.gameObject.CompareTag("Enemy"))
 		{
 			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
-		
+
+			m_bounceAmount -= 1;
+
+			if (m_bounceAmount <= 0)
+			{
+				m_manager.DisableCompanion(this);
+			}
+			
 			if (inRangeColliders.Length == 0)
 			{
 				m_manager.DisableCompanion(this);
 			}
+			
 			else
 			{
 				Vector3 targetDir = Vector3.forward * m_seekRange * 2; 
@@ -69,7 +83,11 @@ public class SeekerCompanion : Companion
 		}
 	}
 
-
+	public override void Reset()
+	{
+		base.Reset();
+		m_bounceAmount = m_initbounceAmount;
+	}
 
 	public override void Activate()
 	{
