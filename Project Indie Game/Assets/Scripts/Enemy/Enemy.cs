@@ -14,23 +14,25 @@ public class Enemy : MonoBehaviour
 
     private bool m_afterStart = false;
 
-    void Start () {
-
-	}
+    void Awake() {
+        m_target = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void AfterStart()
     {
-        m_target = GameObject.FindGameObjectWithTag("Player");
+
         m_enemyMovement = GetComponent<EnemyMovement>();
         m_enemyMovement.SetMoveSpeed(m_moveSpeed);
-        m_enemyMovement.SetDestination(m_target.transform.position);
+        //m_enemyMovement.SetDestination(m_target.transform.position);
     }
 
-	void Update () {
-		if(!m_afterStart)
+    void Update() {
+        if (!m_afterStart)
         {
             AfterStart();
             m_afterStart = true;
         }
-	}
+    }
+
+    public GameObject target{ get { return m_target; } }
 }
