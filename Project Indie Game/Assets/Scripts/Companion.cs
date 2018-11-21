@@ -25,6 +25,10 @@ public class Companion : MonoBehaviour,ICompanion
 
 	private Vector3 m_throwPos = Vector3.zero;
 
+	private Material m_material;
+
+	private int m_index;
+
 
 	public Action<Companion> OnSpawn;
 	public Action<Companion> OnDisable;
@@ -36,6 +40,12 @@ public class Companion : MonoBehaviour,ICompanion
 	// Use this for initialization
 	void Awake ()
 	{
+		m_isThrown = false;
+		m_material = GetComponent<Renderer>().material;
+		
+		OnSelected += delegate(Companion companion)	{companion.m_material.color = Color.red;};
+		OnDeSelected +=  delegate(Companion companion) { companion.m_material.color = Color.white; };
+		
 		m_rb = GetComponent<Rigidbody>();
 		m_steering = GetComponent<CompanionSteering>();
 	}
@@ -58,6 +68,8 @@ public class Companion : MonoBehaviour,ICompanion
 		if (!m_isThrown)
 		{
 			if (OnThrow != null) OnThrow(this);
+			
+			m_manager.SelectCompanion(m_index + 1);
 			m_steering.StopAgent();
 			m_throwPos = transform.position;
 			m_rb.velocity = dir * m_throwSpeed;   //CHANGE TRANSFORM FORWARD TO MOUSE POINT
@@ -103,4 +115,13 @@ public class Companion : MonoBehaviour,ICompanion
 		m_steering.FindRandomPositionAroundParent();
 	}
 
+	public void SetIndex(int index)
+	{
+		m_index = index;
+	}
+
+	public bool IsThrown
+	{
+		get { return m_isThrown; }
+	}
 }

@@ -10,15 +10,19 @@ public class CompanionManager : MonoBehaviour
 
 	private Companion m_selectedCompanion;
 
+	private float m_companionCount;
+
 	// Use this for initialization
 	void Start ()
 	{
-		for (int i = 0; i < m_companions.Count; i++)
+		m_companionCount = m_companions.Count;
+		for (int i = 0; i < m_companionCount; i++)
 		{
 			SpawnCompanion(m_companions[i]);
+			m_companions[i].SetIndex(i + 1);
 		}
 
-		m_selectedCompanion = m_companions[0];
+		SelectCompanion(1);
 	}
 	
 	// Update is called once per frame
@@ -55,10 +59,21 @@ public class CompanionManager : MonoBehaviour
 
 	public void SelectCompanion(int index)
 	{
-		if(m_selectedCompanion.OnDeSelected != null) m_selectedCompanion.OnDeSelected(m_selectedCompanion);
+		if (index > m_companionCount) index = 1;   //mirror the array if you go past its count
 		
-		m_selectedCompanion = m_companions[index - 1];
-		
-		if(m_selectedCompanion.OnSelected != null) m_selectedCompanion.OnSelected(m_selectedCompanion);
+		Companion compToSelect = m_companions[index - 1];	// get the companion we need to change to
+
+		if (compToSelect != null && !compToSelect.IsThrown) // check if its null and if its thrown
+		{
+
+			if (m_selectedCompanion != null && m_selectedCompanion.OnDeSelected != null)  //Call on deselect for the current 
+				m_selectedCompanion.OnDeSelected(m_selectedCompanion);
+
+			m_selectedCompanion = m_companions[index - 1];      //Set the companion to selected
+
+			if (m_selectedCompanion.OnSelected != null) m_selectedCompanion.OnSelected(m_selectedCompanion); //call select action
+		}
+
 	}
+
 }
