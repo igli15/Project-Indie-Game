@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class SeekerCompanion : Companion
 {
+
+	[SerializeField]
+	private float m_seekRange = 3;
+	
+	private Collider m_collider;
+	
 	private void Awake()
 	{
 		base.Awake();
+		
+		m_collider = GetComponent<Collider>();
 	}
 
 	// Use this for initialization
@@ -18,6 +26,7 @@ public class SeekerCompanion : Companion
 	public override void Throw(Vector3 dir)
 	{
 		base.Throw(dir);
+		m_collider.enabled = true;
 		m_throwPos = transform.position;
 		m_rb.velocity = dir * m_throwSpeed; 
 	}
@@ -26,5 +35,44 @@ public class SeekerCompanion : Companion
 	void Update () 
 	{
 		base.Update();
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		Activate();
+		if (other.gameObject.CompareTag("Enemy"))
+		{
+			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
+		
+			if (inRangeColliders.Length == 0)
+			{
+				m_manager.DisableCompanion(this);
+			}
+			else
+			{
+				Vector3 targetDir = Vector3.forward * m_seekRange * 2; 
+				for (int i = 0; i < inRangeColliders.Length; i++)
+				{
+					if (inRangeColliders[i].CompareTag("Enemy") && inRangeColliders[i].transform != other.transform)
+					{
+						if (targetDir.magnitude >=
+						    (inRangeColliders[i].transform.position - other.transform.position).magnitude)
+						{
+							targetDir = inRangeColliders[i].transform.position - other.transform.position;
+						}
+					}
+				}
+				
+				Throw(targetDir.normalized);
+			}
+			
+		}
+	}
+
+
+
+	public override void Activate()
+	{
+		base.Activate();
 	}
 }
