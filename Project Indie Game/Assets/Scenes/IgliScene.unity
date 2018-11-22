@@ -1122,6 +1122,7 @@ GameObject:
   - component: {fileID: 1774658610}
   - component: {fileID: 1774658605}
   - component: {fileID: 1774658612}
+  - component: {fileID: 1774658614}
   - component: {fileID: 1774658604}
   - component: {fileID: 1774658613}
   - component: {fileID: 1774658611}
@@ -1281,6 +1282,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_feetPos: {fileID: 368805044}
+--- !u!114 &1774658614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1774658603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fe813e022b8435db3c5160f61f151d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dashRange: 6
 --- !u!1 &2142496477
 GameObject:
   m_ObjectHideFlags: 0
