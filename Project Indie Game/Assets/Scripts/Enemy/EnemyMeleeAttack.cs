@@ -6,21 +6,22 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMeleeAttack : MonoBehaviour
 {
-    [SerializeField]
-    private EnemyDamageCollider m_enemyDamageCollider;
+    public Action<bool> OnAttackEnds;
 
-    public Action OnAttackStart;
-    public Action OnAttackEnds;
+    private Enemy m_enemy;
 
     private float m_damage = 1;
     private float m_reloadTime = 2f;
     private float m_lastTimeAttacked;
 
-    public bool isPlayerInZone = false;
+    private bool m_attack = false;
+    private bool m_playerThere = false;
     void Start()
     {
-        m_enemyDamageCollider.OnEnemyTriggerStay += OnEnemyTriggerStay;
-        m_lastTimeAttacked = Time.time;
+        m_enemy = GetComponent<Enemy>();
+        m_enemy.damageCollider.OnEnemyTriggerStay += OnEnemyTriggerStay;
+
+        ResetWaitingTime();
     }
   
     public void ResetWaitingTime()
@@ -28,31 +29,39 @@ public class EnemyMeleeAttack : MonoBehaviour
         m_lastTimeAttacked = Time.time;
     }
 
-    void Update()
+    void OnEnemyTriggerStay(Collider collider)
     {
+        m_playerThere = collider.CompareTag("Player");
 
+        if (m_attack)
+        {
+            if (m_playerThere)
+            {
+                collider.GetComponent<Health>().InflictDamage(m_damage);
+                m_attack = false;
+            }
+
+        }
     }
 
-
-    public void OnEnemyTriggerStay(Collider collider)
+    public void AttackPlayer()
     {
-        //TOD: INCLUDE TWO STAGE ATTACK
-        //TODO: WTF ATTACK AND STATE ARE THE SAME SCRIPT BUT IN 2 files FIX IT
+        StartCoroutine(WaitTillAttack());
+    }
 
-        if (!collider.CompareTag("Player")&& !isPlayerInZone)
-        {
-            isPlayerInZone = true;
-            if (OnAttackStart != null) OnAttackStart();
-            m_lastTimeAttacked = Time.time;
-        }
+    IEnumerator WaitTillAttack()
+    {
+        yield return new WaitForSeconds(reloadTime);
+        m_attack = true;
+        yield return new WaitForEndOfFrame();
+        if (OnAttackEnds != null) OnAttackEnds(m_playerThere);
+        m_playerThere = false;
+        yield return null;
+    }
 
-        if (m_lastTimeAttacked + m_reloadTime > Time.time) return;
-        if (OnAttackEnds != null) OnAttackEnds();
-
+    void Update()
+    {
         
-        Health health = collider.GetComponent<Health>();
-        m_lastTimeAttacked = Time.time;
-        if (health != null) health.InflictDamage(m_damage);
     }
 
     public float reloadTime { get { return m_reloadTime; } set { m_reloadTime = value; } }

@@ -16,52 +16,60 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
     void Awake()
     {
         Debug.Log("ENEMY MELEE START");
+
         m_enemyFSM = GetComponent<EnemyFSM>();
         m_rigidbody = GetComponent<Rigidbody>();
         m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
+
         m_enemyMeleeAttack.OnAttackEnds += OnAttackEnds;
-        m_enemyMeleeAttack.enabled = false;
+    }
+
+    private void OnAttackEnds(bool isPlayerDamaged)
+    {
+        if (isPlayerDamaged)
+        {
+            Debug.Log("DO DAMAGE AGAIN");
+            colorManager.ChangeColorTo(Color.yellow);
+            m_enemyMeleeAttack.AttackPlayer();
+            StartCoroutine(SetItRed(Color.yellow));
+        }
+        else
+        {
+            Debug.Log("Player Escaped");
+            m_enemyFSM.fsm.ChangeState<EnemySeekState>();
+            StartCoroutine(SetItRed(Color.green));
+        }
+        
     }
 
     public override void Enter(IAgent pAgent)
     {
         base.Enter(pAgent);
-        Debug.Log("Unit " + m_enemyFSM.ID + " ==> ENTER MELEE STATE");
        
-        //m_enemyMeleeAttack.enabled = true;
-
-        m_enemyMeleeAttack.ResetWaitingTime();
         colorManager.ChangeColorTo(Color.yellow);
 
         //FREEZING position of enemyObject
         m_rigidbody.constraints = RigidbodyConstraints.FreezePositionX |
             RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+
+        m_enemyMeleeAttack.AttackPlayer();
     }
 
     public override void Exit(IAgent pAgent)
     {
         base.Exit(pAgent);
-        Debug.Log("Unit " + m_enemyFSM.ID + " ==> EXIT MELEE STATE");
+        Debug.Log(" EXIT MELEE STATE");
         m_rigidbody.constraints = RigidbodyConstraints.None;
         colorManager.ChangeColorTo(Color.green);
         StopAllCoroutines();
     }
 
-    void OnAttackEnds()
-    {
-        //m_enemyMeleeAttack.enabled = false;
-        StartCoroutine(SetItRed());
-        Debug.Log("UNIT: " + m_enemyFSM.ID + " Ended his attack");
-        //m_enemyFSM.fsm.ChangeState<EnemySeekState>();
-    }
-
-    IEnumerator SetItRed()
+    IEnumerator SetItRed(Color endColor)
     {
         colorManager.ChangeColorTo(Color.red);
         
         yield return new WaitForSeconds(0.5f);
         colorManager.ChangeColorTo(Color.green);
-        m_enemyFSM.fsm.ChangeState<EnemySeekState>();
         yield return null;
     }
 

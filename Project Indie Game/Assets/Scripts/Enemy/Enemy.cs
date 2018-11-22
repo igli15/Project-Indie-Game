@@ -5,11 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
-
+    [Header("Stats")]
     [SerializeField]
     private float m_moveSpeed = 5;
     [SerializeField]
     private float m_reloadTime = 0.5f;
+    [Header("Other")]
+    [SerializeField]
+    private EnemyDamageCollider m_enemyDamageCollider;
 
     private GameObject m_target;
     private EnemyMovement m_enemyMovement;
@@ -41,4 +44,5 @@ public class Enemy : MonoBehaviour
     }
 
     public GameObject target{ get { return m_target; } }
+    public EnemyDamageCollider damageCollider { get { return m_enemyDamageCollider; } }
 }
