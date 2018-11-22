@@ -175,7 +175,6 @@
             <e p="ACompanion.cs" t="Include" />
             <e p="Companion.cs" t="Include" />
             <e p="CompanionSteering.cs" t="Include" />
-            <e p="ICompanion.cs" t="Include" />
             <e p="SeekerCompanion.cs" t="Include" />
           </e>
           <e p="DummyScripts" t="Include">

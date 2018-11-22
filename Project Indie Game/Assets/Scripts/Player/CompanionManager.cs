@@ -19,7 +19,7 @@ public class CompanionManager : MonoBehaviour
 		for (int i = 0; i < m_companionCount; i++)
 		{
 			SpawnCompanion(m_companions[i]);
-			m_companions[i].SetIndex(i + 1);
+			m_companions[i].Index = i+1;
 		}
 
 		SelectCompanion(1);
@@ -59,25 +59,25 @@ public class CompanionManager : MonoBehaviour
 
 	public void SelectNextCompanion()
 	{
-		if (m_selectedCompanion.GetIndex() == m_companionCount)
+		if (m_selectedCompanion.Index == m_companionCount)
 		{
 			SelectCompanion(1);
 		}
 		else
 		{
-			SelectCompanion(m_selectedCompanion.GetIndex() + 1);
+			SelectCompanion(m_selectedCompanion.Index + 1);
 		}
 	}
 
 	public void SelectPreviousCompanion()
 	{
-		if (m_selectedCompanion.GetIndex() == 1)
+		if (m_selectedCompanion.Index == 1)
 		{
 			SelectCompanion(m_companionCount);
 		}
 		else
 		{
-			SelectCompanion(m_selectedCompanion.GetIndex() - 1 );
+			SelectCompanion(m_selectedCompanion.Index - 1 );
 		}
 	}
 

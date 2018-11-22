@@ -24,14 +24,10 @@ public abstract class ACompanion : MonoBehaviour
 	public abstract void Spawn();
 	
 	
-	public void SetIndex(int index)
+	public int Index
 	{
-		m_index = index;
-	}
-
-	public int GetIndex()
-	{
-		return m_index;
+		get { return m_index; }
+		set { m_index = value; }
 	}
 
 	public bool IsThrown
