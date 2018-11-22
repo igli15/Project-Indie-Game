@@ -11,6 +11,8 @@ public class CompanionController : MonoBehaviour
 	private CompanionManager m_manager;
 	private Camera m_mainCam;
 
+	private const int m_scorllScale = 10;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -20,6 +22,29 @@ public class CompanionController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () 
+	{
+		HandleScrollWheel();
+		
+		HandleMouseAim();
+
+		HandleNumInput();
+	}
+
+	private void HandleScrollWheel()
+	{
+		if (Input.mouseScrollDelta.y  * m_scorllScale > 0)
+		{
+			Debug.Log(Input.mouseScrollDelta.y);
+			m_manager.SelectNextCompanion();
+		}
+		if (Input.mouseScrollDelta.y * m_scorllScale < 0)
+		{
+			Debug.Log(Input.mouseScrollDelta.y);
+			m_manager.SelectPreviousCompanion();
+		}
+	}
+
+	private void HandleMouseAim()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -37,10 +62,13 @@ public class CompanionController : MonoBehaviour
 			if (dir != Vector3.negativeInfinity)
 			{
 				if(!m_manager.GetSelectedCompanion().IsThrown)
-				m_manager.GetSelectedCompanion().Throw(dir.normalized);
+					m_manager.GetSelectedCompanion().Throw(dir.normalized);
 			}
 		}
+	}
 
+	private void HandleNumInput()
+	{
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			m_manager.SelectCompanion(1);

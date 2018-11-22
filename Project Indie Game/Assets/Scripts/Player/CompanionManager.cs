@@ -10,7 +10,7 @@ public class CompanionManager : MonoBehaviour
 
 	private Companion m_selectedCompanion;
 
-	private float m_companionCount;
+	private int m_companionCount;
 
 	// Use this for initialization
 	void Start ()
@@ -55,6 +55,30 @@ public class CompanionManager : MonoBehaviour
 	public Companion GetSelectedCompanion()
 	{
 		return m_selectedCompanion;
+	}
+
+	public void SelectNextCompanion()
+	{
+		if (m_selectedCompanion.GetIndex() == m_companionCount)
+		{
+			SelectCompanion(1);
+		}
+		else
+		{
+			SelectCompanion(m_selectedCompanion.GetIndex() + 1);
+		}
+	}
+
+	public void SelectPreviousCompanion()
+	{
+		if (m_selectedCompanion.GetIndex() == 1)
+		{
+			SelectCompanion(m_companionCount);
+		}
+		else
+		{
+			SelectCompanion(m_selectedCompanion.GetIndex() - 1 );
+		}
 	}
 
 	public void SelectCompanion(int index)

@@ -113,6 +113,11 @@ public class Companion : MonoBehaviour,ICompanion
 		m_index = index;
 	}
 
+	public int GetIndex()
+	{
+		return m_index;
+	}
+
 	public bool IsThrown
 	{
 		get { return m_isThrown; }
