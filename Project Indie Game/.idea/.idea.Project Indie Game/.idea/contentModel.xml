@@ -7,6 +7,18 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Demigiant" t="Include">
+          <e p="DOTween" t="Include">
+            <e p="DOTween43.xml" t="Include" />
+            <e p="DOTween46.xml" t="Include" />
+            <e p="DOTween50.xml" t="Include" />
+            <e p="Examples" t="Include">
+              <e p="Basics.cs" t="Include" />
+              <e p="Sequences.cs" t="Include" />
+            </e>
+            <e p="readme.txt" t="Include" />
+          </e>
+        </e>
         <e p="PostProcessing" t="Include">
           <e p="Editor" t="Include">
             <e p="Attributes" t="Include">
@@ -201,6 +213,7 @@
             </e>
             <e p="Health.cs" t="Include" />
           </e>
+          <e p="HudManager.cs" t="Include" />
           <e p="Player" t="Include">
             <e p="CompanionController.cs" t="Include" />
             <e p="CompanionManager.cs" t="Include" />
