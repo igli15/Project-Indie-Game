@@ -34,3 +34,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Project Indie Game/.vs/Project Indie Game/v15/Server/sqlite3/storage.ide-wal
+Project Indie Game/.vs/Project Indie Game/v15/Server/sqlite3/storage.ide
+Project Indie Game/.vs/Project Indie Game/v15/Server/sqlite3/db.lock
+Project Indie Game/.vs/Project Indie Game/v15/Server/sqlite3/storage.ide-shm

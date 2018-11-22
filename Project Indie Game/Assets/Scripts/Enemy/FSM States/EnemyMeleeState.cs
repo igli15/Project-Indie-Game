@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMeleeState : AbstractState<EnemyFSM> {
+public class EnemyMeleeState : AbstractState<EnemyFSM>
+{
 
     //DELETE AFTER PROTYPE
     public PrototypeColorManager colorManager;
@@ -12,7 +13,9 @@ public class EnemyMeleeState : AbstractState<EnemyFSM> {
     private EnemyMeleeAttack m_enemyMeleeAttack;
     private Rigidbody m_rigidbody;
 
-	void Awake () {
+    void Awake()
+    {
+        Debug.Log("ENEMY MELEE START");
         m_enemyFSM = GetComponent<EnemyFSM>();
         m_rigidbody = GetComponent<Rigidbody>();
         m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
@@ -23,10 +26,13 @@ public class EnemyMeleeState : AbstractState<EnemyFSM> {
     public override void Enter(IAgent pAgent)
     {
         base.Enter(pAgent);
+        Debug.Log("Unit " + m_enemyFSM.ID + " ==> ENTER MELEE STATE");
         //if(m_enemyMeleeAttack==null) m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
         m_enemyMeleeAttack.enabled = true;
+
+        m_enemyMeleeAttack.ResetWaitingTime();
         colorManager.ChangeColorTo(Color.yellow);
-        
+
         //FREEZING position of enemyObject
         m_rigidbody.constraints = RigidbodyConstraints.FreezePositionX |
             RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
@@ -35,16 +41,17 @@ public class EnemyMeleeState : AbstractState<EnemyFSM> {
     public override void Exit(IAgent pAgent)
     {
         base.Exit(pAgent);
+        Debug.Log("Unit " + m_enemyFSM.ID + " ==> EXIT MELEE STATE");
         m_rigidbody.constraints = RigidbodyConstraints.None;
         colorManager.ChangeColorTo(Color.green);
         StopAllCoroutines();
-        m_enemyMeleeAttack.enabled = false;
     }
 
     void OnAttackEnds()
     {
+        m_enemyMeleeAttack.enabled = false;
         StartCoroutine(SetItRed());
-        m_enemyFSM.fsm.ChangeState<EnemySeekState>();
+        //m_enemyFSM.fsm.ChangeState<EnemySeekState>();
     }
 
     IEnumerator SetItRed()
@@ -52,11 +59,12 @@ public class EnemyMeleeState : AbstractState<EnemyFSM> {
         colorManager.ChangeColorTo(Color.red);
 
         yield return new WaitForSeconds(0.5f);
-
+        colorManager.ChangeColorTo(Color.green);
         m_enemyFSM.fsm.ChangeState<EnemySeekState>();
         yield return null;
     }
 
-    void Update () {
+    void Update()
+    {
     }
 }
