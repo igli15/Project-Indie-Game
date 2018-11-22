@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Companion
   - Enemy
+  - IgnoreCollision
   layers:
   - Default
   - TransparentFX

@@ -35,7 +35,6 @@ public class EnemySeekState : AbstractState<EnemyFSM>
         m_enemyMovement.ResetPath();
         m_enemyMovement.navMeshAgent.enabled = false;
 
-        Debug.Log("Unit " + m_enemyFSM.ID + " ==> EXIT SEEK STATE");
         StopAllCoroutines();
     }
 

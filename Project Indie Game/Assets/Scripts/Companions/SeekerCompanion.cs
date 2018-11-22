@@ -15,26 +15,26 @@ public class SeekerCompanion : Companion
 	private Collider m_collider;
 
 	private float m_initbounceAmount = 0;
+
+    private bool m_canBounce = false;
 	
 	private void Awake()
 	{
 		base.Awake();
-		
+		m_initbounceAmount = m_bounceAmount;
 		m_collider = GetComponent<Collider>();
 	}
 
 	// Use this for initialization
-	void Start ()
-	{
-		m_initbounceAmount = m_bounceAmount;
-	}
+
 
 	public override void Throw(Vector3 dir)
 	{
 		base.Throw(dir);
 		m_collider.enabled = true;
 		m_throwPos = transform.position;
-		m_rb.velocity = dir * m_throwSpeed; 
+		m_rb.velocity = dir * m_throwSpeed;
+        m_canBounce = true;
 	}
 
 	// Update is called once per frame
@@ -47,8 +47,8 @@ public class SeekerCompanion : Companion
 	{
 		Activate();
 
-		if (other.gameObject.CompareTag("Enemy"))
-		{
+        if (other.gameObject.CompareTag("Enemy") && IsThrown)
+        {
 			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
 
 			List<GameObject> enemiesInRange =  new List<GameObject>();
@@ -60,14 +60,20 @@ public class SeekerCompanion : Companion
 					enemiesInRange.Add(inRangeColliders[i].gameObject);
 				}
 			}
+            // Debug.Log(m_bounceAmount);
 
-			other.GetComponent<Health>().InflictDamage(20);
-			
-			m_bounceAmount -= 1;
-			
-			
-			if (enemiesInRange.Count == 0 || m_bounceAmount <= 0)
+            if (m_canBounce)
+            {
+                other.GetComponent<Health>().InflictDamage(20);
+
+                m_bounceAmount -= 1;
+                m_canBounce = false;
+            }
+
+            //Debug.Log(enemiesInRange.Count == 0);
+            if (enemiesInRange.Count == 0 || m_bounceAmount <=0)
 			{
+                //Debug.Log("WTF");
 				m_manager.DisableCompanion(this);
 			}
 			
@@ -86,9 +92,12 @@ public class SeekerCompanion : Companion
 					}
 				}
 				Throw(targetDir.normalized);
-			}
-			
+			}			
 		}
+        else if(!other.CompareTag("Player") && IsThrown)
+        {
+            m_manager.DisableCompanion(this);
+        }
 	}
 
 	public override void Reset()

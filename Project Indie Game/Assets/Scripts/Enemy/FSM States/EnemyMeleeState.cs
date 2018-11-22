@@ -13,7 +13,6 @@ public class EnemyMeleeState : AbstractState<EnemyFSM> {
     private Rigidbody m_rigidbody;
 
 	void Awake () {
-        Debug.Log("ENEMY MELEE START");
         m_enemyFSM = GetComponent<EnemyFSM>();
         m_rigidbody = GetComponent<Rigidbody>();
         m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
@@ -24,7 +23,6 @@ public class EnemyMeleeState : AbstractState<EnemyFSM> {
     public override void Enter(IAgent pAgent)
     {
         base.Enter(pAgent);
-        Debug.Log("Unit " + m_enemyFSM.ID + " ==> ENTER MELEE STATE");
         //if(m_enemyMeleeAttack==null) m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
         m_enemyMeleeAttack.enabled = true;
         colorManager.ChangeColorTo(Color.yellow);
@@ -37,7 +35,6 @@ public class EnemyMeleeState : AbstractState<EnemyFSM> {
     public override void Exit(IAgent pAgent)
     {
         base.Exit(pAgent);
-        Debug.Log("Unit " + m_enemyFSM.ID + " ==> EXIT MELEE STATE");
         m_rigidbody.constraints = RigidbodyConstraints.None;
         colorManager.ChangeColorTo(Color.green);
         StopAllCoroutines();

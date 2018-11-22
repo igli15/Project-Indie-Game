@@ -10,7 +10,6 @@ public class Companion : MonoBehaviour,ICompanion
 {
 	[SerializeField] 
 	protected CompanionManager m_manager; 
-
 	[SerializeField]
 	protected float m_throwRange = 10;
 
@@ -75,8 +74,6 @@ public class Companion : MonoBehaviour,ICompanion
 	public virtual void Activate()
 	{
 		if (OnActivate != null) OnActivate(this);
-		
-		Debug.Log("Activate");
 	}
 
 	public void CheckIfOutOfRange()
