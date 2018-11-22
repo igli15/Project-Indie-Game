@@ -94,7 +94,7 @@ public class SeekerCompanion : Companion
 				Throw(targetDir.normalized);
 			}			
 		}
-        else if(!other.CompareTag("Player") && IsThrown)
+        else if(!other.CompareTag("Player") && !other.CompareTag("IgnoreCollision")  && IsThrown)
         {
             m_manager.DisableCompanion(this);
         }
