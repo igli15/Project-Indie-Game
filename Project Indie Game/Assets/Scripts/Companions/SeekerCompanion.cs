@@ -11,7 +11,7 @@ public class SeekerCompanion : Companion
 
 	[SerializeField] 
 	private float m_bounceAmount = 4;
-	
+	 
 	private Collider m_collider;
 
 	private float m_initbounceAmount = 0;
@@ -51,38 +51,7 @@ public class SeekerCompanion : Companion
 
 	private void OnTriggerEnter(Collider other)
 	{
-		Activate();
-
-        if (other.gameObject.CompareTag("Enemy") && IsThrown)
-        {
-			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange); //Get all colliders around the sphere
-
-	        List<GameObject> enemiesInRange = GetAllEnemiesInRange(inRangeColliders,other.transform);  //Fill the list
-
-            other.GetComponent<Health>().InflictDamage(20);   //Inflict Damage
-            m_bounceAmount -= 1;  							 // it bounced once 
-
-            if (enemiesInRange.Count == 0 || m_bounceAmount <=0)  //Check if there is no enemies or no bounce left
-			{
-				m_manager.DisableCompanion(this);
-			}
-			
-			else
-			{
-				CheckForObstaclesBlock(enemiesInRange,other.transform);    //Check if there is any obstacles in the way if so remove them from the list
-				
-				m_targetTransform = GetTheClosestEnemy(enemiesInRange,other.transform);  //Get the closest enemies that are currently on the range
-			}
-	        
-	        if (m_targetTransform == null)   //Needs to be done after everything. So the target is assigned
-	        {
-		        m_manager.DisableCompanion(this);
-	        }
-		}
-        else if(!other.CompareTag("Companion") && !other.CompareTag("Player") && !other.CompareTag("IgnoreCollision")  && IsThrown) //Disable if it hits anything beside the one stated here
-        {
-            m_manager.DisableCompanion(this);
-        }
+		Activate(other.gameObject);
 	}
 
 	public override void Reset()
@@ -92,9 +61,39 @@ public class SeekerCompanion : Companion
 		m_targetTransform = null;
 	}
 
-	public override void Activate()
+	public override void Activate(GameObject other)
 	{
-		base.Activate();
+		base.Activate(other);
+		
+		if (other.CompareTag("Enemy") && IsThrown)
+		{
+			List<GameObject> enemiesInRange = GetAllEnemiesInRange(other.transform);  //Fill the list
+
+			other.GetComponent<Health>().InflictDamage(20);   //Inflict Damage
+			m_bounceAmount -= 1;  							 // it bounced once 
+
+			if (enemiesInRange.Count == 0 || m_bounceAmount <=0)  //Check if there is no enemies or no bounce left
+			{
+				m_manager.DisableCompanion(this);
+			}
+			else
+			{
+				CheckForObstaclesBlock(enemiesInRange,other.transform);    //Check if there is any obstacles in the way if so remove them from the list
+				
+				m_targetTransform = GetTheClosestEnemy(enemiesInRange,other.transform);  //Get the closest enemies that are currently on the range
+			}
+			
+	        
+			if (m_targetTransform == null)   //Needs to be done after everything. So the target is assigned
+			{
+				m_manager.DisableCompanion(this);
+			}
+		}
+		else if(other.gameObject.layer != LayerMask.NameToLayer(m_layerToIgnoreName)  && IsThrown) //Disable if it hits anything beside the one stated here
+		{
+			
+			m_manager.DisableCompanion(this);
+		}
 	}
 
 	private void CheckForObstaclesBlock(List<GameObject> enemiesInRange,Transform other)
@@ -113,8 +112,9 @@ public class SeekerCompanion : Companion
 		}
 	}
 
-	private List<GameObject> GetAllEnemiesInRange(Collider[] inRangeColliders,Transform other)
+	private List<GameObject> GetAllEnemiesInRange(Transform other)
 	{
+		Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
 		List<GameObject> enemiesInRange = new List<GameObject>();
 		for (int i = 0; i < inRangeColliders.Length; i++)
 		{
