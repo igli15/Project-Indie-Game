@@ -50,7 +50,8 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
 
         //FREEZING position of enemyObject
         m_rigidbody.constraints = RigidbodyConstraints.FreezePositionX |
-            RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+            RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ|
+            RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY| RigidbodyConstraints.FreezeRotationZ;
 
         m_enemyMeleeAttack.AttackPlayer();
     }
@@ -59,7 +60,7 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
     {
         base.Exit(pAgent);
         Debug.Log(" EXIT MELEE STATE");
-        m_rigidbody.constraints = RigidbodyConstraints.None;
+        m_rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ; ;
         colorManager.ChangeColorTo(Color.green);
         StopAllCoroutines();
     }

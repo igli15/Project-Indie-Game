@@ -45,6 +45,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
         Debug.Log("EXIT SEEK STATE");
         base.Exit(pAgent);
 
+        //SLOW DOWN BEFORE ATTACK, KEK
         m_enemyMovement.navMeshAgent.velocity /=2;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
