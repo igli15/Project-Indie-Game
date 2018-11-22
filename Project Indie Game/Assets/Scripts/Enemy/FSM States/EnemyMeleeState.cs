@@ -28,7 +28,7 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
     {
         if (isPlayerDamaged)
         {
-            Debug.Log("DO DAMAGE AGAIN");
+            //Debug.Log("DO DAMAGE AGAIN");
             colorManager.ChangeColorTo(Color.yellow);
             m_enemyMeleeAttack.AttackPlayer();
             StartCoroutine(SetItRed(Color.yellow));
@@ -49,8 +49,8 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
         colorManager.ChangeColorTo(Color.yellow);
 
         //FREEZING position of enemyObject
-        m_rigidbody.constraints = RigidbodyConstraints.FreezePositionX |
-            RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ|
+        //RigidbodyConstraints.FreezePositionX |  RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ |
+        m_rigidbody.constraints = 
             RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY| RigidbodyConstraints.FreezeRotationZ;
 
         m_enemyMeleeAttack.AttackPlayer();

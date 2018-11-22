@@ -23,6 +23,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
         m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
 
         m_enemy.damageCollider.OnEnemyTriggerEnter += OnPlayerEntersAttackZone;
+        m_enemy.damageCollider.OnEnemyTriggerStay += OnPlayerEntersAttackZone;
     }
 
 
@@ -35,8 +36,14 @@ public class EnemySeekState : AbstractState<EnemyFSM>
     {
         Debug.Log("ENTER SEEK STATE");
         base.Enter(pAgent);
-
+        
         m_seekTarget = m_enemy.target;
+        if ((m_seekTarget.transform.position - transform.position).magnitude < 0.1f)
+        {
+            Debug.Log("FORCED SWITCH STATE");
+            m_enemyFSM.fsm.ChangeState<EnemyMeleeState>();
+            return;
+        }
         StartCoroutine( FollowTarget(m_seekTarget.transform) );
     }
 
@@ -46,7 +53,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
         base.Exit(pAgent);
 
         //SLOW DOWN BEFORE ATTACK, KEK
-        m_enemyMovement.navMeshAgent.velocity /=2;
+        m_enemyMovement.navMeshAgent.velocity =Vector3.zero;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         StopAllCoroutines();
