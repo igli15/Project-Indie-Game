@@ -16,12 +16,13 @@ public class EnemyMeleeAttack : MonoBehaviour
     private float m_reloadTime = 2f;
     private float m_lastTimeAttacked;
 
+    public bool isPlayerInZone = false;
     void Start()
     {
         m_enemyDamageCollider.OnEnemyTriggerStay += OnEnemyTriggerStay;
         m_lastTimeAttacked = Time.time;
     }
-
+  
     public void ResetWaitingTime()
     {
         m_lastTimeAttacked = Time.time;
@@ -35,14 +36,22 @@ public class EnemyMeleeAttack : MonoBehaviour
 
     public void OnEnemyTriggerStay(Collider collider)
     {
+        //TOD: INCLUDE TWO STAGE ATTACK
+        //TODO: WTF ATTACK AND STATE ARE THE SAME SCRIPT BUT IN 2 files FIX IT
+
+        if (!collider.CompareTag("Player")&& !isPlayerInZone)
+        {
+            isPlayerInZone = true;
+            if (OnAttackStart != null) OnAttackStart();
+            m_lastTimeAttacked = Time.time;
+        }
+
         if (m_lastTimeAttacked + m_reloadTime > Time.time) return;
         if (OnAttackEnds != null) OnAttackEnds();
 
-        if (!collider.CompareTag("Player")) return;
+        
         Health health = collider.GetComponent<Health>();
         m_lastTimeAttacked = Time.time;
-
-
         if (health != null) health.InflictDamage(m_damage);
     }
 

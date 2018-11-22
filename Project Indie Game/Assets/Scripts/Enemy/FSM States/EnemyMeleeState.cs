@@ -27,8 +27,8 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
     {
         base.Enter(pAgent);
         Debug.Log("Unit " + m_enemyFSM.ID + " ==> ENTER MELEE STATE");
-        //if(m_enemyMeleeAttack==null) m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
-        m_enemyMeleeAttack.enabled = true;
+       
+        //m_enemyMeleeAttack.enabled = true;
 
         m_enemyMeleeAttack.ResetWaitingTime();
         colorManager.ChangeColorTo(Color.yellow);
@@ -49,15 +49,16 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
 
     void OnAttackEnds()
     {
-        m_enemyMeleeAttack.enabled = false;
+        //m_enemyMeleeAttack.enabled = false;
         StartCoroutine(SetItRed());
+        Debug.Log("UNIT: " + m_enemyFSM.ID + " Ended his attack");
         //m_enemyFSM.fsm.ChangeState<EnemySeekState>();
     }
 
     IEnumerator SetItRed()
     {
         colorManager.ChangeColorTo(Color.red);
-
+        
         yield return new WaitForSeconds(0.5f);
         colorManager.ChangeColorTo(Color.green);
         m_enemyFSM.fsm.ChangeState<EnemySeekState>();

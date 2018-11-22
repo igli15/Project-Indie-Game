@@ -27,6 +27,6 @@ public class EnemyFSM : MonoBehaviour, IAgent {
         if (fsm == null) return;
         if (fsm.GetCurrentState() is EnemySeekState) Gizmos.color = Color.cyan;
         if (fsm.GetCurrentState() is EnemyMeleeState) Gizmos.color = Color.magenta;
-        Gizmos.DrawSphere(transform.position + transform.up * 2, 1);
+        Gizmos.DrawSphere(transform.position + transform.up * 2, 0.4f);
     }
 }
