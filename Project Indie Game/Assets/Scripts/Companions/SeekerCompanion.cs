@@ -55,27 +55,31 @@ public class SeekerCompanion : Companion
 
         if (other.gameObject.CompareTag("Enemy") && IsThrown)
         {
-			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
+			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange); //Get all colliders around the sphere
 
-	        List<GameObject> enemiesInRange = FindObjectsInRange(inRangeColliders,other);
+	        List<GameObject> enemiesInRange = GetAllEnemiesInRange(inRangeColliders,other.transform);  //Fill the list
 
-            other.GetComponent<Health>().InflictDamage(20);
-            m_bounceAmount -= 1;
+            other.GetComponent<Health>().InflictDamage(20);   //Inflict Damage
+            m_bounceAmount -= 1;  							 // it bounced once 
 
-            if (enemiesInRange.Count == 0 || m_bounceAmount <=0)
+            if (enemiesInRange.Count == 0 || m_bounceAmount <=0)  //Check if there is no enemies or no bounce left
 			{
 				m_manager.DisableCompanion(this);
 			}
 			
 			else
 			{
-				CheckForObstacles(enemiesInRange,other);
+				CheckForObstaclesBlock(enemiesInRange,other.transform);    //Check if there is any obstacles in the way if so remove them from the list
 				
-				m_targetTransform = GetTheClosestTransform(enemiesInRange,other);
-				//Throw(targetDir.normalized);
-			}			
+				m_targetTransform = GetTheClosestEnemy(enemiesInRange,other.transform);  //Get the closest enemies that are currently on the range
+			}
+	        
+	        if (m_targetTransform == null)   //Needs to be done after everything. So the target is assigned
+	        {
+		        m_manager.DisableCompanion(this);
+	        }
 		}
-        else if(!other.CompareTag("Companion") && !other.CompareTag("Player") && !other.CompareTag("IgnoreCollision")  && IsThrown)
+        else if(!other.CompareTag("Companion") && !other.CompareTag("Player") && !other.CompareTag("IgnoreCollision")  && IsThrown) //Disable if it hits anything beside the one stated here
         {
             m_manager.DisableCompanion(this);
         }
@@ -93,29 +97,28 @@ public class SeekerCompanion : Companion
 		base.Activate();
 	}
 
-	private void CheckForObstacles(List<GameObject> enemiesInRange,Collider other)
+	private void CheckForObstaclesBlock(List<GameObject> enemiesInRange,Transform other)
 	{
 		for (int i = 0; i < enemiesInRange.Count; i++)
 		{
 			RaycastHit hit;
-			if (Physics.Raycast(other.transform.position,
-				enemiesInRange[i].transform.position - other.transform.position, out hit))
+			if (Physics.Raycast(other.position,
+				enemiesInRange[i].transform.position - other.position, out hit))
 			{
-				Debug.Log(hit.transform.tag);
 				if (hit.transform.CompareTag("Obstacle"))
 				{
-					enemiesInRange[i] = null;
+					enemiesInRange.Remove(enemiesInRange[i]);
 				}
 			}
 		}
 	}
 
-	private List<GameObject> FindObjectsInRange(Collider[] inRangeColliders,Collider other)
+	private List<GameObject> GetAllEnemiesInRange(Collider[] inRangeColliders,Transform other)
 	{
 		List<GameObject> enemiesInRange = new List<GameObject>();
 		for (int i = 0; i < inRangeColliders.Length; i++)
 		{
-			if (inRangeColliders[i].gameObject.CompareTag("Enemy") && inRangeColliders[i].transform != other.transform)
+			if (inRangeColliders[i].gameObject.CompareTag("Enemy") && inRangeColliders[i].transform != other)
 			{
 				enemiesInRange.Add(inRangeColliders[i].gameObject);
 			}
@@ -124,20 +127,20 @@ public class SeekerCompanion : Companion
 		return enemiesInRange;
 	}
 
-	private Transform GetTheClosestTransform(List<GameObject> enemiesInRange,Collider other)
+	private Transform GetTheClosestEnemy(List<GameObject> enemiesInRange,Transform other)
 	{
 		Vector3 targetDir = Vector3.forward * m_seekRange * 2;
 		Transform targetTransform = null;
 		for (int i = 0; i < enemiesInRange.Count; i++)
 		{
 					
-			if (enemiesInRange[i] != null && enemiesInRange[i].transform != other.transform)
+			if (enemiesInRange[i].transform != other)
 			{
 				if (targetDir.magnitude >=
-				    (enemiesInRange[i].transform.position - other.transform.position).magnitude)
+				    (enemiesInRange[i].transform.position - other.position).magnitude)
 				{
 							
-					targetDir = enemiesInRange[i].transform.position - other.transform.position;
+					targetDir = enemiesInRange[i].transform.position - other.position;
 					targetTransform = enemiesInRange[i].transform;
 				}
 			}
