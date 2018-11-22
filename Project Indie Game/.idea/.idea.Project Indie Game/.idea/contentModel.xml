@@ -172,6 +172,7 @@
         <e p="Scripts" t="Include">
           <e p="CameraFollow.cs" t="Include" />
           <e p="Companions" t="Include">
+            <e p="ACompanion.cs" t="Include" />
             <e p="Companion.cs" t="Include" />
             <e p="CompanionSteering.cs" t="Include" />
             <e p="ICompanion.cs" t="Include" />

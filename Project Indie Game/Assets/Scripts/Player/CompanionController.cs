@@ -34,12 +34,10 @@ public class CompanionController : MonoBehaviour
 	{
 		if (Input.mouseScrollDelta.y  * m_scorllScale > 0)
 		{
-			Debug.Log(Input.mouseScrollDelta.y);
 			m_manager.SelectNextCompanion();
 		}
 		if (Input.mouseScrollDelta.y * m_scorllScale < 0)
 		{
-			Debug.Log(Input.mouseScrollDelta.y);
 			m_manager.SelectPreviousCompanion();
 		}
 	}

@@ -6,9 +6,9 @@ using UnityEngine;
 public class CompanionManager : MonoBehaviour
 {
 	[SerializeField]
-	private List<Companion> m_companions = new List<Companion>();
+	private List<ACompanion> m_companions = new List<ACompanion>();
 
-	private Companion m_selectedCompanion;
+	private ACompanion m_selectedCompanion;
 
 	private int m_companionCount;
 
@@ -31,13 +31,13 @@ public class CompanionManager : MonoBehaviour
 		
 	}
 
-	public void SpawnCompanion(Companion companion)
+	public void SpawnCompanion(ACompanion companion)
 	{
 		companion.gameObject.SetActive(true);
 		companion.Spawn();
 	}
 
-	public void DisableCompanion(Companion companion)
+	public void DisableCompanion(ACompanion companion)
 	{
 		if (companion.OnDisable != null) companion.OnDisable(companion);
 		
@@ -46,13 +46,13 @@ public class CompanionManager : MonoBehaviour
 
 	}
 	
-	IEnumerator ReSpawnCooldown(Companion companion)
+	IEnumerator ReSpawnCooldown(ACompanion companion)
 	{
 		yield return new WaitForSeconds(3);
 		SpawnCompanion(companion);
 	}
 
-	public Companion GetSelectedCompanion()
+	public ACompanion GetSelectedCompanion()
 	{
 		return m_selectedCompanion;
 	}
@@ -85,7 +85,7 @@ public class CompanionManager : MonoBehaviour
 	{
 		if (index > m_companionCount) index = 1;   //mirror the array if you go past its count
 		
-		Companion compToSelect = m_companions[index - 1];	// get the companion we need to change to
+		ACompanion compToSelect = m_companions[index - 1];	// get the companion we need to change to
 
 		if (compToSelect != null && !compToSelect.IsThrown) // check if its null and if its thrown
 		{
