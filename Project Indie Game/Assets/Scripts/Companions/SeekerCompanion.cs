@@ -11,12 +11,14 @@ public class SeekerCompanion : Companion
 
 	[SerializeField] 
 	private float m_bounceAmount = 4;
-	
+	 
 	private Collider m_collider;
 
 	private float m_initbounceAmount = 0;
 
     private bool m_canBounce = false;
+
+	private Transform m_targetTransform;
 	
 	private void Awake()
 	{
@@ -34,80 +36,116 @@ public class SeekerCompanion : Companion
 		m_collider.enabled = true;
 		m_throwPos = transform.position;
 		m_rb.velocity = dir * m_throwSpeed;
-        m_canBounce = true;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
 		base.Update();
+
+		if (m_targetTransform != null && m_isThrown)
+		{
+			m_rb.velocity = (m_targetTransform.position - transform.position).normalized * m_throwSpeed;
+		}
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		Activate();
-
-        if (other.gameObject.CompareTag("Enemy") && IsThrown)
-        {
-			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
-
-			List<GameObject> enemiesInRange =  new List<GameObject>();
-
-			for (int i = 0; i < inRangeColliders.Length; i++)
-			{
-				if (inRangeColliders[i].gameObject.CompareTag("Enemy") && inRangeColliders[i].transform != other.transform)
-				{
-					enemiesInRange.Add(inRangeColliders[i].gameObject);
-				}
-			}
-            // Debug.Log(m_bounceAmount);
-
-            if (m_canBounce)
-            {
-                other.GetComponent<Health>().InflictDamage(20);
-
-                m_bounceAmount -= 1;
-                m_canBounce = false;
-            }
-
-            //Debug.Log(enemiesInRange.Count == 0);
-            if (enemiesInRange.Count == 0 || m_bounceAmount <=0)
-			{
-                //Debug.Log("WTF");
-				m_manager.DisableCompanion(this);
-			}
-			
-			else
-			{
-				Vector3 targetDir = Vector3.forward * m_seekRange * 2; 
-				for (int i = 0; i < enemiesInRange.Count; i++)
-				{
-					if (enemiesInRange[i].transform != other.transform)
-					{
-						if (targetDir.magnitude >=
-						    (enemiesInRange[i].transform.position - other.transform.position).magnitude)
-						{
-							targetDir = enemiesInRange[i].transform.position - other.transform.position;
-						}
-					}
-				}
-				Throw(targetDir.normalized);
-			}			
-		}
-        else if(!other.CompareTag("Player") && !other.CompareTag("IgnoreCollision")  && IsThrown)
-        {
-            m_manager.DisableCompanion(this);
-        }
+		Activate(other.gameObject);
 	}
 
 	public override void Reset()
 	{
 		base.Reset();
 		m_bounceAmount = m_initbounceAmount;
+		m_targetTransform = null;
 	}
 
-	public override void Activate()
+	public override void Activate(GameObject other)
 	{
-		base.Activate();
+		base.Activate(other);
+		
+		if (other.CompareTag("Enemy") && IsThrown)
+		{
+			List<GameObject> enemiesInRange = GetAllEnemiesInRange(other.transform);  //Fill the list
+
+			other.GetComponent<Health>().InflictDamage(20);   //Inflict Damage
+			m_bounceAmount -= 1;  							 // it bounced once 
+
+			if (enemiesInRange.Count == 0 || m_bounceAmount <=0)  //Check if there is no enemies or no bounce left
+			{
+				m_manager.DisableCompanion(this);
+			}
+			else
+			{
+				CheckForObstaclesBlock(enemiesInRange,other.transform);    //Check if there is any obstacles in the way if so remove them from the list
+				
+				m_targetTransform = GetTheClosestEnemy(enemiesInRange,other.transform);  //Get the closest enemies that are currently on the range
+			}
+			
+	        
+			if (m_targetTransform == null)   //Needs to be done after everything. So the target is assigned
+			{
+				m_manager.DisableCompanion(this);
+			}
+		}
+		else if(other.gameObject.layer != LayerMask.NameToLayer(m_layerToIgnoreName)  && IsThrown) //Disable if it hits anything beside the one stated here
+		{
+			
+			m_manager.DisableCompanion(this);
+		}
+	}
+
+	private void CheckForObstaclesBlock(List<GameObject> enemiesInRange,Transform other)
+	{
+		for (int i = 0; i < enemiesInRange.Count; i++)
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(other.position,
+				enemiesInRange[i].transform.position - other.position, out hit))
+			{
+				if (hit.transform.CompareTag("Obstacle"))
+				{
+					enemiesInRange.Remove(enemiesInRange[i]);
+				}
+			}
+		}
+	}
+
+	private List<GameObject> GetAllEnemiesInRange(Transform other)
+	{
+		Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
+		List<GameObject> enemiesInRange = new List<GameObject>();
+		for (int i = 0; i < inRangeColliders.Length; i++)
+		{
+			if (inRangeColliders[i].gameObject.CompareTag("Enemy") && inRangeColliders[i].transform != other)
+			{
+				enemiesInRange.Add(inRangeColliders[i].gameObject);
+			}
+		}
+
+		return enemiesInRange;
+	}
+
+	private Transform GetTheClosestEnemy(List<GameObject> enemiesInRange,Transform other)
+	{
+		Vector3 targetDir = Vector3.forward * m_seekRange * 2;
+		Transform targetTransform = null;
+		for (int i = 0; i < enemiesInRange.Count; i++)
+		{
+					
+			if (enemiesInRange[i].transform != other)
+			{
+				if (targetDir.magnitude >=
+				    (enemiesInRange[i].transform.position - other.position).magnitude)
+				{
+							
+					targetDir = enemiesInRange[i].transform.position - other.position;
+					targetTransform = enemiesInRange[i].transform;
+				}
+			}
+		}
+
+		return targetTransform;
 	}
 }

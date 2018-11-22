@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,6 +9,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(CompanionSteering))]
 public class Companion : MonoBehaviour,ICompanion
 {
+	[SerializeField] 
+	protected string m_layerToIgnoreName = "CompanionIgnore";
 	[SerializeField] 
 	protected CompanionManager m_manager; 
 	[SerializeField]
@@ -71,7 +74,7 @@ public class Companion : MonoBehaviour,ICompanion
 		m_isThrown = true;
 	}
 
-	public virtual void Activate()
+	public virtual void Activate(GameObject other = null)
 	{
 		if (OnActivate != null) OnActivate(this);
 	}
