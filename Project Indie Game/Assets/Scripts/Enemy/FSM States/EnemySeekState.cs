@@ -15,7 +15,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
 
 
 
-    void Start()
+    void Awake()
     {
         m_enemy = GetComponent<Enemy>();
         m_enemyFSM = GetComponent<EnemyFSM>();
@@ -36,7 +36,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
     {
         Debug.Log("ENTER SEEK STATE");
         base.Enter(pAgent);
-        
+        m_enemyMovement.navMeshAgent.enabled = true;
         m_seekTarget = m_enemy.target;
         if ((m_seekTarget.transform.position - transform.position).magnitude < 0.1f)
         {
@@ -59,7 +59,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
         StopAllCoroutines();
 
         m_enemyMovement.ResetPath();
-
+        m_enemyMovement.navMeshAgent.enabled = false;
     }
 
     //EACH 0.1 seconds updating its destination if it reach previous
