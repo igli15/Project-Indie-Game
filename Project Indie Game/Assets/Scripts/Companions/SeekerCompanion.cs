@@ -57,46 +57,21 @@ public class SeekerCompanion : Companion
         {
 			Collider[] inRangeColliders = Physics.OverlapSphere(transform.position, m_seekRange);
 
-			List<GameObject> enemiesInRange =  new List<GameObject>();
+	        List<GameObject> enemiesInRange = FindObjectsInRange(inRangeColliders,other);
 
-			for (int i = 0; i < inRangeColliders.Length; i++)
-			{
-				if (inRangeColliders[i].gameObject.CompareTag("Enemy") && inRangeColliders[i].transform != other.transform)
-				{
-					enemiesInRange.Add(inRangeColliders[i].gameObject);
-				}
-			}
-            // Debug.Log(m_bounceAmount);
+            other.GetComponent<Health>().InflictDamage(20);
+            m_bounceAmount -= 1;
 
-                other.GetComponent<Health>().InflictDamage(20);
-
-                m_bounceAmount -= 1;
-
-            //Debug.Log(enemiesInRange.Count == 0);
             if (enemiesInRange.Count == 0 || m_bounceAmount <=0)
 			{
-                //Debug.Log("WTF");
 				m_manager.DisableCompanion(this);
 			}
 			
 			else
 			{
-				Vector3 targetDir = Vector3.forward * m_seekRange * 2;
-				Transform targetTransform = null;
-				for (int i = 0; i < enemiesInRange.Count; i++)
-				{
-					if (enemiesInRange[i].transform != other.transform)
-					{
-						if (targetDir.magnitude >=
-						    (enemiesInRange[i].transform.position - other.transform.position).magnitude)
-						{
-							targetDir = enemiesInRange[i].transform.position - other.transform.position;
-							targetTransform = enemiesInRange[i].transform;
-						}
-					}
-				}
-
-				m_targetTransform = targetTransform;
+				CheckForObstacles(enemiesInRange,other);
+				
+				m_targetTransform = GetTheClosestTransform(enemiesInRange,other);
 				//Throw(targetDir.normalized);
 			}			
 		}
@@ -116,5 +91,58 @@ public class SeekerCompanion : Companion
 	public override void Activate()
 	{
 		base.Activate();
+	}
+
+	private void CheckForObstacles(List<GameObject> enemiesInRange,Collider other)
+	{
+		for (int i = 0; i < enemiesInRange.Count; i++)
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(other.transform.position,
+				enemiesInRange[i].transform.position - other.transform.position, out hit))
+			{
+				Debug.Log(hit.transform.tag);
+				if (hit.transform.CompareTag("Obstacle"))
+				{
+					enemiesInRange[i] = null;
+				}
+			}
+		}
+	}
+
+	private List<GameObject> FindObjectsInRange(Collider[] inRangeColliders,Collider other)
+	{
+		List<GameObject> enemiesInRange = new List<GameObject>();
+		for (int i = 0; i < inRangeColliders.Length; i++)
+		{
+			if (inRangeColliders[i].gameObject.CompareTag("Enemy") && inRangeColliders[i].transform != other.transform)
+			{
+				enemiesInRange.Add(inRangeColliders[i].gameObject);
+			}
+		}
+
+		return enemiesInRange;
+	}
+
+	private Transform GetTheClosestTransform(List<GameObject> enemiesInRange,Collider other)
+	{
+		Vector3 targetDir = Vector3.forward * m_seekRange * 2;
+		Transform targetTransform = null;
+		for (int i = 0; i < enemiesInRange.Count; i++)
+		{
+					
+			if (enemiesInRange[i] != null && enemiesInRange[i].transform != other.transform)
+			{
+				if (targetDir.magnitude >=
+				    (enemiesInRange[i].transform.position - other.transform.position).magnitude)
+				{
+							
+					targetDir = enemiesInRange[i].transform.position - other.transform.position;
+					targetTransform = enemiesInRange[i].transform;
+				}
+			}
+		}
+
+		return targetTransform;
 	}
 }
