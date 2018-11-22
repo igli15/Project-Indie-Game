@@ -17,6 +17,8 @@ public class SeekerCompanion : Companion
 	private float m_initbounceAmount = 0;
 
     private bool m_canBounce = false;
+
+	private Transform m_targetTransform;
 	
 	private void Awake()
 	{
@@ -34,13 +36,17 @@ public class SeekerCompanion : Companion
 		m_collider.enabled = true;
 		m_throwPos = transform.position;
 		m_rb.velocity = dir * m_throwSpeed;
-        m_canBounce = true;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
 		base.Update();
+
+		if (m_targetTransform != null && m_isThrown)
+		{
+			m_rb.velocity = (m_targetTransform.position - transform.position).normalized * m_throwSpeed;
+		}
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -62,13 +68,9 @@ public class SeekerCompanion : Companion
 			}
             // Debug.Log(m_bounceAmount);
 
-            if (m_canBounce)
-            {
                 other.GetComponent<Health>().InflictDamage(20);
 
                 m_bounceAmount -= 1;
-                m_canBounce = false;
-            }
 
             //Debug.Log(enemiesInRange.Count == 0);
             if (enemiesInRange.Count == 0 || m_bounceAmount <=0)
@@ -79,7 +81,8 @@ public class SeekerCompanion : Companion
 			
 			else
 			{
-				Vector3 targetDir = Vector3.forward * m_seekRange * 2; 
+				Vector3 targetDir = Vector3.forward * m_seekRange * 2;
+				Transform targetTransform = null;
 				for (int i = 0; i < enemiesInRange.Count; i++)
 				{
 					if (enemiesInRange[i].transform != other.transform)
@@ -88,13 +91,16 @@ public class SeekerCompanion : Companion
 						    (enemiesInRange[i].transform.position - other.transform.position).magnitude)
 						{
 							targetDir = enemiesInRange[i].transform.position - other.transform.position;
+							targetTransform = enemiesInRange[i].transform;
 						}
 					}
 				}
-				Throw(targetDir.normalized);
+
+				m_targetTransform = targetTransform;
+				//Throw(targetDir.normalized);
 			}			
 		}
-        else if(!other.CompareTag("Player") && !other.CompareTag("IgnoreCollision")  && IsThrown)
+        else if(!other.CompareTag("Companion") && !other.CompareTag("Player") && !other.CompareTag("IgnoreCollision")  && IsThrown)
         {
             m_manager.DisableCompanion(this);
         }
@@ -104,6 +110,7 @@ public class SeekerCompanion : Companion
 	{
 		base.Reset();
 		m_bounceAmount = m_initbounceAmount;
+		m_targetTransform = null;
 	}
 
 	public override void Activate()
