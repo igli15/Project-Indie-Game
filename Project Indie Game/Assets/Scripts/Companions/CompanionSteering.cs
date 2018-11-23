@@ -18,14 +18,11 @@ public class CompanionSteering : MonoBehaviour
 	private Vector3 m_randomPos;
 
 	private NavMeshAgent m_navMeshAgent;
-
-	private Rigidbody m_rb;
 	
 	
 	// Use this for initialization
 	void Awake () 
 	{
-		m_rb = GetComponent<Rigidbody>();
 		m_navMeshAgent = GetComponent<NavMeshAgent>();
 	}
 	

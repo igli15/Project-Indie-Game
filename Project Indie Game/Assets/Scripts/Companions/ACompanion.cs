@@ -8,6 +8,7 @@ public abstract class ACompanion : MonoBehaviour
 {
 	protected int m_index;
 	protected bool m_isThrown = false;
+	protected bool m_isQuickCast = false;
 	
 	public Action<ACompanion> OnSpawn;
 	public Action<ACompanion> OnDisable;
@@ -33,5 +34,10 @@ public abstract class ACompanion : MonoBehaviour
 	public bool IsThrown
 	{
 		get { return m_isThrown; }
+	}
+	
+	public bool IsQuickCast
+	{
+		get { return m_isQuickCast; }
 	}
 }

@@ -13,12 +13,10 @@ public class DashBehaviour : MonoBehaviour
 	
 	private float m_initDashRange;
 
-	private Rigidbody m_rb;
 	
 	// Use this for initialization
 	void Start ()
 	{
-		m_rb = GetComponent<Rigidbody>();
 		m_initDashRange = m_dashRange;
 	}
 

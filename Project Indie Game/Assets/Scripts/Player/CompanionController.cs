@@ -44,24 +44,10 @@ public class CompanionController : MonoBehaviour
 
 	private void HandleMouseAim()
 	{
-		if (Input.GetMouseButtonDown(0))
+		
+		if (Input.GetMouseButtonDown(0) && m_manager.GetSelectedCompanion().IsQuickCast)
 		{
-			Ray camRay = m_mainCam.ScreenPointToRay(Input.mousePosition);
-			Plane plane = new Plane(Vector3.up,m_feetPos.position);
-
-			float rayDistance;
-			Vector3 dir = Vector3.negativeInfinity;
-			if (plane.Raycast(camRay, out rayDistance))
-			{
-				Vector3 point = camRay.GetPoint(rayDistance);
-				dir = point - m_manager.GetSelectedCompanion().transform.position;
-			}
-
-			if (dir != Vector3.negativeInfinity)
-			{
-				if(!m_manager.GetSelectedCompanion().IsThrown)
-					m_manager.GetSelectedCompanion().Throw(dir.normalized);
-			}
+			ThrowAtMousePos();
 		}
 	}
 
@@ -74,6 +60,26 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
 			m_manager.SelectCompanion(2);
+		}
+	}
+
+	private void ThrowAtMousePos()
+	{
+		Ray camRay = m_mainCam.ScreenPointToRay(Input.mousePosition);
+		Plane plane = new Plane(Vector3.up,m_feetPos.position);
+
+		float rayDistance;
+		Vector3 dir = Vector3.negativeInfinity;
+		if (plane.Raycast(camRay, out rayDistance))
+		{
+			Vector3 point = camRay.GetPoint(rayDistance);
+			dir = point - m_manager.GetSelectedCompanion().transform.position;
+		}
+
+		if (dir != Vector3.negativeInfinity)
+		{
+			if(!m_manager.GetSelectedCompanion().IsThrown)
+				m_manager.GetSelectedCompanion().Throw(dir.normalized);
 		}
 	}
 }
