@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class EnemyMeleeState : AbstractState<EnemyFSM>
 {
 
@@ -12,6 +12,7 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
     private EnemyFSM m_enemyFSM;
     private EnemyMeleeAttack m_enemyMeleeAttack;
     private Rigidbody m_rigidbody;
+    private NavMeshObstacle m_navMeshObstacle;
 
     void Awake()
     {
@@ -20,7 +21,9 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
         m_enemyFSM = GetComponent<EnemyFSM>();
         m_rigidbody = GetComponent<Rigidbody>();
         m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
+        m_navMeshObstacle = GetComponent<NavMeshObstacle>();
 
+        m_navMeshObstacle.enabled = false;
         m_enemyMeleeAttack.OnAttackEnds += OnAttackEnds;
     }
 
@@ -28,7 +31,7 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
     {
         if (isPlayerDamaged)
         {
-            Debug.Log("DO DAMAGE AGAIN");
+            //Debug.Log("DO DAMAGE AGAIN");
             colorManager.ChangeColorTo(Color.yellow);
             m_enemyMeleeAttack.AttackPlayer();
             StartCoroutine(SetItRed(Color.yellow));
@@ -47,10 +50,12 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
         base.Enter(pAgent);
        
         colorManager.ChangeColorTo(Color.yellow);
+        //m_navMeshObstacle.enabled = true;
 
         //FREEZING position of enemyObject
-        m_rigidbody.constraints = RigidbodyConstraints.FreezePositionX |
-            RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+        //RigidbodyConstraints.FreezePositionX |  RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ |
+        m_rigidbody.constraints = 
+            RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY| RigidbodyConstraints.FreezeRotationZ;
 
         m_enemyMeleeAttack.AttackPlayer();
     }
@@ -58,8 +63,9 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
     public override void Exit(IAgent pAgent)
     {
         base.Exit(pAgent);
+        // m_navMeshObstacle.enabled = false;
         Debug.Log(" EXIT MELEE STATE");
-        m_rigidbody.constraints = RigidbodyConstraints.None;
+        m_rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ; ;
         colorManager.ChangeColorTo(Color.green);
         StopAllCoroutines();
     }
