@@ -21,7 +21,7 @@ public class EnemyFSM : MonoBehaviour, IAgent {
                 m_fsm.ChangeState<GoombaSeekState>();
                 break;
             case EnemyType.TURRET:
-                m_fsm.ChangeState<GoombaSeekState>();
+                m_fsm.ChangeState<TurretSeekState>();
                 break;
         }
         

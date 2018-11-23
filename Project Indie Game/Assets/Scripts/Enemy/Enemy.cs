@@ -31,12 +31,12 @@ public class Enemy : MonoBehaviour
 
     void AfterStart()
     {
-
+        //NO STATES PLEASE!
         m_enemyMovement = GetComponent<EnemyMovement>();
         m_enemyMovement.SetMoveSpeed(m_moveSpeed);
         m_enemyMovement.SetPushPower(m_pushPower);
         m_meleeAttack = GetComponent<EnemyMeleeAttack>();
-        m_meleeAttack.reloadTime = m_reloadTime;
+        if(m_meleeAttack!=null) m_meleeAttack.reloadTime = m_reloadTime;
         //m_enemyMovement.SetDestination(m_target.transform.position);
     }
 
