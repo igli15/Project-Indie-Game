@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class TurretSeekState : EnemySeekState {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    private Enemy m_enemy;
+    private EnemyFSM m_enemyFSM;
+    private EnemyMovement m_enemyMovement;
+
+    private GameObject m_seekTarget;
+
+
+    void Awake()
+    {
+        m_enemy = GetComponent<Enemy>();
+        m_enemyFSM = GetComponent<EnemyFSM>();
+        m_enemyMovement = GetComponent<EnemyMovement>();
+
+        m_seekTarget = m_enemy.target;
+        
+    }
+
+
+    void Update () {
 		
 	}
 }
