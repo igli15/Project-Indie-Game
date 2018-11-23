@@ -37,6 +37,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
         Debug.Log("ENTER SEEK STATE");
         base.Enter(pAgent);
         m_enemyMovement.navMeshAgent.enabled = true;
+        m_enemyMovement.pushIsEnabled = true;
         m_seekTarget = m_enemy.target;
         if ((m_seekTarget.transform.position - transform.position).magnitude < 0.1f)
         {
@@ -60,6 +61,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
 
         m_enemyMovement.ResetPath();
         m_enemyMovement.navMeshAgent.enabled = false;
+        m_enemyMovement.pushIsEnabled = false;
     }
 
     //EACH 0.1 seconds updating its destination if it reach previous

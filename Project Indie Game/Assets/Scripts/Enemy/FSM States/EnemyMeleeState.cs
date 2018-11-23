@@ -50,7 +50,8 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
         base.Enter(pAgent);
        
         colorManager.ChangeColorTo(Color.yellow);
-        m_navMeshObstacle.enabled = true;
+        //m_navMeshObstacle.enabled = true;
+
         //FREEZING position of enemyObject
         //RigidbodyConstraints.FreezePositionX |  RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ |
         m_rigidbody.constraints = 
@@ -62,7 +63,7 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
     public override void Exit(IAgent pAgent)
     {
         base.Exit(pAgent);
-        m_navMeshObstacle.enabled = false;
+        // m_navMeshObstacle.enabled = false;
         Debug.Log(" EXIT MELEE STATE");
         m_rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ; ;
         colorManager.ChangeColorTo(Color.green);

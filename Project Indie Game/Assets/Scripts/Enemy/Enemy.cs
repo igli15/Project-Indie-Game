@@ -10,9 +10,14 @@ public class Enemy : MonoBehaviour
     private float m_moveSpeed = 5;
     [SerializeField]
     private float m_reloadTime = 0.5f;
+    [SerializeField]
+    private float m_pushPower = 5;
+
     [Header("Other")]
     [SerializeField]
     private EnemyDamageCollider m_enemyDamageCollider;
+    [SerializeField]
+    private EnemyDamageCollider m_sphereCollider;
 
     private GameObject m_target;
     private EnemyMovement m_enemyMovement;
@@ -29,7 +34,7 @@ public class Enemy : MonoBehaviour
 
         m_enemyMovement = GetComponent<EnemyMovement>();
         m_enemyMovement.SetMoveSpeed(m_moveSpeed);
-
+        m_enemyMovement.SetPushPower(m_pushPower);
         m_meleeAttack = GetComponent<EnemyMeleeAttack>();
         m_meleeAttack.reloadTime = m_reloadTime;
         //m_enemyMovement.SetDestination(m_target.transform.position);
@@ -45,4 +50,5 @@ public class Enemy : MonoBehaviour
 
     public GameObject target{ get { return m_target; } }
     public EnemyDamageCollider damageCollider { get { return m_enemyDamageCollider; } }
+    public EnemyDamageCollider sphereCOllider { get { return m_sphereCollider; } }
 }
