@@ -516,6 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8ba38ccf78540f0ae5ca34265786b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_chargeTime: 1
   m_layerToIgnoreName: CompanionIgnore
   m_manager: {fileID: 1774658612}
   m_throwRange: 20
@@ -877,6 +878,8 @@ MonoBehaviour:
     icon: {fileID: 1746861180}
   - companion: {fileID: 1223154932}
     icon: {fileID: 828250389}
+  m_scaleFactor: 1.2
+  m_scaleTime: 0.2
 --- !u!1 &982909049
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,6 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8ba38ccf78540f0ae5ca34265786b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_chargeTime: 1
   m_layerToIgnoreName: CompanionIgnore
   m_manager: {fileID: 1774658612}
   m_throwRange: 20
@@ -1324,6 +1328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8ba38ccf78540f0ae5ca34265786b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_chargeTime: 1
   m_layerToIgnoreName: CompanionIgnore
   m_manager: {fileID: 1774658612}
   m_throwRange: 20

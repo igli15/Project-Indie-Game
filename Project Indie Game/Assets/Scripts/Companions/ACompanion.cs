@@ -6,9 +6,14 @@ using UnityEngine;
 public abstract class ACompanion : MonoBehaviour 
 
 {
+	[SerializeField]
+	protected float m_chargeTime = 0;
+
+	protected bool m_isCharged = false;
+	
 	protected int m_index;
+	
 	protected bool m_isThrown = false;
-	protected bool m_isQuickCast = false;
 	
 	public Action<ACompanion> OnSpawn;
 	public Action<ACompanion> OnDisable;
@@ -35,9 +40,15 @@ public abstract class ACompanion : MonoBehaviour
 	{
 		get { return m_isThrown; }
 	}
-	
-	public bool IsQuickCast
+
+	public float ChargeTime
 	{
-		get { return m_isQuickCast; }
+		get { return m_chargeTime; }
+	}
+
+	public bool IsCharged
+	{
+		get { return m_isCharged; }
+		set { m_isCharged = value; }
 	}
 }

@@ -59,6 +59,7 @@ public class Companion : ACompanion
 		m_manager.SelectCompanion(m_index + 1);
 		m_steering.StopAgent();
 		m_isThrown = true;
+		m_isCharged = false;
 	}
 
 	public override void Activate(GameObject other = null)

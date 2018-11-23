@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class CompanionController : MonoBehaviour
 	
 	private CompanionManager m_manager;
 	private Camera m_mainCam;
+
+	private bool m_startCharge = false;
 
 	private const int m_scorllScale = 10;
 
@@ -44,10 +47,26 @@ public class CompanionController : MonoBehaviour
 
 	private void HandleMouseAim()
 	{
-		
-		if (Input.GetMouseButtonDown(0) && m_manager.GetSelectedCompanion().IsQuickCast)
+		if (Input.GetMouseButton(0))
 		{
-			ThrowAtMousePos();
+			m_startCharge = true;
+			//StartCoroutine(ChargeThrow(m_manager.GetSelectedCompanion()));
+			
+		}
+		
+
+		if (m_startCharge)
+		{
+			Debug.Log("hi");
+			m_startCharge = false;
+			StartCoroutine(ChargeThrow(m_manager.GetSelectedCompanion()));
+			Debug.Log(Input.GetMouseButtonUp(0));
+			if (Input.GetMouseButtonUp(0) && m_manager.GetSelectedCompanion().IsCharged)
+			{
+				Debug.Log("T");
+				m_manager.GetSelectedCompanion().IsCharged = false;
+				ThrowAtMousePos(m_manager.GetSelectedCompanion());
+			}
 		}
 	}
 
@@ -63,7 +82,7 @@ public class CompanionController : MonoBehaviour
 		}
 	}
 
-	private void ThrowAtMousePos()
+	private void ThrowAtMousePos(ACompanion companion)
 	{
 		Ray camRay = m_mainCam.ScreenPointToRay(Input.mousePosition);
 		Plane plane = new Plane(Vector3.up,m_feetPos.position);
@@ -73,13 +92,23 @@ public class CompanionController : MonoBehaviour
 		if (plane.Raycast(camRay, out rayDistance))
 		{
 			Vector3 point = camRay.GetPoint(rayDistance);
-			dir = point - m_manager.GetSelectedCompanion().transform.position;
+			dir = point - companion.transform.position;
 		}
 
 		if (dir != Vector3.negativeInfinity)
 		{
-			if(!m_manager.GetSelectedCompanion().IsThrown)
-				m_manager.GetSelectedCompanion().Throw(dir.normalized);
+			if (!companion.IsThrown)
+			{
+				companion.Throw(dir.normalized);
+			}
+			
 		}
+	}
+
+	IEnumerator ChargeThrow(ACompanion companion)
+	{
+		yield return new WaitForSeconds(companion.ChargeTime);
+		Debug.Log("finished charging");
+		companion.IsCharged = true;
 	}
 }

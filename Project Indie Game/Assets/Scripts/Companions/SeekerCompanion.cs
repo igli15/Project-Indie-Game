@@ -21,7 +21,6 @@ public class SeekerCompanion : Companion
 	private void Awake()
 	{
 		base.Awake();
-		m_isQuickCast = true;
 		m_initbounceAmount = m_bounceAmount;
 		m_collider = GetComponent<Collider>();
 	}
