@@ -50,5 +50,5 @@ public class Enemy : MonoBehaviour
 
     public GameObject target{ get { return m_target; } }
     public EnemyDamageCollider damageCollider { get { return m_enemyDamageCollider; } }
-    public EnemyDamageCollider sphereCOllider { get { return m_sphereCollider; } }
+    public EnemyDamageCollider sphereCollider { get { return m_sphereCollider; } }
 }

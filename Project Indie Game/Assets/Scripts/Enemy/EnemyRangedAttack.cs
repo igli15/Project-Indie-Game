@@ -19,7 +19,14 @@ public class EnemyRangedAttack : MonoBehaviour {
     public void ShootTo(Vector3 targetPosition)
     {
         Debug.Log("PewPew");
-        GameObject newProjectile=Instantiate(m_projectile, transform.position, transform.rotation, null);
-        newProjectile.GetComponent<Rigidbody>().AddForce(transform.forward);
+        Vector3 direction=targetPosition- transform.position;
+        direction.Normalize();
+        Debug.Log(direction + "D");
+        GameObject newProjectile=Instantiate(m_projectile, transform.position+transform.up, transform.rotation, null);
+        Rigidbody rb =newProjectile.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezePositionY;
+        rb.velocity = direction * 20;
+
+
     }
 }

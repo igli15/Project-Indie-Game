@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
 	void Awake () {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_enemy = GetComponent<Enemy>();
-        m_enemy.sphereCOllider.OnEnemyTriggerEnter += OnObjectTriggerStay;
+        m_enemy.sphereCollider.OnEnemyTriggerEnter += OnObjectTriggerStay;
     }
 	
 	void Update () {
