@@ -8,7 +8,7 @@ public class EnemyMovement : MonoBehaviour
 {
     private Enemy m_enemy;
     private NavMeshAgent m_navMeshAgent;
-
+    
     private float m_pushPower = 0;
 
     private float m_initialSpeed;
@@ -29,11 +29,29 @@ public class EnemyMovement : MonoBehaviour
         if (!pushIsEnabled) return;
         if (collider.CompareTag("Enemy"))
         {
-            if (!IsBehindMe(collider.transform.position)) return;
+            
+
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 direction = collider.transform.position - transform.position;
+
+            if (Vector3.Dot(forward, direction) >=0) return;
+            //ENEMY IS BEHIND
+            
+            if (Vector3.Dot(transform.TransformDirection(Vector3.right), direction) >=0)
+            {
+                //ENEMY IS ON RIGHT SIDE
+                direction.Normalize();
+                direction += transform.right/2;
+            }
+            else
+            {
+                //ENEMY IS ON LEFt SIDE
+                direction.Normalize();
+                direction -= transform.right / 2;
+            }
+
             print("The other transform is behind me!  " + collider.name);
-            Vector3 direction = collider.transform.position- transform.position;
-            direction.Normalize();
-            collider.GetComponent<NavMeshAgent>().velocity += (direction + transform.right )* m_pushPower;
+            collider.GetComponent<NavMeshAgent>().velocity += direction * m_pushPower;
         }
     }
 
@@ -43,15 +61,6 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         m_isPushed = false;
         yield return null;
-    }
-
-    bool IsBehindMe(Vector3 target)
-    {
-
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 toOther = target- transform.position;
-
-        return (Vector3.Dot(forward, toOther) < 0);
     }
 
     private void SlowDown()
