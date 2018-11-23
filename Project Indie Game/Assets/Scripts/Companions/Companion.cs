@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CompanionSteering))]
-public class Companion : MonoBehaviour,ICompanion
+public class Companion : ACompanion
 {
 	[SerializeField] 
 	protected string m_layerToIgnoreName = "CompanionIgnore";
@@ -23,30 +23,17 @@ public class Companion : MonoBehaviour,ICompanion
 
 	protected Rigidbody m_rb;
 
-	protected bool m_isThrown = false;
-
 	protected Vector3 m_throwPos = Vector3.zero;
 
-	protected Material m_material;
 
-	protected int m_index;
-
-	public Action<Companion> OnSpawn;
-	public Action<Companion> OnDisable;
-	public Action<Companion> OnActivate;
-	public Action<Companion> OnThrow;
-	public Action<Companion> OnSelected;
-	public Action<Companion> OnDeSelected;
-	public Action<Companion> OnRangeReached;
 	
 	// Use this for initialization
 	protected void Awake ()
 	{
 		m_isThrown = false;
-		m_material = GetComponent<Renderer>().material;
 		
-		OnSelected += delegate(Companion companion)	{companion.m_material.color = Color.red;};
-		OnDeSelected +=  delegate(Companion companion) { companion.m_material.color = Color.white; };
+		OnSelected += delegate(ACompanion companion)	{companion.GetComponent<Renderer>().material.color = Color.red;};
+		OnDeSelected +=  delegate(ACompanion companion) {companion.GetComponent<Renderer>().material.color = Color.white; };
 		
 		m_rb = GetComponent<Rigidbody>();
 		m_steering = GetComponent<CompanionSteering>();
@@ -65,7 +52,7 @@ public class Companion : MonoBehaviour,ICompanion
 
 	}
 
-	public virtual void Throw(Vector3 dir)
+	public override void Throw(Vector3 dir)
 	{
 		if (OnThrow != null) OnThrow(this);
 			
@@ -74,12 +61,12 @@ public class Companion : MonoBehaviour,ICompanion
 		m_isThrown = true;
 	}
 
-	public virtual void Activate(GameObject other = null)
+	public override void Activate(GameObject other = null)
 	{
 		if (OnActivate != null) OnActivate(this);
 	}
 
-	public void CheckIfOutOfRange()
+	public override void CheckIfOutOfRange()
 	{
 		if (m_isThrown)
 		{
@@ -91,7 +78,7 @@ public class Companion : MonoBehaviour,ICompanion
 		}
 	}
 
-	public virtual void Reset()
+	public override void Reset()
 	{
 		m_isThrown = false;
 		m_steering.ResumeAgent();
@@ -101,20 +88,11 @@ public class Companion : MonoBehaviour,ICompanion
 
 
 
-	public virtual void Spawn()
+	public override void Spawn()
 	{
 		if (OnSpawn != null) OnSpawn(this);
 		Reset();
 		m_steering.FindRandomPositionAroundParent();
 	}
 
-	public void SetIndex(int index)
-	{
-		m_index = index;
-	}
-
-	public bool IsThrown
-	{
-		get { return m_isThrown; }
-	}
 }

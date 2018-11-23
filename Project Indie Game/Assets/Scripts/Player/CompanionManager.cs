@@ -6,11 +6,11 @@ using UnityEngine;
 public class CompanionManager : MonoBehaviour
 {
 	[SerializeField]
-	private List<Companion> m_companions = new List<Companion>();
+	private List<ACompanion> m_companions = new List<ACompanion>();
 
-	private Companion m_selectedCompanion;
+	private ACompanion m_selectedCompanion;
 
-	private float m_companionCount;
+	private int m_companionCount;
 
 	// Use this for initialization
 	void Start ()
@@ -19,7 +19,7 @@ public class CompanionManager : MonoBehaviour
 		for (int i = 0; i < m_companionCount; i++)
 		{
 			SpawnCompanion(m_companions[i]);
-			m_companions[i].SetIndex(i + 1);
+			m_companions[i].Index = i+1;
 		}
 
 		SelectCompanion(1);
@@ -31,13 +31,13 @@ public class CompanionManager : MonoBehaviour
 		
 	}
 
-	public void SpawnCompanion(Companion companion)
+	public void SpawnCompanion(ACompanion companion)
 	{
 		companion.gameObject.SetActive(true);
 		companion.Spawn();
 	}
 
-	public void DisableCompanion(Companion companion)
+	public void DisableCompanion(ACompanion companion)
 	{
 		if (companion.OnDisable != null) companion.OnDisable(companion);
 		
@@ -46,22 +46,46 @@ public class CompanionManager : MonoBehaviour
 
 	}
 	
-	IEnumerator ReSpawnCooldown(Companion companion)
+	IEnumerator ReSpawnCooldown(ACompanion companion)
 	{
 		yield return new WaitForSeconds(3);
 		SpawnCompanion(companion);
 	}
 
-	public Companion GetSelectedCompanion()
+	public ACompanion GetSelectedCompanion()
 	{
 		return m_selectedCompanion;
+	}
+
+	public void SelectNextCompanion()
+	{
+		if (m_selectedCompanion.Index == m_companionCount)
+		{
+			SelectCompanion(1);
+		}
+		else
+		{
+			SelectCompanion(m_selectedCompanion.Index + 1);
+		}
+	}
+
+	public void SelectPreviousCompanion()
+	{
+		if (m_selectedCompanion.Index == 1)
+		{
+			SelectCompanion(m_companionCount);
+		}
+		else
+		{
+			SelectCompanion(m_selectedCompanion.Index - 1 );
+		}
 	}
 
 	public void SelectCompanion(int index)
 	{
 		if (index > m_companionCount) index = 1;   //mirror the array if you go past its count
 		
-		Companion compToSelect = m_companions[index - 1];	// get the companion we need to change to
+		ACompanion compToSelect = m_companions[index - 1];	// get the companion we need to change to
 
 		if (compToSelect != null && !compToSelect.IsThrown) // check if its null and if its thrown
 		{
