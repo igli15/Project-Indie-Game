@@ -39,7 +39,7 @@ public class EnemyMeleeState : AbstractState<EnemyFSM>
         else
         {
             Debug.Log("Player Escaped");
-            m_enemyFSM.fsm.ChangeState<EnemySeekState>();
+            m_enemyFSM.fsm.ChangeState<GoombaSeekState>();
             StartCoroutine(SetItRed(Color.green));
         }
         

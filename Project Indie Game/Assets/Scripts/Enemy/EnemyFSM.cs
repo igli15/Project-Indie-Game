@@ -8,16 +8,26 @@ public class EnemyFSM : MonoBehaviour, IAgent {
     public int ID;
 
     private Fsm<EnemyFSM> m_fsm;
+    public enum EnemyType {GOOMBA,TURRET }
+    public EnemyType enemyTpe;
 
     void Start() {
         ID = countID;
         countID++;
         m_fsm = new Fsm<EnemyFSM>(this);
-        m_fsm.ChangeState<EnemySeekState>();
+        switch (enemyTpe)
+        {
+            case EnemyType.GOOMBA:
+                m_fsm.ChangeState<GoombaSeekState>();
+                break;
+            case EnemyType.TURRET:
+                m_fsm.ChangeState<GoombaSeekState>();
+                break;
+        }
+        
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.S)) m_fsm.ChangeState<EnemyMeleeState>();
     }
 
     public Fsm<EnemyFSM> fsm{ get{ return m_fsm; } }
