@@ -41,10 +41,12 @@ public class CompanionController : MonoBehaviour
 		if (Input.mouseScrollDelta.y  * m_scorllScale > 0)
 		{
 			m_manager.SelectNextCompanion();
+			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
 		}
 		if (Input.mouseScrollDelta.y * m_scorllScale < 0)
 		{
 			m_manager.SelectPreviousCompanion();
+			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
 		}
 	}
 
@@ -108,12 +110,5 @@ public class CompanionController : MonoBehaviour
 			}
 			
 		}
-	}
-
-	IEnumerator ChargeThrow(ACompanion companion)
-	{
-		yield return new WaitForSeconds(companion.ChargeTime);
-		Debug.Log("finished charging");
-		companion.IsCharged = true;
 	}
 }
