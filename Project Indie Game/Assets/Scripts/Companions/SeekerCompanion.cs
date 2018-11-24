@@ -34,6 +34,7 @@ public class SeekerCompanion : Companion
 		m_collider.enabled = true;
 		m_throwPos = transform.position;
 		m_rb.velocity = dir * m_throwSpeed;
+		m_rb.rotation = Quaternion.LookRotation(m_rb.velocity.normalized);
 	}
 
 	// Update is called once per frame
@@ -43,7 +44,9 @@ public class SeekerCompanion : Companion
 
 		if (m_targetTransform != null && m_isThrown)
 		{
-			m_rb.velocity = (m_targetTransform.position - transform.position).normalized * m_throwSpeed;
+			Vector3 dir = (m_targetTransform.position - transform.position).normalized;
+			m_rb.rotation = Quaternion.LookRotation(m_rb.velocity.normalized);
+			m_rb.velocity = dir * m_throwSpeed;
 		}
 	}
 
