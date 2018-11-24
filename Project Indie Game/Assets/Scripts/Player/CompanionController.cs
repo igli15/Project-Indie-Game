@@ -16,11 +16,14 @@ public class CompanionController : MonoBehaviour
 
 	private const int m_scorllScale = 10;
 
+	private float m_chargeCount;
+
 	// Use this for initialization
 	void Start ()
 	{
 		m_mainCam = Camera.main;
 		m_manager = GetComponent<CompanionManager>();
+
 	}
 	
 	// Update is called once per frame
@@ -47,27 +50,29 @@ public class CompanionController : MonoBehaviour
 
 	private void HandleMouseAim()
 	{
+
+		if (Input.GetMouseButtonDown(0))
+		{
+			 m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
+		}
 		if (Input.GetMouseButton(0))
 		{
-			m_startCharge = true;
-			//StartCoroutine(ChargeThrow(m_manager.GetSelectedCompanion()));
-			
+			m_chargeCount -= Time.deltaTime;
+			//Debug.Log(m_chargeCount);
+			if (m_chargeCount <= 0)
+			{
+				m_manager.GetSelectedCompanion().IsCharged = true;
+				m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
+			}
+
 		}
 		
-
-		if (m_startCharge)
+		if (Input.GetMouseButtonUp(0) && m_manager.GetSelectedCompanion().IsCharged)
 		{
-			Debug.Log("hi");
-			m_startCharge = false;
-			StartCoroutine(ChargeThrow(m_manager.GetSelectedCompanion()));
-			Debug.Log(Input.GetMouseButtonUp(0));
-			if (Input.GetMouseButtonUp(0) && m_manager.GetSelectedCompanion().IsCharged)
-			{
-				Debug.Log("T");
-				m_manager.GetSelectedCompanion().IsCharged = false;
-				ThrowAtMousePos(m_manager.GetSelectedCompanion());
-			}
+			ThrowAtMousePos(m_manager.GetSelectedCompanion());
 		}
+
+		
 	}
 
 	private void HandleNumInput()
