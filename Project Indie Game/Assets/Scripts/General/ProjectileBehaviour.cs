@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour {
 
+    public string tag;
+
     private float m_damage=1;
     private Vector3 m_distancePerFrame;
 	void Start () {
@@ -27,9 +29,9 @@ public class ProjectileBehaviour : MonoBehaviour {
         if (collider.CompareTag("Player"))
         {
             collider.GetComponent<Health>().InflictDamage(m_damage);
-            Destroy(gameObject);
+            ObjectPooler.instance.DestroyFromPool(tag, gameObject);
         }
         if (!collider.CompareTag("Obstacle") ) return;
-        Destroy(gameObject);
+        ObjectPooler.instance.DestroyFromPool(tag, gameObject);
     }
 }

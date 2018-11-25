@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     private GameObject m_target;
     private EnemyMovement m_enemyMovement;
     private EnemyMeleeAttack m_meleeAttack;
+    private EnemyRangedAttack m_enemyRangedAttack;
 
     private bool m_afterStart = false;
 
@@ -37,6 +38,8 @@ public class Enemy : MonoBehaviour
         m_enemyMovement.SetPushPower(m_pushPower);
         m_meleeAttack = GetComponent<EnemyMeleeAttack>();
         if(m_meleeAttack!=null) m_meleeAttack.reloadTime = m_reloadTime;
+        m_enemyRangedAttack = GetComponent<EnemyRangedAttack>();
+        if (m_enemyRangedAttack != null) m_enemyRangedAttack.reloadTime = m_reloadTime;
         //m_enemyMovement.SetDestination(m_target.transform.position);
     }
 

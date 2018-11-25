@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class EnemyRangedAttack : MonoBehaviour {
 
+
     [SerializeField]
     private GameObject m_projectile;
+    public float reloadTime = 0.1f;
 
-	void Start () {
-		
-	}
+    void Start () {
+        
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    public void ShootTo(Vector3 targetPosition)
+    public void ShootTo(Vector3 targetPosition,string objectPoolTag)
     {
-        Debug.Log("PewPew");
         Vector3 direction=targetPosition- transform.position;
         direction.Normalize();
-        Debug.Log(direction + "D");
-        GameObject newProjectile=Instantiate(m_projectile, transform.position+transform.up, transform.rotation, null);
+
+        GameObject newProjectile = ObjectPooler.instance.SpawnFromPool
+            (objectPoolTag, transform.position + transform.up, transform.rotation);
+
+        newProjectile.GetComponent<ProjectileBehaviour>().tag = objectPoolTag;
         Rigidbody rb =newProjectile.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePositionY;
         rb.velocity = direction * 20;

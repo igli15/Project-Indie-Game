@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class TurretShootState : AbstractState<EnemyFSM> {
 
+    [SerializeField]
+    private PrototypeColorManager m_colorManager;
+
     private Enemy m_enemy;
     private EnemyFSM m_enemyFSM;
     private EnemyRangedAttack m_rangedAttack;
 
     private bool m_attackIsAllowed = false;
-    private float m_reloadTime = 1;
+    private float m_reloadTime = 0.1f;
 
     private void Start()
     {
@@ -17,6 +20,7 @@ public class TurretShootState : AbstractState<EnemyFSM> {
         m_enemyFSM = GetComponent<EnemyFSM>();
         m_rangedAttack = GetComponent<EnemyRangedAttack>();
 
+        m_reloadTime= m_rangedAttack.reloadTime;
         m_enemy.sphereCollider.OnEnemyTriggerExit += OnPlayerExitSpehere;
     }
 
@@ -51,19 +55,22 @@ public class TurretShootState : AbstractState<EnemyFSM> {
 
     IEnumerator Shoot()
     {
-        while (true)
+        while (m_attackIsAllowed)
         {
-            if (!m_attackIsAllowed) yield return null;
             yield return new WaitForSeconds(m_reloadTime);
-            m_rangedAttack.ShootTo(m_enemy.target.transform.position);
+            m_rangedAttack.ShootTo(m_enemy.target.transform.position,"TurretProjectile");
         }
-
+        yield return null;
     }
 
     IEnumerator MoveToStaticMode(float timeToTransform)
     {
+        m_colorManager.ChangeColorTo(Color.yellow);
         m_attackIsAllowed = false;
         yield return new WaitForSeconds(timeToTransform);
+
+        m_colorManager.ChangeColorTo(Color.red);
+
         m_attackIsAllowed = true;
         StartCoroutine(Shoot());
         yield return null;
@@ -71,8 +78,11 @@ public class TurretShootState : AbstractState<EnemyFSM> {
 
     IEnumerator MoveToPortableMode(float timeToTransform)
     {
+        m_colorManager.ChangeColorTo(Color.yellow);
         m_attackIsAllowed = false;
         yield return new WaitForSeconds(timeToTransform);
+
+        m_colorManager.ChangeColorTo(Color.green);
 
         m_enemyFSM.fsm.ChangeState<TurretSeekState>();
         yield return null;
