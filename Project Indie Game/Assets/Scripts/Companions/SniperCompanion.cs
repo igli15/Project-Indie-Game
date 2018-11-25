@@ -8,12 +8,22 @@ public class SniperCompanion : Companion
 
 	[SerializeField] 
 	private float m_playerSlowAmount = 2;
+
+	[SerializeField] 
+	[Range(0,100)]
+	private float m_piercingDamage = 50;
+
+	[SerializeField] 
+	[Range(0,100)]
+	private float m_fullDamage = 100;
 	
 	private GameObject m_targetEnemy;
 
 	private Player m_player;
 
 	private float m_playerInitSpeed;
+
+	private Collider m_collider;
 	
 	
 	private void Awake()
@@ -26,7 +36,7 @@ public class SniperCompanion : Companion
 	{
 		m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 		m_playerInitSpeed = m_player.MoveSpeed;
-
+		m_collider = GetComponent<Collider>();
 		OnStartCharging += delegate(ACompanion companion) {m_player.MoveSpeed -= m_playerSlowAmount;};
 	}
 	
@@ -47,12 +57,14 @@ public class SniperCompanion : Companion
 
 	public override void Reset()
 	{
+		m_collider.enabled = false;
 		m_targetEnemy = null;
 		base.Reset();
 	}
 
 	public override void Throw(Vector3 dir)
 	{
+		m_collider.enabled = true;
 		m_player.MoveSpeed = m_playerInitSpeed;
 		
 		base.Throw(dir);
@@ -61,9 +73,7 @@ public class SniperCompanion : Companion
 		hits = Physics.RaycastAll(transform.position, dir,m_throwRange).OrderBy(d=>d.distance).ToArray();
 
 		for (int i = 0; i < hits.Length; i++)
-		{
-			Debug.Log(hits[i].transform.gameObject);
-			
+		{	
 			if (hits[i].transform.CompareTag("Obstacle"))
 			{
 				break;
@@ -80,14 +90,17 @@ public class SniperCompanion : Companion
 	{
 		if (other.transform.CompareTag("Enemy"))
 		{
-			if (m_targetEnemy != null && other.transform == m_targetEnemy.transform)
+			if (m_targetEnemy != null)
 			{
-				other.GetComponent<Health>().InflictDamage(100);
-				m_manager.DisableCompanion(this);
-			}
-			else
-			{
-				other.GetComponent<Health>().InflictDamage(50);
+				if (other.transform == m_targetEnemy.transform)
+				{
+					other.GetComponent<Health>().InflictDamage(m_fullDamage);
+					m_manager.DisableCompanion(this);
+				}
+				else
+				{
+					other.GetComponent<Health>().InflictDamage(m_piercingDamage);
+				}
 			}
 		}
 		else if (other.transform.CompareTag("Obstacle"))

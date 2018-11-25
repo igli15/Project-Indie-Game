@@ -55,6 +55,7 @@ public class SeekerCompanion : Companion
 	public override void Reset()
 	{
 		base.Reset();
+		m_collider.enabled = false;
 		m_bounceAmount = m_initbounceAmount;
 		m_targetTransform = null;
 	}
