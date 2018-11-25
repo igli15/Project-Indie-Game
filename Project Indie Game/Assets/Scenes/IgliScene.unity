@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_parentFeetPos: {fileID: 368805044}
-  m_distRadius: 2
+  m_distRadius: 1.2
   m_playerScript: {fileID: 1774658605}
 --- !u!114 &635550513
 MonoBehaviour:
@@ -971,7 +971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_parentFeetPos: {fileID: 368805044}
-  m_distRadius: 2
+  m_distRadius: 1.2
   m_playerScript: {fileID: 1774658605}
 --- !u!114 &982909051
 MonoBehaviour:
@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_parentFeetPos: {fileID: 368805044}
-  m_distRadius: 2
+  m_distRadius: 1.2
   m_playerScript: {fileID: 1774658605}
 --- !u!195 &1223154934
 NavMeshAgent:

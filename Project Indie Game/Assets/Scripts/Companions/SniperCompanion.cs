@@ -66,12 +66,10 @@ public class SniperCompanion : Companion
 			
 			if (hits[i].transform.CompareTag("Obstacle"))
 			{
-				Debug.Log("end");
 				break;
 			}
 			if (hits[i].transform.CompareTag("Enemy"))
 			{
-				Debug.Log("hi");
 				m_targetEnemy = hits[i].transform.gameObject;
 			}
 		}
@@ -84,7 +82,6 @@ public class SniperCompanion : Companion
 		{
 			if (m_targetEnemy != null && other.transform == m_targetEnemy.transform)
 			{
-				Debug.Log("ge");
 				other.GetComponent<Health>().InflictDamage(100);
 				m_manager.DisableCompanion(this);
 			}
