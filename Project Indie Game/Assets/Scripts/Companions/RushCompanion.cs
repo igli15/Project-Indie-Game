@@ -10,6 +10,10 @@ public class RushCompanion : Companion {
 
 	[SerializeField] 
 	private GameObject m_rushHitbox;
+
+	[SerializeField] 
+	[Range(0,100)]
+	private float m_damageAmount = 50;
 	
 	private Collider m_collider;
 
@@ -63,16 +67,19 @@ public class RushCompanion : Companion {
 	public override void Activate(GameObject other = null)
 	{
 		base.Activate(other);
-		
-		for (int i = 0; i < m_enemiesCaught.Count; i++)
+
+		if (m_isThrown)
 		{
-			if (m_enemiesCaught[i] != null)
+			for (int i = 0; i < m_enemiesCaught.Count; i++)
 			{
-				m_enemiesCaught[i].transform.SetParent(null);
-				m_enemiesCaught[i].GetComponent<Health>().InflictDamage(100);
+				if (m_enemiesCaught[i] != null)
+				{
+					m_enemiesCaught[i].transform.SetParent(null);
+					m_enemiesCaught[i].GetComponent<Health>().InflictDamage(m_damageAmount);
+				}
 			}
+
+			m_manager.DisableCompanion(this);
 		}
-		
-		m_manager.DisableCompanion(this);
 	}
 }

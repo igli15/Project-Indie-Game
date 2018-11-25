@@ -5,6 +5,9 @@ using UnityEngine;
 public class RushHitbox : MonoBehaviour
 {
 
+	[SerializeField] 
+	private float m_collisionCheckOffset = 0.5f;
+	
 	private RushCompanion m_parentCompanion;
 	
 	// Use this for initialization
@@ -14,20 +17,28 @@ public class RushHitbox : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
 	{
-		
+		RaycastHit hit;
+		//transform.up since the plane is rotated.
+		if (Physics.Raycast(transform.position, transform.up, out hit,m_collisionCheckOffset))
+		{
+			Debug.Log(hit.transform.gameObject);
+			if (hit.transform.CompareTag("Obstacle"))
+			{
+				m_parentCompanion.Activate();
+			}
+		}
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Enemy"))
+		if (m_parentCompanion.IsThrown)
 		{
-			m_parentCompanion.CatchEnemy(other.gameObject);
-		}
-		else if (other.CompareTag("Obstacle"))
-		{
-			m_parentCompanion.Activate();
+			if (other.CompareTag("Enemy"))
+			{
+				m_parentCompanion.CatchEnemy(other.gameObject);
+			}
 		}
 	}
 }
