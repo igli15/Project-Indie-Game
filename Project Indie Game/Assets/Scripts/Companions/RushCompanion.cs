@@ -13,20 +13,26 @@ public class RushCompanion : Companion {
 	
 	private Collider m_collider;
 
+	private List<GameObject> m_enemiesCaught = new List<GameObject>();
+
 	private void Awake()
 	{
+		
 		base.Awake();
 	}
 
 	public override void Throw(Vector3 dir)
 	{
 		base.Throw(dir);
+		m_rushHitbox.SetActive(true);
 		m_collider.enabled = true;
 	}
 
 	private void Reset()
 	{
 		base.Reset();
+		m_enemiesCaught.Clear();
+		m_rushHitbox.SetActive(false);
 		m_collider.enabled = false;
 	}
 
@@ -39,5 +45,34 @@ public class RushCompanion : Companion {
 	void Update () 
 	{
 		base.Update();
+	}
+
+	public override void RangeReached()
+	{
+		base.RangeReached();
+		Activate();
+	}
+
+	public void CatchEnemy(GameObject enemy)
+	{
+		enemy.transform.SetParent(transform);
+		m_enemiesCaught.Add(enemy);
+	}
+
+
+	public override void Activate(GameObject other = null)
+	{
+		base.Activate(other);
+		
+		for (int i = 0; i < m_enemiesCaught.Count; i++)
+		{
+			if (m_enemiesCaught[i] != null)
+			{
+				m_enemiesCaught[i].transform.SetParent(null);
+				m_enemiesCaught[i].GetComponent<Health>().InflictDamage(100);
+			}
+		}
+		
+		m_manager.DisableCompanion(this);
 	}
 }

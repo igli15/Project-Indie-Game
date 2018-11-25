@@ -32,6 +32,7 @@ public abstract class ACompanion : MonoBehaviour
 	public abstract void CheckIfOutOfRange();
 	public abstract void Reset();
 	public abstract void Spawn();
+	public abstract void RangeReached();
 	
 	
 	public int Index
