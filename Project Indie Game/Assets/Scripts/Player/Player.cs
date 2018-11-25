@@ -48,4 +48,10 @@ public class Player : MonoBehaviour
 		return m_vel;
 	}
 
+	public float MoveSpeed
+	{
+		get { return m_moveSpeed; }
+		set { m_moveSpeed = value; }
+	}
+
 }

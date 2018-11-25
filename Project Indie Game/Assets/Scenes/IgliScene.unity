@@ -521,6 +521,7 @@ MonoBehaviour:
   m_manager: {fileID: 1774658612}
   m_throwRange: 20
   m_throwSpeed: 20
+  m_playerSlowAmount: 2
 --- !u!1 &660406649
 GameObject:
   m_ObjectHideFlags: 0

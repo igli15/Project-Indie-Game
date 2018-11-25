@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class SniperCompanion : Companion
 {
+
+	[SerializeField] 
+	private float m_playerSlowAmount = 2;
+	
 	private GameObject m_targetEnemy;
 
-	private List<GameObject> m_enemiesInLine;
-	
+	private Player m_player;
+
+	private float m_playerInitSpeed;
 	
 	
 	private void Awake()
@@ -17,9 +22,12 @@ public class SniperCompanion : Companion
 	}
 	
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
-		
+		m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+		m_playerInitSpeed = m_player.MoveSpeed;
+
+		OnStartCharging += delegate(ACompanion companion) {m_player.MoveSpeed -= m_playerSlowAmount;};
 	}
 	
 	void Update () 
@@ -44,6 +52,8 @@ public class SniperCompanion : Companion
 
 	public override void Throw(Vector3 dir)
 	{
+		m_player.MoveSpeed = m_playerInitSpeed;
+		
 		base.Throw(dir);
 		RaycastHit[] hits;
 		
@@ -57,7 +67,6 @@ public class SniperCompanion : Companion
 			}
 			if (hits[i].transform.CompareTag("Enemy"))
 			{
-				//m_enemiesInLine.Add(hits[i].transform.gameObject);
 				m_targetEnemy = hits[i].transform.gameObject;
 			}
 		}
