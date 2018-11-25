@@ -47,6 +47,7 @@ public class SniperCompanion : Companion
 
 	public override void Reset()
 	{
+		m_targetEnemy = null;
 		base.Reset();
 	}
 
@@ -57,16 +58,20 @@ public class SniperCompanion : Companion
 		base.Throw(dir);
 		RaycastHit[] hits;
 		
-		hits = Physics.RaycastAll(transform.position, dir,m_throwRange);
+		hits = Physics.RaycastAll(transform.position, dir,m_throwRange).OrderBy(d=>d.distance).ToArray();
 
 		for (int i = 0; i < hits.Length; i++)
 		{
+			Debug.Log(hits[i].transform.gameObject);
+			
 			if (hits[i].transform.CompareTag("Obstacle"))
 			{
+				Debug.Log("end");
 				break;
 			}
 			if (hits[i].transform.CompareTag("Enemy"))
 			{
+				Debug.Log("hi");
 				m_targetEnemy = hits[i].transform.gameObject;
 			}
 		}
@@ -79,12 +84,18 @@ public class SniperCompanion : Companion
 		{
 			if (m_targetEnemy != null && other.transform == m_targetEnemy.transform)
 			{
+				Debug.Log("ge");
 				other.GetComponent<Health>().InflictDamage(100);
+				m_manager.DisableCompanion(this);
 			}
 			else
 			{
 				other.GetComponent<Health>().InflictDamage(50);
 			}
+		}
+		else if (other.transform.CompareTag("Obstacle"))
+		{
+			m_manager.DisableCompanion(this);
 		}
 		
 	}
