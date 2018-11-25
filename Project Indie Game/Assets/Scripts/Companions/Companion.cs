@@ -56,9 +56,14 @@ public class Companion : ACompanion
 	{
 		if (OnThrow != null) OnThrow(this);
 			
+		m_isCharged = false;
 		m_manager.SelectCompanion(m_index + 1);
 		m_steering.StopAgent();
 		m_isThrown = true;
+		
+		m_throwPos = transform.position;
+		m_rb.velocity = dir * m_throwSpeed;
+		m_rb.rotation = Quaternion.LookRotation(m_rb.velocity.normalized);
 	}
 
 	public override void Activate(GameObject other = null)
@@ -70,6 +75,7 @@ public class Companion : ACompanion
 	{
 		if (m_isThrown)
 		{
+			//Debug.Log(this);
 			if (Vector3.Distance(m_throwPos, transform.position) >= m_throwRange)
 			{
 				m_manager.DisableCompanion(this);

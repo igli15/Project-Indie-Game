@@ -61,11 +61,15 @@ public class CompanionManager : MonoBehaviour
 	{
 		if (m_selectedCompanion.Index == m_companionCount)
 		{
+			m_selectedCompanion.IsCharged = false;
 			SelectCompanion(1);
+			m_selectedCompanion.IsCharged = false;
 		}
 		else
 		{
+			m_selectedCompanion.IsCharged = false;
 			SelectCompanion(m_selectedCompanion.Index + 1);
+			m_selectedCompanion.IsCharged = false;
 		}
 	}
 
@@ -73,11 +77,15 @@ public class CompanionManager : MonoBehaviour
 	{
 		if (m_selectedCompanion.Index == 1)
 		{
+			m_selectedCompanion.IsCharged = false;
 			SelectCompanion(m_companionCount);
+			m_selectedCompanion.IsCharged = false;
 		}
 		else
 		{
+			m_selectedCompanion.IsCharged = false;
 			SelectCompanion(m_selectedCompanion.Index - 1 );
+			m_selectedCompanion.IsCharged = false;
 		}
 	}
 

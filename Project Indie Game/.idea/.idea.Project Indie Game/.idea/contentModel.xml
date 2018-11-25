@@ -188,6 +188,7 @@
             <e p="Companion.cs" t="Include" />
             <e p="CompanionSteering.cs" t="Include" />
             <e p="SeekerCompanion.cs" t="Include" />
+            <e p="SniperCompanion.cs" t="Include" />
           </e>
           <e p="DummyScripts" t="Include">
             <e p="DummyMoveScript.cs" t="Include" />

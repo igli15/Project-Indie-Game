@@ -16,8 +16,6 @@ public class SeekerCompanion : Companion
 
 	private float m_initbounceAmount = 0;
 
-    private bool m_canBounce = false;
-
 	private Transform m_targetTransform;
 	
 	private void Awake()
@@ -34,8 +32,6 @@ public class SeekerCompanion : Companion
 	{
 		base.Throw(dir);
 		m_collider.enabled = true;
-		m_throwPos = transform.position;
-		m_rb.velocity = dir * m_throwSpeed;
 	}
 
 	// Update is called once per frame
@@ -45,7 +41,9 @@ public class SeekerCompanion : Companion
 
 		if (m_targetTransform != null && m_isThrown)
 		{
-			m_rb.velocity = (m_targetTransform.position - transform.position).normalized * m_throwSpeed;
+			Vector3 dir = (m_targetTransform.position - transform.position).normalized;
+			m_rb.rotation = Quaternion.LookRotation(m_rb.velocity.normalized);
+			m_rb.velocity = dir * m_throwSpeed;
 		}
 	}
 
@@ -57,6 +55,7 @@ public class SeekerCompanion : Companion
 	public override void Reset()
 	{
 		base.Reset();
+		m_collider.enabled = false;
 		m_bounceAmount = m_initbounceAmount;
 		m_targetTransform = null;
 	}
@@ -91,7 +90,6 @@ public class SeekerCompanion : Companion
 		}
 		else if(other.gameObject.layer != LayerMask.NameToLayer(m_layerToIgnoreName)  && IsThrown) //Disable if it hits anything beside the one stated here
 		{
-			
 			m_manager.DisableCompanion(this);
 		}
 	}
