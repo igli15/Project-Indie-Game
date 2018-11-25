@@ -32,9 +32,6 @@ public class SeekerCompanion : Companion
 	{
 		base.Throw(dir);
 		m_collider.enabled = true;
-		m_throwPos = transform.position;
-		m_rb.velocity = dir * m_throwSpeed;
-		m_rb.rotation = Quaternion.LookRotation(m_rb.velocity.normalized);
 	}
 
 	// Update is called once per frame
@@ -92,7 +89,6 @@ public class SeekerCompanion : Companion
 		}
 		else if(other.gameObject.layer != LayerMask.NameToLayer(m_layerToIgnoreName)  && IsThrown) //Disable if it hits anything beside the one stated here
 		{
-			
 			m_manager.DisableCompanion(this);
 		}
 	}

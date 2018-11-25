@@ -52,29 +52,7 @@ public class CompanionController : MonoBehaviour
 
 	private void HandleMouseAim()
 	{
-
-		if (Input.GetMouseButtonDown(0))
-		{
-			 m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
-		}
-		if (Input.GetMouseButton(0))
-		{
-			m_chargeCount -= Time.deltaTime;
-			//Debug.Log(m_chargeCount);
-			if (m_chargeCount <= 0)
-			{
-				m_manager.GetSelectedCompanion().IsCharged = true;
-				m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
-			}
-
-		}
-		
-		if (Input.GetMouseButtonUp(0) && m_manager.GetSelectedCompanion().IsCharged)
-		{
-			ThrowAtMousePos(m_manager.GetSelectedCompanion());
-		}
-
-		
+		ChargeCompanion(m_manager.GetSelectedCompanion());
 	}
 
 	private void HandleNumInput()
@@ -109,6 +87,34 @@ public class CompanionController : MonoBehaviour
 				companion.Throw(dir.normalized);
 			}
 			
+		}
+	}
+
+	private void ChargeCompanion(ACompanion companion)
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			m_chargeCount = companion.ChargeTime;
+			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
+		}
+		if (Input.GetMouseButton(0))
+		{
+			if(companion.OnCharging != null) companion.OnCharging(companion);	
+			m_chargeCount -= Time.deltaTime;
+			
+			if (m_chargeCount <= 0)
+			{
+				if(companion.OnChargeFinished != null) companion.OnChargeFinished(companion);
+				
+				companion.IsCharged = true;
+				m_chargeCount = companion.ChargeTime;
+			}
+
+		}
+		
+		if (Input.GetMouseButtonUp(0) && companion.IsCharged)
+		{
+			ThrowAtMousePos(companion);
 		}
 	}
 }

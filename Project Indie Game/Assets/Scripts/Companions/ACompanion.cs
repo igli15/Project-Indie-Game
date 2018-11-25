@@ -22,6 +22,9 @@ public abstract class ACompanion : MonoBehaviour
 	public Action<ACompanion> OnSelected;
 	public Action<ACompanion> OnDeSelected;
 	public Action<ACompanion> OnRangeReached;
+	public Action<ACompanion> OnStartCharging;
+	public Action<ACompanion> OnCharging;
+	public Action<ACompanion> OnChargeFinished;
 	
 	public abstract void Throw(Vector3 dir);
 	public abstract void Activate(GameObject other = null);  //some time the activation requires other objects that companion collides with.
