@@ -7,6 +7,7 @@ public abstract class ACompanion : MonoBehaviour
 
 {
 	[SerializeField]
+	[Header("General Companion Values")]
 	protected float m_chargeTime = 0;
 
 	protected bool m_isCharged = false;

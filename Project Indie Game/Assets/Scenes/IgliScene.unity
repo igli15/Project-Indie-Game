@@ -1371,7 +1371,7 @@ GameObject:
   - component: {fileID: 1223154932}
   - component: {fileID: 1223154933}
   m_Layer: 9
-  m_Name: SeekerCompanion2
+  m_Name: RushCompanion
   m_TagString: Companion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1385,16 +1385,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1223154931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce8ba38ccf78540f0ae5ca34265786b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d23329498cee4415a1adaf306b97355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeTime: 2
+  m_chargeTime: 0
   m_layerToIgnoreName: CompanionIgnore
   m_manager: {fileID: 1774658612}
-  m_throwRange: 22
+  m_throwRange: 10
   m_throwSpeed: 20
-  m_seekRange: 20
-  m_bounceAmount: 4
+  m_rushHitbox: {fileID: 0}
 --- !u!114 &1223154933
 MonoBehaviour:
   m_ObjectHideFlags: 0
