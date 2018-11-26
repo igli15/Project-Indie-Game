@@ -33,14 +33,10 @@ public class EnemyMeleeAttack : MonoBehaviour
     {
         m_playerThere = collider.CompareTag("Player");
 
-        if (m_attack)
+        if (m_attack && m_playerThere)
         {
-            if (m_playerThere)
-            {
-                collider.GetComponent<Health>().InflictDamage(m_damage);
-                m_attack = false;
-            }
-
+            collider.GetComponent<Health>().InflictDamage(m_damage);
+            m_attack = false;
         }
     }
 

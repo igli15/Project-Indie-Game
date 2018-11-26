@@ -53,10 +53,10 @@ public class Companion : ACompanion
 	public override void Throw(Vector3 dir)
 	{
 		if (OnThrow != null) OnThrow(this);
+		m_steering.StopAgent();
 		m_steering.NavMeshAgent.enabled = false;
 		m_isCharged = false;
 		m_manager.SelectCompanion(m_index + 1);
-		m_steering.StopAgent();
 		
 		m_isThrown = true;
 		
@@ -93,8 +93,8 @@ public class Companion : ACompanion
 
 	public override void Reset()
 	{
-		m_rb.isKinematic = false;
 		m_steering.NavMeshAgent.enabled = true;
+		m_rb.isKinematic = false;
 		m_isThrown = false;
 		m_steering.ResumeAgent();
 		if(m_rb!= null)
