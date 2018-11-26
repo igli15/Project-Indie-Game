@@ -6,66 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Enemy))]
 public class EnemySeekState : AbstractState<EnemyFSM>
 {
-    private Enemy m_enemy;
-    private EnemyFSM m_enemyFSM;
-    private EnemyMovement m_enemyMovement;
-    private EnemyMeleeAttack m_enemyMeleeAttack;
-
-    private GameObject m_seekTarget;
-
-
-
-    void Awake()
-    {
-        m_enemy = GetComponent<Enemy>();
-        m_enemyFSM = GetComponent<EnemyFSM>();
-        m_enemyMovement = GetComponent<EnemyMovement>();
-        m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
-
-        m_enemy.damageCollider.OnEnemyTriggerEnter += OnPlayerEntersAttackZone;
-        m_enemy.damageCollider.OnEnemyTriggerStay += OnPlayerEntersAttackZone;
-    }
-
-
-    private void OnPlayerEntersAttackZone(Collider collider)
-    {
-        if (collider.CompareTag("Player")) m_enemyFSM.fsm.ChangeState<EnemyMeleeState>();
-    }
-
-    public override void Enter(IAgent pAgent)
-    {
-        Debug.Log("ENTER SEEK STATE");
-        base.Enter(pAgent);
-        m_enemyMovement.navMeshAgent.enabled = true;
-        m_enemyMovement.pushIsEnabled = true;
-        m_seekTarget = m_enemy.target;
-        if ((m_seekTarget.transform.position - transform.position).magnitude < 0.1f)
-        {
-            Debug.Log("FORCED SWITCH STATE");
-            m_enemyFSM.fsm.ChangeState<EnemyMeleeState>();
-            return;
-        }
-        StartCoroutine( FollowTarget(m_seekTarget.transform) );
-    }
-
-    public override void Exit(IAgent pAgent)
-    {
-        Debug.Log("EXIT SEEK STATE");
-        base.Exit(pAgent);
-
-        //SLOW DOWN BEFORE ATTACK, KEK
-        m_enemyMovement.navMeshAgent.velocity =Vector3.zero;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-        StopAllCoroutines();
-
-        m_enemyMovement.ResetPath();
-        m_enemyMovement.navMeshAgent.enabled = false;
-        m_enemyMovement.pushIsEnabled = false;
-    }
 
     //EACH 0.1 seconds updating its destination if it reach previous
-    private IEnumerator FollowTarget(Transform target)
+    public IEnumerator FollowTarget(Transform target,EnemyMovement enemyMovement)
     {
         Vector3 previousTargetPosition = new Vector3(float.PositiveInfinity, float.PositiveInfinity);
 
@@ -73,7 +16,7 @@ public class EnemySeekState : AbstractState<EnemyFSM>
         {
             if (Vector3.SqrMagnitude(previousTargetPosition - target.position) > 0.1f)
             {
-                m_enemyMovement.SetDestination(target.position);
+                enemyMovement.SetDestination(target.position);
                 previousTargetPosition = target.position;
             }
             yield return new WaitForSeconds(0.1f);

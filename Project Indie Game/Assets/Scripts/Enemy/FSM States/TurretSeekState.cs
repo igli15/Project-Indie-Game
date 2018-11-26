@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoombaSeekState : EnemySeekState {
+public class TurretSeekState : EnemySeekState {
+
     private Enemy m_enemy;
     private EnemyFSM m_enemyFSM;
     private EnemyMovement m_enemyMovement;
-    private EnemyMeleeAttack m_enemyMeleeAttack;
 
     private GameObject m_seekTarget;
 
@@ -16,16 +16,14 @@ public class GoombaSeekState : EnemySeekState {
         m_enemy = GetComponent<Enemy>();
         m_enemyFSM = GetComponent<EnemyFSM>();
         m_enemyMovement = GetComponent<EnemyMovement>();
-        m_enemyMeleeAttack = GetComponent<EnemyMeleeAttack>();
 
-        m_enemy.damageCollider.OnEnemyTriggerEnter += OnPlayerEntersAttackZone;
-        m_enemy.damageCollider.OnEnemyTriggerStay += OnPlayerEntersAttackZone;
+        m_seekTarget = m_enemy.target;
+        m_enemy.sphereCollider.OnEnemyTriggerStay += OnPlayerStaySpehere;
     }
 
-
-    private void OnPlayerEntersAttackZone(Collider collider)
+    private void OnPlayerStaySpehere(Collider collider)
     {
-        if (collider.CompareTag("Player")) m_enemyFSM.fsm.ChangeState<EnemyMeleeState>();
+        if (collider.CompareTag("Player")) m_enemyFSM.fsm.ChangeState<TurretShootState>();
     }
 
     public override void Enter(IAgent pAgent)
@@ -35,13 +33,8 @@ public class GoombaSeekState : EnemySeekState {
         m_enemyMovement.navMeshAgent.enabled = true;
         m_enemyMovement.pushIsEnabled = true;
         m_seekTarget = m_enemy.target;
-        if ((m_seekTarget.transform.position - transform.position).magnitude < 0.1f)
-        {
-            Debug.Log("FORCED SWITCH STATE");
-            m_enemyFSM.fsm.ChangeState<EnemyMeleeState>();
-            return;
-        }
-        StartCoroutine(FollowTarget(m_seekTarget.transform,m_enemyMovement));
+
+        StartCoroutine(FollowTarget(m_seekTarget.transform, m_enemyMovement));
     }
 
     public override void Exit(IAgent pAgent)
@@ -59,5 +52,4 @@ public class GoombaSeekState : EnemySeekState {
         m_enemyMovement.navMeshAgent.enabled = false;
         m_enemyMovement.pushIsEnabled = false;
     }
-
 }
