@@ -6,6 +6,7 @@ using UnityEngine;
 public class SeekerCompanion : Companion
 {
 
+	[Header("Seeker Companion Values")]
 	[SerializeField]
 	private float m_seekRange = 3;
 

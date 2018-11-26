@@ -6,6 +6,7 @@ using UnityEngine;
 public class SniperCompanion : Companion
 {
 
+	[Header("Sniper Companion Values")]
 	[SerializeField] 
 	private float m_playerSlowAmount = 2;
 

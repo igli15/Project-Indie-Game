@@ -78,10 +78,15 @@ public class Companion : ACompanion
 			//Debug.Log(this);
 			if (Vector3.Distance(m_throwPos, transform.position) >= m_throwRange)
 			{
-				m_manager.DisableCompanion(this);
-				if(OnRangeReached != null) OnRangeReached(this);
+				RangeReached();
 			}
 		}
+	}
+
+	public override void RangeReached()
+	{
+		if(OnRangeReached != null) OnRangeReached(this);
+		m_manager.DisableCompanion(this);
 	}
 
 	public override void Reset()

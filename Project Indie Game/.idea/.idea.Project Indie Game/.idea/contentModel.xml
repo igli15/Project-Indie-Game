@@ -187,6 +187,8 @@
             <e p="ACompanion.cs" t="Include" />
             <e p="Companion.cs" t="Include" />
             <e p="CompanionSteering.cs" t="Include" />
+            <e p="RushCompanion.cs" t="Include" />
+            <e p="RushHitbox.cs" t="Include" />
             <e p="SeekerCompanion.cs" t="Include" />
             <e p="SniperCompanion.cs" t="Include" />
           </e>
