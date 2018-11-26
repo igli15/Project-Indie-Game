@@ -84,7 +84,7 @@ public class CompanionController : MonoBehaviour
 		{
 			if (!companion.IsThrown)
 			{
-				companion.Throw(dir.normalized);
+				companion.Throw(dir);
 			}
 			
 		}

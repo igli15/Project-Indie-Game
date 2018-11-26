@@ -30,6 +30,7 @@ public class SniperCompanion : Companion
 	private void Awake()
 	{
 		base.Awake();
+        m_collider = GetComponent<Collider>();
 	}
 	
 	// Use this for initialization
@@ -37,7 +38,7 @@ public class SniperCompanion : Companion
 	{
 		m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 		m_playerInitSpeed = m_player.MoveSpeed;
-		m_collider = GetComponent<Collider>();
+		
 		OnStartCharging += delegate(ACompanion companion) {m_player.MoveSpeed -= m_playerSlowAmount;};
 	}
 	
@@ -68,10 +69,10 @@ public class SniperCompanion : Companion
 		m_collider.enabled = true;
 		m_player.MoveSpeed = m_playerInitSpeed;
 		
-		base.Throw(dir);
+		base.Throw(dir.normalized);
 		RaycastHit[] hits;
 		
-		hits = Physics.RaycastAll(transform.position, dir,m_throwRange).OrderBy(d=>d.distance).ToArray();
+		hits = Physics.RaycastAll(transform.position, dir.normalized,dir.magnitude).OrderBy(d=>d.distance).ToArray();
 
 		for (int i = 0; i < hits.Length; i++)
 		{	

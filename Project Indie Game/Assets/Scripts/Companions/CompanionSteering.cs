@@ -34,13 +34,22 @@ public class CompanionSteering : MonoBehaviour
 
 	public void StopAgent()
 	{
-		if(m_navMeshAgent.gameObject.activeSelf)
-		m_navMeshAgent.isStopped = true;
+		if (m_navMeshAgent.enabled == true)
+		{
+			m_navMeshAgent.isStopped = true;
+			m_navMeshAgent.updateRotation = false;
+			m_navMeshAgent.ResetPath();
+		}
+
 	}
 
 	public void ResumeAgent()
 	{
-		m_navMeshAgent.isStopped = false;
+		if (m_navMeshAgent.enabled == true)
+		{
+			m_navMeshAgent.isStopped = false;
+			m_navMeshAgent.updateRotation = true;
+		}
 	}
 	
 	public void FindRandomPositionAroundParent()
@@ -72,4 +81,9 @@ public class CompanionSteering : MonoBehaviour
 			{
 				m_navMeshAgent.SetDestination(m_parentFeetPos.position + m_randomPos * -1);
 			}*/
+
+	public NavMeshAgent NavMeshAgent
+	{
+		get { return m_navMeshAgent; }
+	}
 }

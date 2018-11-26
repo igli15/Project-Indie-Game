@@ -23,7 +23,7 @@ public class RushHitbox : MonoBehaviour
 		//transform.up since the plane is rotated.
 		if (Physics.Raycast(transform.position, transform.up, out hit,m_collisionCheckOffset))
 		{
-			Debug.Log(hit.transform.gameObject);
+			//Debug.Log(hit.transform.gameObject);
 			if (hit.transform.CompareTag("Obstacle"))
 			{
 				m_parentCompanion.Activate();

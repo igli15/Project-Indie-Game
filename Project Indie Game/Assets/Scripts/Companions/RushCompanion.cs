@@ -21,18 +21,18 @@ public class RushCompanion : Companion {
 
 	private void Awake()
 	{
-		
+		m_collider = GetComponent<Collider>();
 		base.Awake();
 	}
 
 	public override void Throw(Vector3 dir)
 	{
-		base.Throw(dir);
+		base.Throw(dir.normalized);
 		m_rushHitbox.SetActive(true);
 		m_collider.enabled = true;
 	}
 
-	private void Reset()
+	public override void Reset()
 	{
 		base.Reset();
 		m_enemiesCaught.Clear();
@@ -40,10 +40,6 @@ public class RushCompanion : Companion {
 		m_collider.enabled = false;
 	}
 
-	void Start ()
-	{
-		m_collider = GetComponent<Collider>();
-	}
 	
 	// Update is called once per frame
 	void Update () 
@@ -59,8 +55,10 @@ public class RushCompanion : Companion {
 
 	public void CatchEnemy(GameObject enemy)
 	{
+		
 		enemy.transform.SetParent(transform);
 		m_enemiesCaught.Add(enemy);
+		Debug.Log("enemy caught " + enemy.name);
 	}
 
 

@@ -15,8 +15,10 @@ public class EnemyMovement : MonoBehaviour
     private bool m_isPushed = false;
     public bool pushIsEnabled = true;
 	void Awake () {
+	    Debug.Log("Awake navmeshagent");
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_enemy = GetComponent<Enemy>();
+	    
         m_enemy.sphereCollider.OnEnemyTriggerEnter += OnObjectTriggerStay;
     }
 	
@@ -83,6 +85,7 @@ public class EnemyMovement : MonoBehaviour
     }
     public void SetDestination(Vector3 destination)
     {
+        Debug.Log("SetDestination is called");
         m_navMeshAgent.SetDestination(destination);
     }
     public void ResetPath()

@@ -31,7 +31,7 @@ public class SeekerCompanion : Companion
 
 	public override void Throw(Vector3 dir)
 	{
-		base.Throw(dir);
+		base.Throw(dir.normalized);
 		m_collider.enabled = true;
 	}
 
@@ -64,7 +64,6 @@ public class SeekerCompanion : Companion
 	public override void Activate(GameObject other)
 	{
 		base.Activate(other);
-		
 		if (other.CompareTag("Enemy") && IsThrown)
 		{
 			List<GameObject> enemiesInRange = GetAllEnemiesInRange(other.transform);  //Fill the list
@@ -79,7 +78,6 @@ public class SeekerCompanion : Companion
 			else
 			{
 				CheckForObstaclesBlock(enemiesInRange,other.transform);    //Check if there is any obstacles in the way if so remove them from the list
-				
 				m_targetTransform = GetTheClosestEnemy(enemiesInRange,other.transform);  //Get the closest enemies that are currently on the range
 			}
 			
@@ -89,7 +87,7 @@ public class SeekerCompanion : Companion
 				m_manager.DisableCompanion(this);
 			}
 		}
-		else if(other.gameObject.layer != LayerMask.NameToLayer(m_layerToIgnoreName)  && IsThrown) //Disable if it hits anything beside the one stated here
+		else if(other.gameObject.CompareTag("Obstacle")  && IsThrown) //Disable if it hits anything beside the one stated here
 		{
 			m_manager.DisableCompanion(this);
 		}
@@ -106,6 +104,7 @@ public class SeekerCompanion : Companion
 				if (hit.transform.CompareTag("Obstacle"))
 				{
 					enemiesInRange.Remove(enemiesInRange[i]);
+					i--;
 				}
 			}
 		}

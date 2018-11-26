@@ -10,8 +10,6 @@ using UnityEngine.Serialization;
 public class Companion : ACompanion
 {
 	[SerializeField] 
-	protected string m_layerToIgnoreName = "CompanionIgnore";
-	[SerializeField] 
 	protected CompanionManager m_manager; 
 	[SerializeField]
 	protected float m_throwRange = 10;
@@ -32,8 +30,8 @@ public class Companion : ACompanion
 	{
 		m_isThrown = false;
 		
-		OnSelected += delegate(ACompanion companion)	{companion.GetComponent<Renderer>().material.color = Color.red;};
-		OnDeSelected +=  delegate(ACompanion companion) {companion.GetComponent<Renderer>().material.color = Color.white; };
+		/*OnSelected += delegate(ACompanion companion)	{companion.GetComponent<Renderer>().material.color = Color.red;};
+		OnDeSelected +=  delegate(ACompanion companion) {companion.GetComponent<Renderer>().material.color = Color.white; };*/
 		
 		m_rb = GetComponent<Rigidbody>();
 		m_steering = GetComponent<CompanionSteering>();
@@ -55,15 +53,19 @@ public class Companion : ACompanion
 	public override void Throw(Vector3 dir)
 	{
 		if (OnThrow != null) OnThrow(this);
-			
+		m_steering.NavMeshAgent.enabled = false;
 		m_isCharged = false;
 		m_manager.SelectCompanion(m_index + 1);
 		m_steering.StopAgent();
+		
 		m_isThrown = true;
 		
 		m_throwPos = transform.position;
-		m_rb.velocity = dir * m_throwSpeed;
-		m_rb.rotation = Quaternion.LookRotation(m_rb.velocity.normalized);
+		
+		m_rb.velocity = dir.normalized * m_throwSpeed;
+
+		m_rb.rotation = Quaternion.RotateTowards(m_rb.rotation,Quaternion.LookRotation(m_rb.velocity.normalized),1000); // UNITY REASONS
+		
 	}
 
 	public override void Activate(GameObject other = null)
@@ -91,6 +93,8 @@ public class Companion : ACompanion
 
 	public override void Reset()
 	{
+		m_rb.isKinematic = false;
+		m_steering.NavMeshAgent.enabled = true;
 		m_isThrown = false;
 		m_steering.ResumeAgent();
 		if(m_rb!= null)
@@ -105,5 +109,11 @@ public class Companion : ACompanion
 		Reset();
 		m_steering.FindRandomPositionAroundParent();
 	}
+
+/*	private void OnTriggerEnter(Collider other)
+	{
+		if(other.CompareTag("Enemy"))
+		other.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+	}*/
 
 }

@@ -195,18 +195,27 @@
           <e p="DummyScripts" t="Include">
             <e p="DummyMoveScript.cs" t="Include" />
           </e>
+          <e p="Editor" t="Include">
+            <e p="EnemyManagerEditor.cs" t="Include" />
+          </e>
           <e p="Enemy" t="Include">
             <e p="Enemy.cs" t="Include" />
             <e p="EnemyDamageCollider.cs" t="Include" />
             <e p="EnemyFSM.cs" t="Include" />
+            <e p="EnemyManager.cs" t="Include" />
             <e p="EnemyMeleeAttack.cs" t="Include" />
             <e p="EnemyMovement.cs" t="Include" />
+            <e p="EnemyRangedAttack.cs" t="Include" />
+            <e p="EnemySpawner.cs" t="Include" />
             <e p="FSM States" t="Include">
               <e p="EnemyMeleeState.cs" t="Include" />
               <e p="EnemySeekState.cs" t="Include" />
               <e p="GoombaSeekState.cs" t="Include" />
+              <e p="TurretSeekState.cs" t="Include" />
             </e>
             <e p="PrototypeColorManager.cs" t="Include" />
+            <e p="TurretShootState.cs" t="Include" />
+            <e p="Wave.cs" t="Include" />
           </e>
           <e p="General" t="Include">
             <e p="FSM" t="Include">
@@ -215,6 +224,9 @@
               <e p="IAgent.cs" t="Include" />
             </e>
             <e p="Health.cs" t="Include" />
+            <e p="IPooleableObject.cs" t="Include" />
+            <e p="ObjectPooler.cs" t="Include" />
+            <e p="ProjectileBehaviour.cs" t="Include" />
           </e>
           <e p="HudManager.cs" t="Include" />
           <e p="Player" t="Include">
