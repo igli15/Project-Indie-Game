@@ -16,7 +16,7 @@ public class CompanionManager : MonoBehaviour
 	void Start ()
 	{
 		m_companionCount = m_companions.Count;
-		AssignCompanionsIndex();
+		SpawnCompanions();
 
 		SelectCompanion(1);
 	}
@@ -111,11 +111,23 @@ public class CompanionManager : MonoBehaviour
 	private void DropCompanion(ACompanion companion)
 	{
 		companion.Reset();
+		companion.IsInParty = false;
 		companion.SteeringComponent.NavMeshAgent.enabled = false;
 		m_companionCount -= 1;
 		m_companions.Remove(companion);
 		AssignCompanionsIndex();
 		SelectPreviousCompanion();
+	}
+
+	private void PickCompanion(ACompanion companion)
+	{
+		companion.Spawn();
+		companion.IsInParty = true;
+		companion.SteeringComponent.NavMeshAgent.enabled = true;
+		m_companionCount += 1;
+		m_companions.Add(companion);
+		AssignCompanionsIndex();
+		SelectCompanion(companion.Index);
 		
 	}
 
@@ -124,8 +136,26 @@ public class CompanionManager : MonoBehaviour
 	{
 		for (int i = 0; i < m_companionCount; i++)
 		{
+			m_companions[i].Index = i+1;
+		}
+	}
+	
+	private void SpawnCompanions()
+	{
+		for (int i = 0; i < m_companionCount; i++)
+		{
 			SpawnCompanion(m_companions[i]);
 			m_companions[i].Index = i+1;
 		}
 	}
+
+	private void OnTriggerStay(Collider other)
+	{
+		if (other.transform.CompareTag("PickupSphere") && !other.transform.parent.GetComponent<Companion>().IsInParty &&  Input.GetKeyDown(KeyCode.P))
+		{
+			PickCompanion(other.transform.parent.GetComponent<Companion>());
+		}
+	}
+
+
 }
