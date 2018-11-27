@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(CompanionManager))]
 public class CompanionController : MonoBehaviour
@@ -95,6 +96,8 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_chargeCount = companion.ChargeTime;
+			companion.transform.position = m_feetPos.position + m_feetPos.transform.forward;
+			companion.GetComponent<NavMeshAgent>().enabled = false;
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
 		}
 		if (Input.GetMouseButton(0))
@@ -112,9 +115,18 @@ public class CompanionController : MonoBehaviour
 
 		}
 		
-		if (Input.GetMouseButtonUp(0) && companion.IsCharged)
+		if (Input.GetMouseButtonUp(0))
 		{
-			ThrowAtMousePos(companion);
+			if (companion.IsCharged)
+			{
+				ThrowAtMousePos(companion);
+			}
+			else
+			{
+				companion.GetComponent<NavMeshAgent>().enabled = true;
+				companion.Spawn();
+			}
 		}
+		
 	}
 }

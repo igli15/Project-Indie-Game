@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef066902174449dfb279d08992c3f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeTime: 0
+  m_chargeTime: 1
   m_manager: {fileID: 1774658612}
   m_throwRange: 20
   m_throwSpeed: 20
