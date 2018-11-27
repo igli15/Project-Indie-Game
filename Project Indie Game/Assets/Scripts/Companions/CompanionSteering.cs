@@ -64,7 +64,7 @@ public class CompanionSteering : MonoBehaviour
 	
 	public void ResetDestination()
 	{
-		if (Vector3.Distance(transform.position, m_parentFeetPos.position) >
+		if (m_navMeshAgent.enabled && Vector3.Distance(transform.position, m_parentFeetPos.position) >
 		    m_distRadius + m_navMeshAgent.stoppingDistance && m_playerScript.GetVelocity().magnitude > 0f)
 		{
 			m_navMeshAgent.ResetPath();

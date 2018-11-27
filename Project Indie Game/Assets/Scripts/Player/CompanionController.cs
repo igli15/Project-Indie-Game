@@ -41,11 +41,13 @@ public class CompanionController : MonoBehaviour
 	{
 		if (Input.mouseScrollDelta.y  * m_scorllScale > 0)
 		{
+			ReleaseCompanion(m_manager.GetSelectedCompanion());
 			m_manager.SelectNextCompanion();
 			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
 		}
 		if (Input.mouseScrollDelta.y * m_scorllScale < 0)
 		{
+			ReleaseCompanion(m_manager.GetSelectedCompanion());
 			m_manager.SelectPreviousCompanion();
 			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
 		}
@@ -96,11 +98,10 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_chargeCount = companion.ChargeTime;
+	
+			CatchCompanion(companion);
 			Debug.Log("started charging");
-			
-			companion.SteeringComponent.NavMeshAgent.enabled = false;
-			companion.transform.parent = m_feetPos.transform.parent.transform;
-			companion.transform.position = m_feetPos.position + m_feetPos.transform.forward;
+		
 			
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
 		}
@@ -123,16 +124,31 @@ public class CompanionController : MonoBehaviour
 		{
 			if (companion.IsCharged)
 			{
+				ReleaseCompanion(companion);
 				ThrowAtMousePos(companion);
 			}
 			else
 			{
-				companion.transform.parent = null;
-				companion.SteeringComponent.NavMeshAgent.enabled = true;
-				companion.Reset();
+				ReleaseCompanion(companion);
 				Debug.Log("canceled charging");
 			}
 		}
 		
+	}
+
+
+	private void CatchCompanion(ACompanion companion)
+	{
+		companion.SteeringComponent.NavMeshAgent.enabled = false;
+		companion.transform.parent = m_feetPos.transform.parent;
+		companion.transform.position = m_feetPos.transform.position + m_feetPos.forward * 2;
+	}
+
+	private void ReleaseCompanion(ACompanion companion)
+	{
+		companion.SteeringComponent.NavMeshAgent.enabled = true;
+		companion.Spawn();
+		companion.transform.parent = null;
+		//wcompanion.transform.position = m_feetPos.transform.position + m_feetPos.forward * 2;
 	}
 }

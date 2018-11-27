@@ -91,9 +91,9 @@ public class Companion : ACompanion
 
 	public override void Reset()
 	{
+		m_isThrown = false;
 		m_steering.NavMeshAgent.enabled = true;
 		m_rb.isKinematic = false;
-		m_isThrown = false;
 		m_steering.ResumeAgent();
 		if(m_rb!= null)
 		m_rb.velocity = Vector3.zero;
