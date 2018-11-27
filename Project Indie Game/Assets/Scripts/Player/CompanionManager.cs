@@ -28,7 +28,10 @@ public class CompanionManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+			DropCompanion(m_selectedCompanion);
+		}
 	}
 
 	public void SpawnCompanion(ACompanion companion)
@@ -75,7 +78,7 @@ public class CompanionManager : MonoBehaviour
 
 	public void SelectPreviousCompanion()
 	{
-		if (m_selectedCompanion.Index == 1)
+		if (m_selectedCompanion.Index <= 1)
 		{
 			m_selectedCompanion.IsCharged = false;
 			SelectCompanion(m_companionCount);
@@ -106,6 +109,20 @@ public class CompanionManager : MonoBehaviour
 			if (m_selectedCompanion.OnSelected != null) m_selectedCompanion.OnSelected(m_selectedCompanion); //call select action
 		}
 
+	}
+
+
+	private void DropCompanion(ACompanion companion)
+	{
+		//companion.Index = -1;
+		Debug.Log(companion.Index);
+		companion.Reset();
+		m_companions.Remove(companion);
+		m_companionCount -= 1;
+		SelectPreviousCompanion();
+		Debug.Log(m_companions.Count);
+		Debug.Log(m_selectedCompanion.Index);
+		
 	}
 
 }
