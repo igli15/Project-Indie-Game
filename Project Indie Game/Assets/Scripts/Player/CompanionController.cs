@@ -96,8 +96,12 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_chargeCount = companion.ChargeTime;
+			Debug.Log("started charging");
+			
+			companion.SteeringComponent.NavMeshAgent.enabled = false;
+			companion.transform.parent = m_feetPos.transform;
 			companion.transform.position = m_feetPos.position + m_feetPos.transform.forward;
-			companion.GetComponent<NavMeshAgent>().enabled = false;
+			
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
 		}
 		if (Input.GetMouseButton(0))
@@ -123,8 +127,10 @@ public class CompanionController : MonoBehaviour
 			}
 			else
 			{
-				companion.GetComponent<NavMeshAgent>().enabled = true;
-				companion.Spawn();
+				companion.transform.parent = null;
+				companion.SteeringComponent.NavMeshAgent.enabled = true;
+				companion.Reset();
+				Debug.Log("canceled charging");
 			}
 		}
 		

@@ -17,8 +17,6 @@ public class Companion : ACompanion
 	[SerializeField]
 	protected float m_throwSpeed = 20;
 
-	protected CompanionSteering m_steering;
-
 	protected Rigidbody m_rb;
 
 	protected Vector3 m_throwPos = Vector3.zero;
