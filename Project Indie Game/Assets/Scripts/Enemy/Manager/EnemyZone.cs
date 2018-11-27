@@ -20,7 +20,7 @@ public class EnemyZone : MonoBehaviour {
 
         if (m_numberOfActiveEnemies <= 0&&isPlayerInsideZone)
         {
-            Debug.Log("ALL ENEMIES ARE DEAD, CALLING NEW WAVE");
+            Debug.Log("ALL ENEMIES ARE DEAD, CALLING A NEW WAVE");
             CallNextWave();
         }
 	}
@@ -51,6 +51,7 @@ public class EnemyZone : MonoBehaviour {
     private void OnTriggerEnter(Collider collider)
     {
         if (!collider.CompareTag("Player")) return;
+        Debug.Log("Player entered ZONE: " + name);
         isPlayerInsideZone = true;
 
     }
@@ -58,6 +59,7 @@ public class EnemyZone : MonoBehaviour {
     private void OnTriggerExit(Collider collider)
     {
         if (!collider.CompareTag("Player")) return;
+        Debug.Log("Player left ZONE: " + name);
         isPlayerInsideZone = false;
         foreach (EnemySpawner spawner in m_spawners)
         {
@@ -68,8 +70,6 @@ public class EnemyZone : MonoBehaviour {
     public int numberOfActiveEnemies
     {
         get { return m_numberOfActiveEnemies; }
-        set {
-            Debug.Log(value+" enemies left");
-            m_numberOfActiveEnemies = value; }
+        set { m_numberOfActiveEnemies = value; }
     }
 }

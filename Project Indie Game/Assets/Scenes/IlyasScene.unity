@@ -219,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &248281378
 Transform:
   m_ObjectHideFlags: 0
@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isZoneCleared: 0
+  isPlayerInsideZone: 0
 --- !u!65 &506153273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -405,7 +406,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 506153271}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -936,12 +937,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyZone: {fileID: 506153272}
   m_waves:
-  - numberOfGoombas: 2
+  - numberOfGoombas: 0
     numberOfTurrets: 0
-  - numberOfGoombas: 3
-    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 0
   - numberOfGoombas: 5
-    numberOfTurrets: 2
+    numberOfTurrets: 3
 --- !u!1 &1208330510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,12 +1181,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyZone: {fileID: 506153272}
   m_waves:
-  - numberOfGoombas: 2
-    numberOfTurrets: 0
   - numberOfGoombas: 3
-    numberOfTurrets: 1
-  - numberOfGoombas: 5
     numberOfTurrets: 3
+  - numberOfGoombas: 0
+    numberOfTurrets: 0
+  - numberOfGoombas: 0
+    numberOfTurrets: 0
 --- !u!1 &1378054572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,7 +1391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1486768711
 Transform:
   m_ObjectHideFlags: 0
@@ -1421,7 +1422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1487550562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,6 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isZoneCleared: 0
+  isPlayerInsideZone: 0
 --- !u!65 &1487550563
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1441,7 +1443,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1487550561}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1733,11 +1735,11 @@ MonoBehaviour:
   m_enemyZone: {fileID: 506153272}
   m_waves:
   - numberOfGoombas: 0
-    numberOfTurrets: 3
+    numberOfTurrets: 0
   - numberOfGoombas: 3
     numberOfTurrets: 4
   - numberOfGoombas: 0
-    numberOfTurrets: 5
+    numberOfTurrets: 0
 --- !u!1001 &1763326257
 Prefab:
   m_ObjectHideFlags: 0

@@ -38,12 +38,9 @@ public class EnemySpawner : MonoBehaviour {
     {
         if (m_currentWaveIndex+1 >= m_waves.Count) return -1;
         m_currentWaveIndex++;
-        Debug.Log(name+" spawning next wave "+ m_currentWaveIndex);
 
-        Debug.Log("     Gombas: "+m_waves[m_currentWaveIndex].numberOfGoombas);
+
         SpawnGoomba(m_waves[m_currentWaveIndex].numberOfGoombas);
-
-        Debug.Log("     Turrets: " + m_waves[m_currentWaveIndex].numberOfTurrets);
         SpawnTurret(m_waves[m_currentWaveIndex].numberOfTurrets);
 
  

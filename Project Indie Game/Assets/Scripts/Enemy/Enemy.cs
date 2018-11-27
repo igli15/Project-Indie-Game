@@ -60,7 +60,6 @@ public class Enemy : MonoBehaviour
 
     public void OnEnemyDestroyed(Health health)
     {
-        Debug.Log("Enemy Destroyed");
         if (onEnemyDestroyed != null) onEnemyDestroyed();
         Destroy(gameObject);
         //ObjectPooler.instance.DestroyFromPool();
