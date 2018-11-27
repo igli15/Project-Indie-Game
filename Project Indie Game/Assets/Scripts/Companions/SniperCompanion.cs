@@ -61,6 +61,7 @@ public class SniperCompanion : Companion
 	{
 		m_collider.enabled = false;
 		m_targetEnemy = null;
+		m_player.MoveSpeed = m_playerInitSpeed;
 		base.Reset();
 	}
 

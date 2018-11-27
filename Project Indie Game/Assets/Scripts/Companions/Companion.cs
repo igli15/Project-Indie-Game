@@ -17,8 +17,6 @@ public class Companion : ACompanion
 	[SerializeField]
 	protected float m_throwSpeed = 20;
 
-	protected CompanionSteering m_steering;
-
 	protected Rigidbody m_rb;
 
 	protected Vector3 m_throwPos = Vector3.zero;
@@ -53,6 +51,8 @@ public class Companion : ACompanion
 	public override void Throw(Vector3 dir)
 	{
 		if (OnThrow != null) OnThrow(this);
+		transform.SetParent(null,true);
+		
 		m_steering.StopAgent();
 		m_steering.NavMeshAgent.enabled = false;
 		m_isCharged = false;
@@ -93,9 +93,10 @@ public class Companion : ACompanion
 
 	public override void Reset()
 	{
+		transform.SetParent(null,true);
+		m_isThrown = false;
 		m_steering.NavMeshAgent.enabled = true;
 		m_rb.isKinematic = false;
-		m_isThrown = false;
 		m_steering.ResumeAgent();
 		if(m_rb!= null)
 		m_rb.velocity = Vector3.zero;

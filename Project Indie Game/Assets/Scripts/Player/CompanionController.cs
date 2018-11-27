@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(CompanionManager))]
 public class CompanionController : MonoBehaviour
@@ -95,6 +96,9 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_chargeCount = companion.ChargeTime;
+			Debug.Log("started charging");
+		
+			
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
 		}
 		if (Input.GetMouseButton(0))
@@ -112,9 +116,35 @@ public class CompanionController : MonoBehaviour
 
 		}
 		
-		if (Input.GetMouseButtonUp(0) && companion.IsCharged)
+		if (Input.GetMouseButtonUp(0))
 		{
-			ThrowAtMousePos(companion);
+			if (companion.IsCharged)
+			{
+				CatchCompanion(companion);
+				ThrowAtMousePos(companion);
+			}
+			else
+			{
+				//ReleaseCompanion(companion);
+				companion.Reset();
+				Debug.Log("canceled charging");
+			}
 		}
+		
 	}
+
+
+	private void CatchCompanion(ACompanion companion)
+	{
+		companion.SteeringComponent.NavMeshAgent.enabled = false;
+		companion.transform.SetParent(m_feetPos.transform,true);
+		companion.transform.position = m_feetPos.transform.position + m_feetPos.forward * 2;
+	}
+
+/*	private void ReleaseCompanion(ACompanion companion)
+	{
+		companion.SteeringComponent.NavMeshAgent.enabled = true;
+		companion.Spawn();
+		companion.transform.parent = null;
+	}*/
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public abstract class ACompanion : MonoBehaviour 
@@ -15,6 +16,8 @@ public abstract class ACompanion : MonoBehaviour
 	protected int m_index;
 	
 	protected bool m_isThrown = false;
+
+	protected CompanionSteering m_steering;
 	
 	public Action<ACompanion> OnSpawn;
 	public Action<ACompanion> OnDisable;
@@ -32,7 +35,7 @@ public abstract class ACompanion : MonoBehaviour
 	public abstract void CheckIfOutOfRange();
 	public abstract void Reset();
 	public abstract void Spawn();
-	public abstract void RangeReached();
+	public abstract void RangeReached();	
 	
 	
 	public int Index
@@ -55,5 +58,11 @@ public abstract class ACompanion : MonoBehaviour
 	{
 		get { return m_isCharged; }
 		set { m_isCharged = value; }
+	}
+
+	public CompanionSteering SteeringComponent
+	{
+		get { return m_steering; }
+		set { m_steering = value; }
 	}
 }
