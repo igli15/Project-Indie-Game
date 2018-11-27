@@ -1,29 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour {
-    //IMPORTANT
-    [System.Serializable]
-    public class EnemiesData
-    {
-        public int numberOfGoombas=0;
-        public int numberOfTurrets=0;
-    }
-    //IMPORTANT
-    [HideInInspector]
-    public int numWave = 0;
 
-    //IMPORTANT
-    public List<EnemySpawner> spawners;
 
-    //IMPORTANT
     [HideInInspector]
     public static EnemyManager instance;
 
-    //IMPORTANT
-    private EnemiesData[,] m_enemyWavesData;
-
+    public static Action OnNextWave;
 
     private void Awake()
     {
@@ -33,9 +19,14 @@ public class EnemyManager : MonoBehaviour {
         }
     }
 
-    void Start () {
-        m_enemyWavesData = new EnemiesData[spawners.Count, numWave];
+    public void CallNextWave()
+    {
+        Debug.Log("Called global NEXT_WAVE");
+        if (OnNextWave != null) OnNextWave();
+    }
 
+    void Start () {
+        CallNextWave();
     }
 	
 

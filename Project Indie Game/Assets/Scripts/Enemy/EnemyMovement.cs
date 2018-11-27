@@ -52,7 +52,7 @@ public class EnemyMovement : MonoBehaviour
                 direction -= transform.right / 2;
             }
 
-            print("The other transform is behind me!  " + collider.name);
+            
             collider.GetComponent<NavMeshAgent>().velocity += direction * m_pushPower;
         }
     }
@@ -69,8 +69,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (m_isPushed) return;
         StartCoroutine(DisablePushingFor(1));
-
-        Debug.Log("     SLOW_DOWN");
+        
         m_navMeshAgent.velocity = Vector3.zero;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
@@ -85,7 +84,7 @@ public class EnemyMovement : MonoBehaviour
     }
     public void SetDestination(Vector3 destination)
     {
-        Debug.Log("SetDestination is called");
+
         m_navMeshAgent.SetDestination(destination);
     }
     public void ResetPath()
