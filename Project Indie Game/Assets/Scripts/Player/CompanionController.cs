@@ -137,7 +137,7 @@ public class CompanionController : MonoBehaviour
 	private void CatchCompanion(ACompanion companion)
 	{
 		companion.SteeringComponent.NavMeshAgent.enabled = false;
-		companion.transform.parent = m_feetPos.transform.parent;
+		companion.transform.SetParent(m_feetPos.transform,true);
 		companion.transform.position = m_feetPos.transform.position + m_feetPos.forward * 2;
 	}
 
