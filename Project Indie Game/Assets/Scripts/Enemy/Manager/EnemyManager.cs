@@ -8,8 +8,9 @@ public class EnemyManager : MonoBehaviour {
 
     [HideInInspector]
     public static EnemyManager instance;
-
+    
     public static Action OnNextWave;
+    
 
     private void Awake()
     {
@@ -26,11 +27,10 @@ public class EnemyManager : MonoBehaviour {
     }
 
     void Start () {
-        CallNextWave();
     }
 	
 
 	void Update () {
-		
-	}
+        if (Input.GetKeyDown(KeyCode.K)) CallNextWave();
+    }
 }

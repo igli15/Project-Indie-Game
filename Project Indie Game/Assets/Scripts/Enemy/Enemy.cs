@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
+    public int waveIndex = -1;
+    public int zoneIndex = -1;
+
     [Header("Stats")]
     [SerializeField]
     private float m_moveSpeed = 5;
@@ -26,6 +30,8 @@ public class Enemy : MonoBehaviour
 
     private bool m_afterStart = false;
 
+    public Action onEnemyDestroyed;
+
     void Awake() {
         m_target = GameObject.FindGameObjectWithTag("Player");
     }
@@ -40,7 +46,8 @@ public class Enemy : MonoBehaviour
         if(m_meleeAttack!=null) m_meleeAttack.reloadTime = m_reloadTime;
         m_enemyRangedAttack = GetComponent<EnemyRangedAttack>();
         if (m_enemyRangedAttack != null) m_enemyRangedAttack.reloadTime = m_reloadTime;
-        //m_enemyMovement.SetDestination(m_target.transform.position);
+
+        GetComponent<Health>().OnDeath += OnEnemyDestroyed;
     }
 
     void Update() {
@@ -49,6 +56,14 @@ public class Enemy : MonoBehaviour
             AfterStart();
             m_afterStart = true;
         }
+    }
+
+    public void OnEnemyDestroyed(Health health)
+    {
+        Debug.Log("Enemy Destroyed");
+        if (onEnemyDestroyed != null) onEnemyDestroyed();
+        Destroy(gameObject);
+        //ObjectPooler.instance.DestroyFromPool();
     }
 
     public GameObject target{ get { return m_target; } }

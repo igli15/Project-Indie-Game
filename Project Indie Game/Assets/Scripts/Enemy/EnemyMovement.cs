@@ -15,7 +15,7 @@ public class EnemyMovement : MonoBehaviour
     private bool m_isPushed = false;
     public bool pushIsEnabled = true;
 	void Awake () {
-	    Debug.Log("Awake navmeshagent");
+
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_enemy = GetComponent<Enemy>();
 	    
