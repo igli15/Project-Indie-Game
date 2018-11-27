@@ -91,6 +91,7 @@ public class Companion : ACompanion
 
 	public override void Reset()
 	{
+		transform.parent = null;
 		m_isThrown = false;
 		m_steering.NavMeshAgent.enabled = true;
 		m_rb.isKinematic = false;
