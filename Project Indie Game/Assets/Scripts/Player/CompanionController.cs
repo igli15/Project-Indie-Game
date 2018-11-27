@@ -44,12 +44,14 @@ public class CompanionController : MonoBehaviour
 			ReleaseCompanion(m_manager.GetSelectedCompanion());
 			m_manager.SelectNextCompanion();
 			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
+			CatchCompanion(m_manager.GetSelectedCompanion());
 		}
 		if (Input.mouseScrollDelta.y * m_scorllScale < 0)
 		{
 			ReleaseCompanion(m_manager.GetSelectedCompanion());
 			m_manager.SelectPreviousCompanion();
 			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
+			CatchCompanion(m_manager.GetSelectedCompanion());
 		}
 	}
 
