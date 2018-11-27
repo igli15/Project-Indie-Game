@@ -151,9 +151,11 @@ public class CompanionManager : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-		if (other.transform.CompareTag("PickupSphere") && !other.transform.parent.GetComponent<Companion>().IsInParty &&  Input.GetKeyDown(KeyCode.P))
+		if (other.transform.CompareTag("PickupSphere"))
 		{
-			PickCompanion(other.transform.parent.GetComponent<Companion>());
+			Companion companion = other.transform.parent.GetComponent<Companion>(); 
+			if(!companion.IsInParty &&  Input.GetKeyDown(KeyCode.P))
+			PickCompanion(companion);
 		}
 	}
 
