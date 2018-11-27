@@ -16,11 +16,7 @@ public class CompanionManager : MonoBehaviour
 	void Start ()
 	{
 		m_companionCount = m_companions.Count;
-		for (int i = 0; i < m_companionCount; i++)
-		{
-			SpawnCompanion(m_companions[i]);
-			m_companions[i].Index = i+1;
-		}
+		AssignCompanionsIndex();
 
 		SelectCompanion(1);
 	}
@@ -62,7 +58,7 @@ public class CompanionManager : MonoBehaviour
 
 	public void SelectNextCompanion()
 	{
-		if (m_selectedCompanion.Index == m_companionCount)
+		if (m_selectedCompanion.Index >= m_companionCount)
 		{
 			m_selectedCompanion.IsCharged = false;
 			SelectCompanion(1);
@@ -94,7 +90,7 @@ public class CompanionManager : MonoBehaviour
 
 	public void SelectCompanion(int index)
 	{
-		if (index > m_companionCount) index = 1;   //mirror the array if you go past its count
+		//if (index > m_companionCount) index = 1;   //mirror the array if you go past its count
 		
 		ACompanion compToSelect = m_companions[index - 1];	// get the companion we need to change to
 
@@ -114,15 +110,22 @@ public class CompanionManager : MonoBehaviour
 
 	private void DropCompanion(ACompanion companion)
 	{
-		//companion.Index = -1;
-		Debug.Log(companion.Index);
 		companion.Reset();
-		m_companions.Remove(companion);
+		companion.SteeringComponent.NavMeshAgent.enabled = false;
 		m_companionCount -= 1;
+		m_companions.Remove(companion);
+		AssignCompanionsIndex();
 		SelectPreviousCompanion();
-		Debug.Log(m_companions.Count);
-		Debug.Log(m_selectedCompanion.Index);
 		
 	}
 
+
+	private void AssignCompanionsIndex()
+	{
+		for (int i = 0; i < m_companionCount; i++)
+		{
+			SpawnCompanion(m_companions[i]);
+			m_companions[i].Index = i+1;
+		}
+	}
 }

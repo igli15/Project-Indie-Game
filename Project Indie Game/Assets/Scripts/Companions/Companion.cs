@@ -56,7 +56,7 @@ public class Companion : ACompanion
 		m_steering.StopAgent();
 		m_steering.NavMeshAgent.enabled = false;
 		m_isCharged = false;
-		m_manager.SelectCompanion(m_index + 1);
+		m_manager.SelectNextCompanion();
 		
 		m_isThrown = true;
 		
