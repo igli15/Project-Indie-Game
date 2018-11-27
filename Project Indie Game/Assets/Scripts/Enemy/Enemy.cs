@@ -61,8 +61,18 @@ public class Enemy : MonoBehaviour
     public void OnEnemyDestroyed(Health health)
     {
         if (onEnemyDestroyed != null) onEnemyDestroyed();
-        Destroy(gameObject);
-        //ObjectPooler.instance.DestroyFromPool();
+
+        string tag="";
+        switch (GetComponent<EnemyFSM>().enemyTpe)
+        {
+            case EnemyFSM.EnemyType.GOOMBA:
+                tag = "Goomba";
+                break;
+            case EnemyFSM.EnemyType.TURRET:
+                tag = "Turret";
+                break;
+        }
+        ObjectPooler.instance.DestroyFromPool(tag,gameObject);
     }
 
     public GameObject target{ get { return m_target; } }

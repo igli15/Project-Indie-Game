@@ -10,11 +10,12 @@ public class EnemySpawner : MonoBehaviour {
     private List<Wave> m_waves;
     
     private EnemyManager m_enemyManager;
-
+    private List<Enemy> m_enemies;
     private int m_currentWaveIndex = -1;
 
     public void Start()
     {
+        m_enemies = new List<Enemy>();
         m_enemyManager = EnemyManager.instance;
         m_enemyZone.AddSpawner(this);
     }
@@ -39,7 +40,7 @@ public class EnemySpawner : MonoBehaviour {
         if (m_currentWaveIndex+1 >= m_waves.Count) return -1;
         m_currentWaveIndex++;
 
-
+        m_enemies.Clear();
         SpawnGoomba(m_waves[m_currentWaveIndex].numberOfGoombas);
         SpawnTurret(m_waves[m_currentWaveIndex].numberOfTurrets);
 
@@ -62,9 +63,17 @@ public class EnemySpawner : MonoBehaviour {
     {
         GameObject newEnemy=ObjectPooler.instance.SpawnFromPool(tag, transform.position, transform.rotation);
         newEnemy.GetComponent<Enemy>().onEnemyDestroyed += OnMyEnemyDestroyed;
+        m_enemies.Add(newEnemy.GetComponent<Enemy>());
     }
 
-    
+    public void DestroyAllMyEnemies()
+    {
+        foreach (Enemy enemy in m_enemies)
+        {
+            enemy.OnEnemyDestroyed(new Health());
+        }
+        m_enemies.Clear();
+    }
 
     public void OnMyEnemyDestroyed()
     {

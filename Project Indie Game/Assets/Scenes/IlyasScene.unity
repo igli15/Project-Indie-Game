@@ -1508,12 +1508,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyZone: {fileID: 1487550562}
   m_waves:
-  - numberOfGoombas: 2
+  - numberOfGoombas: 0
     numberOfTurrets: 0
-  - numberOfGoombas: 3
-    numberOfTurrets: 1
-  - numberOfGoombas: 5
-    numberOfTurrets: 2
+  - numberOfGoombas: 0
+    numberOfTurrets: 0
+  - numberOfGoombas: 10
+    numberOfTurrets: 20
 --- !u!23 &1618927062
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1601,11 +1601,11 @@ MonoBehaviour:
   m_enemyZone: {fileID: 1487550562}
   m_waves:
   - numberOfGoombas: 0
-    numberOfTurrets: 3
-  - numberOfGoombas: 3
+    numberOfTurrets: 0
+  - numberOfGoombas: 10
     numberOfTurrets: 4
   - numberOfGoombas: 0
-    numberOfTurrets: 5
+    numberOfTurrets: 0
 --- !u!23 &1669691066
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1826,12 +1826,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyZone: {fileID: 1487550562}
   m_waves:
-  - numberOfGoombas: 2
+  - numberOfGoombas: 10
     numberOfTurrets: 0
-  - numberOfGoombas: 3
-    numberOfTurrets: 1
-  - numberOfGoombas: 5
-    numberOfTurrets: 3
+  - numberOfGoombas: 0
+    numberOfTurrets: 0
+  - numberOfGoombas: 0
+    numberOfTurrets: 0
 --- !u!23 &1774947125
 MeshRenderer:
   m_ObjectHideFlags: 0

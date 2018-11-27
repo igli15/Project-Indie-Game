@@ -63,6 +63,7 @@ public class EnemyZone : MonoBehaviour {
         isPlayerInsideZone = false;
         foreach (EnemySpawner spawner in m_spawners)
         {
+            spawner.DestroyAllMyEnemies();
             spawner.currentWaveIndex--;
         }
     }
