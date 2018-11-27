@@ -99,7 +99,7 @@ public class CompanionController : MonoBehaviour
 			Debug.Log("started charging");
 			
 			companion.SteeringComponent.NavMeshAgent.enabled = false;
-			companion.transform.parent = m_feetPos.transform;
+			companion.transform.parent = m_feetPos.transform.parent.transform;
 			companion.transform.position = m_feetPos.position + m_feetPos.transform.forward;
 			
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
