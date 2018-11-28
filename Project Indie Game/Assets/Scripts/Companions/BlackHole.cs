@@ -6,19 +6,31 @@ public class BlackHole : MonoBehaviour
 {
 	private float m_pullForce ;
 
-	private Dictionary<Transform, Vector3> m_enemiesInRangeDictionary ;
-	// Use this for initialization
-	void Start () 
-	{
-		m_enemiesInRangeDictionary = new Dictionary<Transform, Vector3>();
-	}
+	private List<GameObject> m_enemiesInRange = new List<GameObject>();
+
 	
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.transform.CompareTag("Enemy"))
 		{
-			m_enemiesInRangeDictionary.Add(other.transform,(transform.position - other.transform.position).normalized);
+			m_enemiesInRange.Add(other.gameObject);
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.transform.CompareTag("Enemy"))
+		{
+			m_enemiesInRange.Remove(other.gameObject);
+		}
+	}
+
+	private void OnDestroy()
+	{
+		foreach (GameObject enemy in m_enemiesInRange)
+		{
+			enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 	}
 
@@ -32,7 +44,7 @@ public class BlackHole : MonoBehaviour
 			}
 			else
 			{
-				other.GetComponent<Rigidbody>().velocity = (m_enemiesInRangeDictionary[other.transform] * m_pullForce);
+				other.GetComponent<Rigidbody>().velocity = (transform.position - other.transform.position).normalized * m_pullForce;
 			}
 		}
 	}

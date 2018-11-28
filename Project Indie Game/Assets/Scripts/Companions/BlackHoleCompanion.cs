@@ -7,10 +7,12 @@ public class BlackHoleCompanion : Companion
 	[SerializeField] 
 	private GameObject m_blackHole;
 
-
 	[SerializeField] 
 	[Range(0.1f,2)]
 	private float m_pullForce = 1;
+
+	[SerializeField] 
+	private float m_destroyBlackholeTimer = 2;
 	
 	private bool m_instantiatedBlackHole;
 	
@@ -48,7 +50,7 @@ public class BlackHoleCompanion : Companion
 		Activate();
 	}
 
-	private void Reset()
+	public override void Reset()
 	{
 		base.Reset();
 		m_instantiatedBlackHole = false;
@@ -61,6 +63,7 @@ public class BlackHoleCompanion : Companion
 		if (m_instantiatedBlackHole == false)
 		{
 			GameObject blackHole = Instantiate(m_blackHole);
+			Destroy(blackHole,m_destroyBlackholeTimer);
 			blackHole.transform.position = transform.position;
 			blackHole.transform.rotation = Quaternion.identity;
 			blackHole.GetComponent<BlackHole>().PullForce = m_pullForce;
