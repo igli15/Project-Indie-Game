@@ -10,6 +10,7 @@ public class BlackHole : MonoBehaviour
 
 	
 
+	
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.transform.CompareTag("Enemy"))

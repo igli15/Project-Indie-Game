@@ -29,7 +29,7 @@ public abstract class ACompanion : MonoBehaviour
 	public Action<ACompanion> OnDeSelected;
 	public Action<ACompanion> OnRangeReached;
 	public Action<ACompanion> OnStartCharging;
-	public Action<ACompanion> OnCharging;
+	public Action<ACompanion,float> OnCharging;
 	public Action<ACompanion> OnChargeFinished;
 	
 	public abstract void Throw(Vector3 dir);

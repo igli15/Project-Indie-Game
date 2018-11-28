@@ -19,6 +19,8 @@ public class CompanionController : MonoBehaviour
 
 	private float m_chargeCount;
 
+	private float m_timeCharging = 0;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -106,13 +108,15 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_chargeCount = companion.ChargeTime;
-			
+		
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
 		}
 		if (Input.GetMouseButton(0))
 		{
-			if(companion.OnCharging != null) companion.OnCharging(companion);	
 			m_chargeCount -= Time.deltaTime;
+			m_timeCharging += Time.deltaTime;
+
+			if(companion.OnCharging != null) companion.OnCharging(companion,m_timeCharging);	
 			
 			if (m_chargeCount <= 0)
 			{
@@ -128,6 +132,7 @@ public class CompanionController : MonoBehaviour
 		{
 			if (companion.IsCharged)
 			{
+				m_timeCharging = 0;
 				TeleportCompanion(companion);
 				ThrowAtMousePos(companion);
 			}
