@@ -106,7 +106,7 @@ public class SniperCompanion : Companion
 				}
 			}
 		}
-		else if (other.transform.CompareTag("Obstacle"))
+		else if (other.transform.CompareTag("Obstacle") && m_isThrown)
 		{
 			m_manager.DisableCompanion(this);
 		}

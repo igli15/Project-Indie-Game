@@ -18,6 +18,8 @@ public abstract class ACompanion : MonoBehaviour
 	protected bool m_isThrown = false;
 
 	protected CompanionSteering m_steering;
+
+	protected bool m_isInParty = false;
 	
 	public Action<ACompanion> OnSpawn;
 	public Action<ACompanion> OnDisable;
@@ -64,5 +66,11 @@ public abstract class ACompanion : MonoBehaviour
 	{
 		get { return m_steering; }
 		set { m_steering = value; }
+	}
+
+	public bool IsInParty
+	{
+		get { return m_isInParty; }
+		set { m_isInParty = value; }
 	}
 }
