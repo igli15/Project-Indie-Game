@@ -58,6 +58,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        Debug.Log(name+" IS DESTROYED");
+    }
+
     public void OnEnemyDestroyed(Health health)
     {
         if (onEnemyDestroyed != null) onEnemyDestroyed();

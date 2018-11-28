@@ -264,10 +264,10 @@ MonoBehaviour:
   pools:
   - tag: TurretProjectile
     prefab: {fileID: 1379026466851066, guid: b4245768f96c56e419bb6940e361bb6b, type: 2}
-    size: 100
+    size: 300
   - tag: Goomba
     prefab: {fileID: 1459528790649564, guid: f8b9d206f7eff194d9e0e680208fc307, type: 2}
-    size: 60
+    size: 30
   - tag: Turret
     prefab: {fileID: 1518130936522326, guid: 6a969578206d82c418e177e189f0e167, type: 2}
     size: 30
@@ -943,6 +943,12 @@ MonoBehaviour:
     numberOfTurrets: 0
   - numberOfGoombas: 5
     numberOfTurrets: 3
+  - numberOfGoombas: 6
+    numberOfTurrets: 6
+  - numberOfGoombas: 20
+    numberOfTurrets: 20
+  - numberOfGoombas: 20
+    numberOfTurrets: 20
 --- !u!1 &1208330510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,6 +1193,12 @@ MonoBehaviour:
     numberOfTurrets: 0
   - numberOfGoombas: 0
     numberOfTurrets: 0
+  - numberOfGoombas: 6
+    numberOfTurrets: 6
+  - numberOfGoombas: 20
+    numberOfTurrets: 20
+  - numberOfGoombas: 20
+    numberOfTurrets: 20
 --- !u!1 &1378054572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,12 +1429,12 @@ GameObject:
   - component: {fileID: 1487550563}
   - component: {fileID: 1487550562}
   m_Layer: 0
-  m_Name: Zone_1 (1)
+  m_Name: Zone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1487550562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1740,6 +1752,12 @@ MonoBehaviour:
     numberOfTurrets: 4
   - numberOfGoombas: 0
     numberOfTurrets: 0
+  - numberOfGoombas: 6
+    numberOfTurrets: 6
+  - numberOfGoombas: 20
+    numberOfTurrets: 20
+  - numberOfGoombas: 20
+    numberOfTurrets: 20
 --- !u!1001 &1763326257
 Prefab:
   m_ObjectHideFlags: 0
