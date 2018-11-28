@@ -1131,7 +1131,10 @@ MonoBehaviour:
   m_blackHole: {fileID: 1986207357161808, guid: 8d3f45e8a415b49ea8a1dbfaffd9bcc8,
     type: 2}
   m_pullForce: 2
-  m_destroyBlackholeTimer: 2
+  m_maxChargeTime: 3
+  m_minDistance: 5
+  m_maxDistance: 12
+  m_destroyBlackholeTimer: 5
 --- !u!195 &705245480
 NavMeshAgent:
   m_ObjectHideFlags: 0
