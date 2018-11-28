@@ -20,15 +20,6 @@ public class CompanionManager : MonoBehaviour
 
 		SelectCompanion(1);
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if (Input.GetKeyDown(KeyCode.K))
-		{
-			DropCompanion(m_selectedCompanion);
-		}
-	}
 
 	public void SpawnCompanion(ACompanion companion)
 	{
@@ -90,8 +81,6 @@ public class CompanionManager : MonoBehaviour
 
 	public void SelectCompanion(int index)
 	{
-		//if (index > m_companionCount) index = 1;   //mirror the array if you go past its count
-		
 		ACompanion compToSelect = m_companions[index - 1];	// get the companion we need to change to
 
 		if (compToSelect != null && !compToSelect.IsThrown) // check if its null and if its thrown
@@ -108,7 +97,7 @@ public class CompanionManager : MonoBehaviour
 	}
 
 
-	private void DropCompanion(ACompanion companion)
+	public void DropCompanion(ACompanion companion)
 	{
 		companion.Reset();
 		companion.IsInParty = false;
@@ -119,7 +108,7 @@ public class CompanionManager : MonoBehaviour
 		SelectPreviousCompanion();
 	}
 
-	private void PickCompanion(ACompanion companion)
+	public void PickCompanion(ACompanion companion)
 	{
 		companion.Spawn();
 		companion.IsInParty = true;
@@ -146,16 +135,6 @@ public class CompanionManager : MonoBehaviour
 		{
 			SpawnCompanion(m_companions[i]);
 			m_companions[i].Index = i+1;
-		}
-	}
-
-	private void OnTriggerStay(Collider other)
-	{
-		if (other.transform.CompareTag("PickupSphere"))
-		{
-			Companion companion = other.transform.parent.GetComponent<Companion>(); 
-			if(!companion.IsInParty &&  Input.GetKeyDown(KeyCode.P))
-			PickCompanion(companion);
 		}
 	}
 

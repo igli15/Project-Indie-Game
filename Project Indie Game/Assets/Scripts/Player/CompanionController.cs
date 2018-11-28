@@ -35,6 +35,12 @@ public class CompanionController : MonoBehaviour
 		HandleMouseAim();
 
 		HandleNumInput();
+		
+		if (Input.GetKeyDown(KeyCode.O))
+		{
+			m_manager.DropCompanion(m_manager.GetSelectedCompanion());
+		}
+		
 	}
 
 	private void HandleScrollWheel()
@@ -96,8 +102,6 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_chargeCount = companion.ChargeTime;
-			Debug.Log("started charging");
-		
 			
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
 		}
@@ -120,31 +124,34 @@ public class CompanionController : MonoBehaviour
 		{
 			if (companion.IsCharged)
 			{
-				CatchCompanion(companion);
+				TeleportCompanion(companion);
 				ThrowAtMousePos(companion);
 			}
 			else
 			{
-				//ReleaseCompanion(companion);
 				companion.Reset();
-				Debug.Log("canceled charging");
 			}
 		}
 		
 	}
 
 
-	private void CatchCompanion(ACompanion companion)
+	private void TeleportCompanion(ACompanion companion)
 	{
 		companion.SteeringComponent.NavMeshAgent.enabled = false;
 		companion.transform.SetParent(m_feetPos.transform,true);
 		companion.transform.position = m_feetPos.transform.position + m_feetPos.forward * 2;
 	}
-
-/*	private void ReleaseCompanion(ACompanion companion)
+	
+	
+	private void OnTriggerStay(Collider other)
 	{
-		companion.SteeringComponent.NavMeshAgent.enabled = true;
-		companion.Spawn();
-		companion.transform.parent = null;
-	}*/
+		if (other.transform.CompareTag("PickupSphere"))
+		{
+			Companion companion = other.transform.parent.GetComponent<Companion>(); 
+			if(!companion.IsInParty &&  Input.GetKeyDown(KeyCode.P))
+			m_manager.PickCompanion(companion);
+		}
+	}
+
 }
