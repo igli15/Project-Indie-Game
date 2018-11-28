@@ -16,15 +16,15 @@ public class EnemyDisabledState : AbstractState<EnemyFSM> {
     public override void Enter(IAgent pAgent)
     {
         base.Enter(pAgent);
-        m_navMeshAgent.ResetPath();
+        /*m_navMeshAgent.ResetPath();
         m_navMeshAgent.velocity = Vector3.zero;
-        m_navMeshAgent.enabled = false;
+        m_navMeshAgent.enabled = false;*/
 
     }
     public override void Exit(IAgent pAgent)
     {
         base.Exit(pAgent);
-        m_navMeshAgent.enabled = true;
+//        m_navMeshAgent.enabled = true;
     }
 
 

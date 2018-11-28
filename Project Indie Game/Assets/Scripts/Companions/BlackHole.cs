@@ -15,6 +15,7 @@ public class BlackHole : MonoBehaviour
 		if (other.transform.CompareTag("Enemy"))
 		{
 			m_enemiesInRange.Add(other.gameObject);
+			other.GetComponent<EnemyFSM>().fsm.ChangeState<EnemyDisabledState>();
 		}
 	}
 
@@ -23,7 +24,10 @@ public class BlackHole : MonoBehaviour
 		if (other.transform.CompareTag("Enemy"))
 		{
 			m_enemiesInRange.Remove(other.gameObject);
+			other.GetComponent<EnemyFSM>().fsm.ChangeState<EnemySeekState>();
 		}
+		
+
 	}
 
 	private void OnDestroy()
@@ -31,6 +35,8 @@ public class BlackHole : MonoBehaviour
 		foreach (GameObject enemy in m_enemiesInRange)
 		{
 			enemy.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			Debug.Log("release  enemy");
+			enemy.GetComponent<EnemyFSM>().fsm.ChangeState<GoombaSeekState>();
 		}
 	}
 
