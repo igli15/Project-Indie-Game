@@ -1047,7 +1047,7 @@ GameObject:
   - component: {fileID: 705245479}
   - component: {fileID: 705245478}
   m_Layer: 9
-  m_Name: OtherCompanion
+  m_Name: BlackHole
   m_TagString: Companion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1075,16 +1075,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 705245477}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aef066902174449dfb279d08992c3f20, type: 3}
+  m_Script: {fileID: 11500000, guid: 19a62282dffbb43369d9b0b9b0f52a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeTime: 1
+  m_chargeTime: 0
   m_manager: {fileID: 1774658612}
-  m_throwRange: 20
+  m_throwRange: 10
   m_throwSpeed: 20
-  m_playerSlowAmount: 2
-  m_piercingDamage: 50
-  m_fullDamage: 100
+  m_blackHole: {fileID: 1986207357161808, guid: 8d3f45e8a415b49ea8a1dbfaffd9bcc8,
+    type: 2}
+  m_pullForce: 1
 --- !u!195 &705245480
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1713,9 +1713,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hudIcons:
-  - companion: {fileID: 635550513}
-    icon: {fileID: 2086712637}
   - companion: {fileID: 982909051}
+    icon: {fileID: 2086712637}
+  - companion: {fileID: 635550513}
     icon: {fileID: 1746861180}
   - companion: {fileID: 1223154932}
     icon: {fileID: 828250389}
@@ -2896,8 +2896,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_companions:
-  - {fileID: 635550513}
   - {fileID: 982909051}
+  - {fileID: 635550513}
   - {fileID: 1223154932}
 --- !u!114 &1774658613
 MonoBehaviour:

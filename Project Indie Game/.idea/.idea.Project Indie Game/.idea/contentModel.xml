@@ -185,6 +185,8 @@
           <e p="CameraFollow.cs" t="Include" />
           <e p="Companions" t="Include">
             <e p="ACompanion.cs" t="Include" />
+            <e p="BlackHole.cs" t="Include" />
+            <e p="BlackHoleCompanion.cs" t="Include" />
             <e p="Companion.cs" t="Include" />
             <e p="CompanionSteering.cs" t="Include" />
             <e p="RushCompanion.cs" t="Include" />
