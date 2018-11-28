@@ -41,6 +41,8 @@ public class Health : MonoBehaviour
 	{
 		m_health = m_initialHealth;
 	}
+
+    public float HP { get { return m_health; } }
 	
 	void Update () 
 	{
