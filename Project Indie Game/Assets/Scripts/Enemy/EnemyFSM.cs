@@ -41,7 +41,6 @@ public class EnemyFSM : MonoBehaviour, IAgent {
 
     void OnEnable()
     {
-        return;
         Debug.Log("OnEnabled");
         m_fsm = new Fsm<EnemyFSM>(this);
         switch (enemyTpe)

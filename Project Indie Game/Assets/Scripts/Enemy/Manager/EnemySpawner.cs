@@ -62,9 +62,10 @@ public class EnemySpawner : MonoBehaviour {
     public void SpawnEnemy(string tag)
     {
         Vector3 spawnPosition;
+        Vector3 distnaceToSpawnPosition;
         Vector2 randomCircle = Random.insideUnitCircle.normalized * 2;
-        spawnPosition = new Vector3(randomCircle.x, 0, randomCircle.y);
-        transform.position = spawnPosition + transform.position;
+        distnaceToSpawnPosition = new Vector3(randomCircle.x, 0, randomCircle.y);
+        spawnPosition = distnaceToSpawnPosition + transform.position;
 
         spawnPosition.y = transform.position.y;
 
@@ -90,6 +91,8 @@ public class EnemySpawner : MonoBehaviour {
     public int currentWaveIndex
     {
         get { return m_currentWaveIndex; }
-        set { m_currentWaveIndex = value; }
+        set {
+            if (value < 0) m_currentWaveIndex = 0;
+            else m_currentWaveIndex = value; }
     }
 }
