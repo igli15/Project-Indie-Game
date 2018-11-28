@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a49c528-e2bc-4868-93d9-6fc86404f55c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/IgliScene/NavMesh.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/IgliScene/NavMesh.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Companions/SniperCompanion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Companions/SniperCompanion.cs" afterDir="false" />
-    </list>
+    <list default="true" id="0a49c528-e2bc-4868-93d9-6fc86404f55c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,8 +207,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/SniperCompanion.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="655">
-              <caret line="108" column="69" selection-start-line="108" selection-start-column="69" selection-end-line="108" selection-end-column="69" />
+            <state relative-caret-position="430">
+              <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
               <folding>
                 <marker date="1543398950415" expanded="false" signature="6:97" ph="..." />
                 <marker date="1543398950415" expanded="true" signature="139:2289" ph="{...}" />
@@ -480,7 +477,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110973000" />
+    <option name="totallyTimeSpent" value="111425000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -868,8 +865,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/SniperCompanion.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="655">
-          <caret line="108" column="69" selection-start-line="108" selection-start-column="69" selection-end-line="108" selection-end-column="69" />
+        <state relative-caret-position="430">
+          <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
           <folding>
             <marker date="1543398950415" expanded="false" signature="6:97" ph="..." />
             <marker date="1543398950415" expanded="true" signature="139:2289" ph="{...}" />
