@@ -26,7 +26,6 @@ public class EnemyFSM : MonoBehaviour, IAgent {
         }
         
     }
-
     void Update() {
     }
 
@@ -39,4 +38,21 @@ public class EnemyFSM : MonoBehaviour, IAgent {
         if (fsm.GetCurrentState() is EnemyMeleeState) Gizmos.color = Color.magenta;
         Gizmos.DrawSphere(transform.position + transform.up * 2, 0.4f);
     }
+
+    void OnEnable()
+    {
+        return;
+        Debug.Log("OnEnabled");
+        m_fsm = new Fsm<EnemyFSM>(this);
+        switch (enemyTpe)
+        {
+            case EnemyType.GOOMBA:
+                m_fsm.ChangeState<GoombaSeekState>();
+                break;
+            case EnemyType.TURRET:
+                m_fsm.ChangeState<TurretSeekState>();
+                break;
+        }
+    }
+    
 }

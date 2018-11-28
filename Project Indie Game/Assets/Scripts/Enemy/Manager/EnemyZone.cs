@@ -9,7 +9,7 @@ public class EnemyZone : MonoBehaviour {
     private int m_numberOfActiveEnemies = 0;
     public bool isZoneCleared = false;
     public bool isPlayerInsideZone = false;
-	void Start () {
+	void Awake () {
         m_spawners = new List<EnemySpawner>();
         //CallNextWave();
 
