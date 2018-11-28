@@ -23,7 +23,6 @@ public class EnemyHealthDisplay : MonoBehaviour {
     public void ChangeHealthValue(Health health)
     {
         StopAllCoroutines();
-
         m_slider.value = health.HP;
         gameObject.SetActive(true);
         StartCoroutine(MakeCanvasEnabledFor(1f));
