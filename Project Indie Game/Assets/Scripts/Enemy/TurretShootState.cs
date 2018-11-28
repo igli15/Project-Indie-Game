@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretShootState : AbstractState<EnemyFSM> {
-
-    [SerializeField]
-    private PrototypeColorManager m_colorManager;
-
     private Enemy m_enemy;
     private EnemyFSM m_enemyFSM;
     private EnemyRangedAttack m_rangedAttack;
@@ -65,11 +61,9 @@ public class TurretShootState : AbstractState<EnemyFSM> {
 
     IEnumerator MoveToStaticMode(float timeToTransform)
     {
-        m_colorManager.ChangeColorTo(Color.yellow);
         m_attackIsAllowed = false;
         yield return new WaitForSeconds(timeToTransform);
 
-        m_colorManager.ChangeColorTo(Color.red);
 
         m_attackIsAllowed = true;
         StartCoroutine(Shoot());
@@ -78,12 +72,8 @@ public class TurretShootState : AbstractState<EnemyFSM> {
 
     IEnumerator MoveToPortableMode(float timeToTransform)
     {
-        m_colorManager.ChangeColorTo(Color.yellow);
         m_attackIsAllowed = false;
         yield return new WaitForSeconds(timeToTransform);
-
-        m_colorManager.ChangeColorTo(Color.green);
-
         m_enemyFSM.fsm.ChangeState<TurretSeekState>();
         yield return null;
     }

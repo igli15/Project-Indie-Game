@@ -52,8 +52,9 @@ public class ObjectPooler : MonoBehaviour
 
 	public GameObject SpawnFromPool(string pTag,Vector3 pPos,Quaternion pRot)
 	{
+
 		GameObject objToSpawn =	poolDictionary[pTag].Dequeue();
-		
+        
 		objToSpawn.SetActive(true);
 		objToSpawn.transform.position = pPos;
 		objToSpawn.transform.rotation = pRot;
@@ -71,12 +72,13 @@ public class ObjectPooler : MonoBehaviour
 
 	public void DestroyFromPool(string pTag,GameObject objToDestroy)
        	{
-       		//GameObject objToDestroy = poolDictionary[pTag].Dequeue();
-       
+        //GameObject objToDestroy = poolDictionary[pTag].Dequeue();
+       Debug.Log("SIZE: "+ poolDictionary[pTag].Count );
        		objToDestroy.SetActive(false);
-       		
-       		if(!poolDictionary[pTag].Contains(objToDestroy))
-       		poolDictionary[pTag].Enqueue(objToDestroy);
+
+        if (!poolDictionary[pTag].Contains(objToDestroy))
+            poolDictionary[pTag].Enqueue(objToDestroy);
+        //else Debug.Log("Somehting went wrong with tag: "+pTag);
        	}
 
 }
