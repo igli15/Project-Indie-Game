@@ -318,6 +318,7 @@
             <e p="CompanionController.cs" t="Include" />
             <e p="CompanionManager.cs" t="Include" />
             <e p="DashBehaviour.cs" t="Include" />
+            <e p="Healthbar.cs" t="Include" />
             <e p="Player.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
           </e>
