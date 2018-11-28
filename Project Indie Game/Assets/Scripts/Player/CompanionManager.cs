@@ -110,6 +110,14 @@ public class CompanionManager : MonoBehaviour
 
 	public void PickCompanion(ACompanion companion)
 	{
+		Debug.Log(m_companionCount);
+		if (m_companionCount == 3)
+		{
+			DropCompanion(m_selectedCompanion);
+			AssignCompanionsIndex();
+		}
+		
+		Debug.Log(m_companionCount);
 		companion.Spawn();
 		companion.IsInParty = true;
 		companion.SteeringComponent.NavMeshAgent.enabled = true;
@@ -134,6 +142,7 @@ public class CompanionManager : MonoBehaviour
 		for (int i = 0; i < m_companionCount; i++)
 		{
 			SpawnCompanion(m_companions[i]);
+			m_companions[i].IsInParty = true;
 			m_companions[i].Index = i+1;
 		}
 	}
