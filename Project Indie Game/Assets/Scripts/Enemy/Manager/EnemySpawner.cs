@@ -61,7 +61,14 @@ public class EnemySpawner : MonoBehaviour {
 
     public void SpawnEnemy(string tag)
     {
-        GameObject newEnemy=ObjectPooler.instance.SpawnFromPool(tag, transform.position, transform.rotation);
+        Vector3 spawnPosition;
+        Vector2 randomCircle = Random.insideUnitCircle.normalized * 2;
+        spawnPosition = new Vector3(randomCircle.x, 0, randomCircle.y);
+        transform.position = spawnPosition + transform.position;
+
+        spawnPosition.y = transform.position.y;
+
+        GameObject newEnemy=ObjectPooler.instance.SpawnFromPool(tag, spawnPosition, transform.rotation);
         newEnemy.GetComponent<Enemy>().onEnemyDestroyed += OnMyEnemyDestroyed;
         m_enemies.Add(newEnemy.GetComponent<Enemy>());
     }
