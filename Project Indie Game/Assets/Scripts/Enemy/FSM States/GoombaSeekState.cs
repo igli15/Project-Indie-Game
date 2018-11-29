@@ -51,7 +51,7 @@ public class GoombaSeekState : EnemySeekState {
 
         //SLOW DOWN BEFORE ATTACK, KEK
         m_enemyMovement.navMeshAgent.velocity = Vector3.zero;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         StopAllCoroutines();
 

@@ -15,6 +15,13 @@ public class EnemyFSM : MonoBehaviour, IAgent {
         ID = countID;
         countID++;
         m_fsm = new Fsm<EnemyFSM>(this);
+        ChangeToInitialState();
+
+
+    }
+
+    public void ChangeToInitialState()
+    {
         switch (enemyTpe)
         {
             case EnemyType.GOOMBA:
@@ -24,8 +31,8 @@ public class EnemyFSM : MonoBehaviour, IAgent {
                 m_fsm.ChangeState<TurretSeekState>();
                 break;
         }
-        
     }
+
     void Update() {
     }
 
