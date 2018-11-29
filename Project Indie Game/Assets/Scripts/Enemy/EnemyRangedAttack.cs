@@ -7,7 +7,12 @@ public class EnemyRangedAttack : MonoBehaviour {
 
     [SerializeField]
     private GameObject m_projectile;
-    public float reloadTime = 0.1f;
+
+    [SerializeField]
+    private float m_projectileSpeed = 5;
+
+    [HideInInspector]
+    public float reloadTime = 1.5f;
 
     void Start () {
         
@@ -30,7 +35,7 @@ public class EnemyRangedAttack : MonoBehaviour {
         newProjectile.GetComponent<ProjectileBehaviour>().tag = objectPoolTag;
         Rigidbody rb =newProjectile.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePositionY;
-        rb.velocity = direction * 20;
+        rb.velocity = direction * m_projectileSpeed;
 
 
     }

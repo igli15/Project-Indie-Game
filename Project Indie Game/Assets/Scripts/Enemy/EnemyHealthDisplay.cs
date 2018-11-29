@@ -10,35 +10,32 @@ public class EnemyHealthDisplay : MonoBehaviour {
     [SerializeField]
     private Slider m_slider;
 
-    private void Start()
-    {
+    [SerializeField]
+    private float m_timeOfAppearance = 2;
+
+    void Start () {
         m_health.OnHealthDecreased += ChangeHealthValue;
+        //m_health.OnHealthIncreased += ChangeHealthValue;
         m_camera = Camera.main;
         m_slider.maxValue = 100;
         m_slider.minValue = 0;
-    }
-    void OnEnable () {
-        
-        //m_health.OnHealthIncreased += ChangeHealthValue;
- 
         m_slider.value = m_health.HP;
-        transform.GetChild(0).gameObject.SetActive(false);
-
+        gameObject.SetActive(false);
     }
 
     public void ChangeHealthValue(Health health)
     {
         StopAllCoroutines();
         m_slider.value = health.HP;
-        transform.GetChild(0).gameObject.SetActive(true);
-        StartCoroutine(MakeCanvasEnabledFor(1f));
+        gameObject.SetActive(true);
+        StartCoroutine(MakeCanvasEnabledFor(m_timeOfAppearance));
  
     }
 
     IEnumerator MakeCanvasEnabledFor(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
 	void Update () {
