@@ -46,8 +46,6 @@ public class RushCompanion : Companion {
     {
         base.Update();
 
-        // !!! DELETE AFTER GREY BOX, PLEASE !!! 
-        //TODO: FIND BETTER WAY
         if (m_isThrown)
         {
             for (int i = 0; i < m_enemiesCaught.Count; i++)
@@ -66,7 +64,6 @@ public class RushCompanion : Companion {
 	public void CatchEnemy(GameObject enemy)
 	{
         enemy.GetComponent<EnemyFSM>().fsm.ChangeState<EnemyDisabledState>();
-        enemy.transform.SetParent(transform);
 		m_enemiesCaught.Add(enemy);
   
 
@@ -84,7 +81,6 @@ public class RushCompanion : Companion {
 			{
 				if (m_enemiesCaught[i] != null)
 				{
-					m_enemiesCaught[i].transform.SetParent(null);
 					m_enemiesCaught[i].GetComponent<Health>().InflictDamage(m_damageAmount);
                     m_enemiesCaught[i].GetComponent<EnemyFSM>().ChangeToInitialState();
 
