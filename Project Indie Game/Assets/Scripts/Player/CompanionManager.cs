@@ -75,8 +75,7 @@ public class CompanionManager : MonoBehaviour
 		m_selectedCompanion.IsCharged = false;
 		if (m_selectedCompanion.Index <= 1) index = GetTheLastAvaiableCompanion().Index;
 		else index -= 1;
-		
-		Debug.Log("INDEX:  " + index);
+
 		ACompanion companion = SelectCompanion(index);
 		
 		while (companion == null)

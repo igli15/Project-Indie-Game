@@ -14,7 +14,11 @@ public abstract class ACompanion : MonoBehaviour
 	[SerializeField]
 	protected Sprite m_iconSprite;
 	
+	[SerializeField]
 	protected float m_chargeTime = 0;
+	
+	[SerializeField]
+	protected float m_throwRange = 10;
 
 	protected bool m_isCharged = false;
 	
@@ -86,5 +90,10 @@ public abstract class ACompanion : MonoBehaviour
 	public Sprite IconSprite
 	{
 		get { return m_iconSprite; }
+	}
+
+	public float ThrowRange
+	{
+		get { return m_throwRange; }
 	}
 }

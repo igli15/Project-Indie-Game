@@ -11,8 +11,6 @@ public class Companion : ACompanion
 {
 	[SerializeField] 
 	protected CompanionManager m_manager; 
-	[SerializeField]
-	protected float m_throwRange = 10;
 
 	[SerializeField]
 	protected float m_throwSpeed = 20;
