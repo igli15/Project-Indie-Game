@@ -26,6 +26,7 @@ public class Companion : ACompanion
 	// Use this for initialization
 	protected void Awake ()
 	{
+		AllCompanions.Add(this);
 		m_isThrown = false;
 		
 		/*OnSelected += delegate(ACompanion companion)	{companion.GetComponent<Renderer>().material.color = Color.red;};

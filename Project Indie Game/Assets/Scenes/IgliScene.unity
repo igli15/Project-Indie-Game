@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef066902174449dfb279d08992c3f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeTime: 1
+  m_iconSprite: {fileID: 21300000, guid: 7bea39f8d396b49098e8e9ceb97928d3, type: 3}
   m_manager: {fileID: 1774658612}
   m_throwRange: 20
   m_throwSpeed: 20
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a62282dffbb43369d9b0b9b0f52a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeTime: 0
+  m_iconSprite: {fileID: 21300000, guid: 1f138f9244fec45269cebd263ffb876d, type: 3}
   m_manager: {fileID: 1774658612}
   m_throwRange: 2
   m_throwSpeed: 20
@@ -1240,7 +1240,7 @@ GameObject:
   - component: {fileID: 828250392}
   - component: {fileID: 828250391}
   m_Layer: 5
-  m_Name: StaticTurretIcon
+  m_Name: Icon3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1261,8 +1261,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -81, y: -183}
-  m_SizeDelta: {x: 130, y: 50}
+  m_AnchoredPosition: {x: -51, y: -183}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &828250391
 MonoBehaviour:
@@ -1283,7 +1283,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4c1e00cb6fcf24128aacdfa6be6a4b92, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96dd5ab95a72345d2828171cd36ffaba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1331,7 +1331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 33.99994, y: -26}
+  m_AnchoredPosition: {x: 34, y: -26}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &860931718
@@ -1975,15 +1975,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60402bf509fd741e0a79f5a011824b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hudIcons:
-  - companion: {fileID: 982909051}
-    icon: {fileID: 2086712637}
-  - companion: {fileID: 635550513}
-    icon: {fileID: 1746861180}
-  - companion: {fileID: 1223154932}
-    icon: {fileID: 828250389}
+  m_noneSelectedIcon: {fileID: 21300000, guid: 96dd5ab95a72345d2828171cd36ffaba, type: 3}
+  m_companionManager: {fileID: 1774658612}
   m_scaleFactor: 1.2
   m_scaleTime: 0.2
+  m_iconGameObjects:
+  - {fileID: 2086712637}
+  - {fileID: 1746861180}
+  - {fileID: 828250389}
 --- !u!1 &982909049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,7 +2030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8ba38ccf78540f0ae5ca34265786b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeTime: 0
+  m_iconSprite: {fileID: 21300000, guid: 5f4e7039eee154127aad1121056ca1fe, type: 3}
   m_manager: {fileID: 1774658612}
   m_throwRange: 22
   m_throwSpeed: 20
@@ -2629,7 +2628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d23329498cee4415a1adaf306b97355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeTime: 0
+  m_iconSprite: {fileID: 21300000, guid: c232193d89e0e4ae583c2cec7f866bca, type: 3}
   m_manager: {fileID: 1774658612}
   m_throwRange: 20
   m_throwSpeed: 12
@@ -2922,7 +2921,7 @@ GameObject:
   - component: {fileID: 1746861183}
   - component: {fileID: 1746861182}
   m_Layer: 5
-  m_Name: CamouflageIcon
+  m_Name: Icon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2943,8 +2942,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -80.50003, y: -111}
-  m_SizeDelta: {x: 130, y: 50}
+  m_AnchoredPosition: {x: -50.5, y: -111}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1746861182
 MonoBehaviour:
@@ -2965,7 +2964,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 682b3c4ff96494e1d813c797356a9b79, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96dd5ab95a72345d2828171cd36ffaba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3292,7 +3291,7 @@ GameObject:
   - component: {fileID: 2086712640}
   - component: {fileID: 2086712639}
   m_Layer: 5
-  m_Name: BasicGoombaIcon
+  m_Name: Icon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3313,8 +3312,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -80.99997, y: -39}
-  m_SizeDelta: {x: 130, y: 50}
+  m_AnchoredPosition: {x: -51, y: -39}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2086712639
 MonoBehaviour:
@@ -3335,7 +3334,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0b85c1d443dd94e28997afe8df0719cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96dd5ab95a72345d2828171cd36ffaba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
