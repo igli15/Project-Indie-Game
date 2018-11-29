@@ -13,7 +13,7 @@ public class ChargeBar : MonoBehaviour
 	void Start ()
 	{
 		m_slider = GetComponent<Slider>();
-
+		m_slider.value = 0;
 		CompanionController.OnMouseCharging += ChargeSlider;
 		CompanionController.OnMouseRelease += RestoreSlider;
 	}

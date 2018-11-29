@@ -52,14 +52,12 @@ public class CompanionController : MonoBehaviour
 	{
 		if (Input.mouseScrollDelta.y  * m_scorllScale > 0)
 		{
-			Debug.Log("next");
-			m_manager.SelectNextCompanion();
+			m_manager.SelectPreviousCompanion();
 			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
 		}
 		if (Input.mouseScrollDelta.y * m_scorllScale < 0)
 		{
-			Debug.Log("previous");
-			m_manager.SelectPreviousCompanion();
+			m_manager.SelectNextCompanion();
 			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
 		}
 	}

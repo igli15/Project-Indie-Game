@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BlackHoleCompanion : Companion
 {
+	[Header("BlackHole Companion Values")]
 	[SerializeField] 
 	private GameObject m_blackHole;
 
