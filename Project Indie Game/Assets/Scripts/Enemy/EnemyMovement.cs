@@ -91,7 +91,7 @@ public class EnemyMovement : MonoBehaviour
             m_navMeshAgent.Warp(transform.position);
             Debug.Log(" !!! AGENT IS NOT ON NAV_MESH !!! ");
         }
-        m_navMeshAgent.SetDestination(destination);
+        if(m_navMeshAgent.isOnNavMesh)m_navMeshAgent.SetDestination(destination);
     }
     public void ResetPath()
     {
