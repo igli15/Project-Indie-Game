@@ -11,8 +11,6 @@ public class Companion : ACompanion
 {
 	[SerializeField] 
 	protected CompanionManager m_manager; 
-	[SerializeField]
-	protected float m_throwRange = 10;
 
 	[SerializeField]
 	protected float m_throwSpeed = 20;
@@ -26,6 +24,7 @@ public class Companion : ACompanion
 	// Use this for initialization
 	protected void Awake ()
 	{
+		AllCompanions.Add(this);
 		m_isThrown = false;
 		
 		/*OnSelected += delegate(ACompanion companion)	{companion.GetComponent<Renderer>().material.color = Color.red;};

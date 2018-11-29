@@ -48,41 +48,52 @@ public class CompanionManager : MonoBehaviour
 	}
 
 	public void SelectNextCompanion()
-	{
-		if (m_selectedCompanion.Index >= m_companionCount)
+	{	
+		int index = m_selectedCompanion.Index;
+
+		m_selectedCompanion.IsCharged = false;
+		if (m_selectedCompanion.Index >= m_companionCount) index = GetTheFirstAvaiableCompanion().Index;
+		else index += 1;
+		
+		ACompanion companion = SelectCompanion(index);
+		
+		while (companion == null)
 		{
-			m_selectedCompanion.IsCharged = false;
-			SelectCompanion(1);
-			m_selectedCompanion.IsCharged = false;
+			index++;
+			if (index >= m_companionCount + 1) index = 1;
+			companion = SelectCompanion(index);
 		}
-		else
-		{
-			m_selectedCompanion.IsCharged = false;
-			SelectCompanion(m_selectedCompanion.Index + 1);
-			m_selectedCompanion.IsCharged = false;
-		}
+
+		m_selectedCompanion.IsCharged = false;
+		
 	}
 
 	public void SelectPreviousCompanion()
 	{
-		if (m_selectedCompanion.Index <= 1)
+		int index = m_selectedCompanion.Index;
+
+		m_selectedCompanion.IsCharged = false;
+		if (m_selectedCompanion.Index <= 1) index = GetTheLastAvaiableCompanion().Index;
+		else index -= 1;
+
+		ACompanion companion = SelectCompanion(index);
+		
+		while (companion == null)
 		{
-			m_selectedCompanion.IsCharged = false;
-			SelectCompanion(m_companionCount);
-			m_selectedCompanion.IsCharged = false;
+			index--;
+			if (index <= 0) index = m_companionCount;
+			companion = SelectCompanion(index);
 		}
-		else
-		{
-			m_selectedCompanion.IsCharged = false;
-			SelectCompanion(m_selectedCompanion.Index - 1 );
-			m_selectedCompanion.IsCharged = false;
-		}
+
+		m_selectedCompanion.IsCharged = false;
 	}
 
-	public void SelectCompanion(int index)
+	public ACompanion SelectCompanion(int index)
 	{
 		ACompanion compToSelect = m_companions[index - 1];	// get the companion we need to change to
 
+		if (compToSelect.IsThrown) return null;
+		
 		if (compToSelect != null && !compToSelect.IsThrown) // check if its null and if its thrown
 		{
 
@@ -93,39 +104,54 @@ public class CompanionManager : MonoBehaviour
 
 			if (m_selectedCompanion.OnSelected != null) m_selectedCompanion.OnSelected(m_selectedCompanion); //call select action
 		}
+		
+
+		return compToSelect;
 
 	}
 
 
-	public void DropCompanion(ACompanion companion)
+	public ACompanion DropCompanion(ACompanion companion)
 	{
 		companion.Reset();
 		companion.IsInParty = false;
 		companion.SteeringComponent.NavMeshAgent.enabled = false;
-		m_companionCount -= 1;
-		m_companions.Remove(companion);
-		AssignCompanionsIndex();
+		if(companion.OnDropped != null) companion.OnDropped(companion);
+		//m_companionCount -= 1;
+		
+		m_companions[companion.Index - 1] = null;
+		
+		//AssignCompanionsIndex();
 		SelectPreviousCompanion();
+		return companion;
 	}
 
-	public void PickCompanion(ACompanion companion)
+	public ACompanion PickCompanion(ACompanion companion)
 	{
-		Debug.Log(m_companionCount);
-		if (m_companionCount == 3)
+		ACompanion droppedCompanion = null;
+		if (IsPartyFull())
 		{
-			DropCompanion(m_selectedCompanion);
-			AssignCompanionsIndex();
+			droppedCompanion = DropCompanion(m_selectedCompanion);
+			
+			//AssignCompanionsIndex();
 		}
 		
 		Debug.Log(m_companionCount);
 		companion.Spawn();
 		companion.IsInParty = true;
 		companion.SteeringComponent.NavMeshAgent.enabled = true;
-		m_companionCount += 1;
-		m_companions.Add(companion);
-		AssignCompanionsIndex();
-		SelectCompanion(companion.Index);
 		
+		companion.Index = GetEmptySlot();
+		m_companions[GetEmptySlot() - 1] = companion;
+		
+		if(companion.OnPicked != null) companion.OnPicked(companion);
+		
+		//AssignCompanionsIndex();
+
+		//if (droppedCompanion != null) companion.Index = droppedCompanion.Index;
+		
+		SelectCompanion(companion.Index);
+		return companion;
 	}
 
 
@@ -147,5 +173,63 @@ public class CompanionManager : MonoBehaviour
 		}
 	}
 
+	public List<ACompanion> Companions
+	{
+		get { return m_companions; }
+	}
+
+	private ACompanion GetTheFirstAvaiableCompanion()
+	{
+		for (int i = 0; i < m_companionCount; i++)
+		{
+			if (m_companions[i] != null)
+			{
+				return m_companions[i];
+			}
+		}
+
+		return null;
+	}
+	
+	
+	private ACompanion GetTheLastAvaiableCompanion()
+	{
+		for (int i = m_companionCount - 1; i >= 0; i -- )
+		{
+			if (m_companions[i] != null)
+			{
+				return m_companions[i];
+			}
+		}
+
+		return null;
+	}
+
+	private bool IsPartyFull()
+	{
+		for (int i = 0; i < m_companionCount; i++)
+		{
+			if (m_companions[i] == null)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+
+	private int GetEmptySlot()
+	{
+		for (int i = 0; i < m_companionCount; i++)
+		{
+			if (m_companions[i] == null)
+			{
+				return i + 1;
+			}
+		}
+
+		return -1;
+	}
 
 }

@@ -4,12 +4,21 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public abstract class ACompanion : MonoBehaviour 
+public abstract class ACompanion : MonoBehaviour
 
 {
+	 [Header("General Companion Values")]
+
+	public static List<ACompanion> AllCompanions = new List<ACompanion>();
+
 	[SerializeField]
-	[Header("General Companion Values")]
+	protected Sprite m_iconSprite;
+	
+	[SerializeField]
 	protected float m_chargeTime = 0;
+	
+	[SerializeField]
+	protected float m_throwRange = 10;
 
 	protected bool m_isCharged = false;
 	
@@ -30,6 +39,10 @@ public abstract class ACompanion : MonoBehaviour
 	public Action<ACompanion> OnRangeReached;
 	public Action<ACompanion> OnStartCharging;
 	public Action<ACompanion,float> OnCharging;
+	public Action<ACompanion> OnDropped;
+	public Action<ACompanion> OnPicked;
+
+	
 	public Action<ACompanion> OnChargeFinished;
 	
 	public abstract void Throw(Vector3 dir);
@@ -72,5 +85,15 @@ public abstract class ACompanion : MonoBehaviour
 	{
 		get { return m_isInParty; }
 		set { m_isInParty = value; }
+	}
+
+	public Sprite IconSprite
+	{
+		get { return m_iconSprite; }
+	}
+
+	public float ThrowRange
+	{
+		get { return m_throwRange; }
 	}
 }

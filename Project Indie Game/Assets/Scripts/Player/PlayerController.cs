@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
 	private Vector3 m_velocity;
 	private Rigidbody m_rb;
 	private Quaternion m_targetRotation;
+	
 	
 	// Use this for initialization
 	void Start ()

@@ -75,7 +75,6 @@ public class BlackHoleCompanion : Companion
 			GameObject blackHole = Instantiate(m_blackHole);
 			Destroy(blackHole,m_destroyBlackholeTimer);
 			blackHole.transform.position = transform.position;
-			blackHole.transform.rotation = Quaternion.identity;
 			blackHole.GetComponent<BlackHole>().PullForce = m_pullForce;
 			m_instantiatedBlackHole = true;
 		}
@@ -85,9 +84,23 @@ public class BlackHoleCompanion : Companion
 
 	public void Charging(ACompanion companion,float chargeCount)
 	{
-		Debug.Log(chargeCount);
 		if (chargeCount > m_maxChargeTime) chargeCount = m_maxChargeTime;
 		m_throwRange = chargeCount / m_maxChargeTime * (m_maxDistance - m_minDistance) + m_minDistance;
-		Debug.Log(m_throwRange);
 	}
+
+	public float MinDistance
+	{
+		get { return m_minDistance; }
+	}
+
+	public float MaxDistance
+	{
+		get { return m_maxDistance; }
+	}
+
+	public float MaxChargeTime
+	{
+		get { return m_maxChargeTime; }
+	}
+	
 }

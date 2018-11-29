@@ -20,6 +20,9 @@ public class CompanionController : MonoBehaviour
 	private float m_chargeCount;
 
 	private float m_timeCharging = 0;
+	
+	public static Action<CompanionController, ACompanion> OnMouseCharging;
+	public static Action<CompanionController, ACompanion> OnMouseRelease;
 
 	// Use this for initialization
 	void Start ()
@@ -49,11 +52,13 @@ public class CompanionController : MonoBehaviour
 	{
 		if (Input.mouseScrollDelta.y  * m_scorllScale > 0)
 		{
+			Debug.Log("next");
 			m_manager.SelectNextCompanion();
 			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
 		}
 		if (Input.mouseScrollDelta.y * m_scorllScale < 0)
 		{
+			Debug.Log("previous");
 			m_manager.SelectPreviousCompanion();
 			m_chargeCount = m_manager.GetSelectedCompanion().ChargeTime;
 		}
@@ -116,12 +121,12 @@ public class CompanionController : MonoBehaviour
 			m_chargeCount -= Time.deltaTime;
 			m_timeCharging += Time.deltaTime;
 
+			if (OnMouseCharging != null) OnMouseCharging(this, companion);
 			if(companion.OnCharging != null) companion.OnCharging(companion,m_timeCharging);	
 			
 			if (m_chargeCount <= 0)
 			{
 				if(companion.OnChargeFinished != null) companion.OnChargeFinished(companion);
-				
 				companion.IsCharged = true;
 				m_chargeCount = companion.ChargeTime;
 			}
@@ -130,9 +135,10 @@ public class CompanionController : MonoBehaviour
 		
 		if (Input.GetMouseButtonUp(0))
 		{
+			if (OnMouseRelease != null) OnMouseRelease(this, companion);
+			m_timeCharging = 0;
 			if (companion.IsCharged)
 			{
-				m_timeCharging = 0;
 				TeleportCompanion(companion);
 				ThrowAtMousePos(companion);
 			}
@@ -162,6 +168,11 @@ public class CompanionController : MonoBehaviour
 				m_manager.PickCompanion(other.transform.parent.GetComponent<Companion>());
 			}
 		}
+	}
+
+	public float TimeCharging
+	{
+		get { return m_timeCharging; }
 	}
 
 }
