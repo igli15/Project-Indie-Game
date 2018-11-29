@@ -12,7 +12,10 @@ public class SeekerCompanion : Companion
 
 	[SerializeField] 
 	private float m_bounceAmount = 4;
-	 
+	
+	[SerializeField] 
+	private float m_damageDealt = 20;
+
 	private Collider m_collider;
 
 	private float m_initbounceAmount = 0;
@@ -68,7 +71,7 @@ public class SeekerCompanion : Companion
 		{
 			List<GameObject> enemiesInRange = GetAllEnemiesInRange(other.transform);  //Fill the list
 
-			other.GetComponent<Health>().InflictDamage(20);   //Inflict Damage
+			other.GetComponent<Health>().InflictDamage(m_damageDealt);   //Inflict Damage
 			m_bounceAmount -= 1;  							 // it bounced once 
 
 			if (enemiesInRange.Count == 0 || m_bounceAmount <=0)  //Check if there is no enemies or no bounce left

@@ -10,6 +10,9 @@ public class EnemyHealthDisplay : MonoBehaviour {
     [SerializeField]
     private Slider m_slider;
 
+    [SerializeField]
+    private float m_timeOfAppearance = 2;
+
     void Start () {
         m_health.OnHealthDecreased += ChangeHealthValue;
         //m_health.OnHealthIncreased += ChangeHealthValue;
@@ -25,7 +28,7 @@ public class EnemyHealthDisplay : MonoBehaviour {
         StopAllCoroutines();
         m_slider.value = health.HP;
         gameObject.SetActive(true);
-        StartCoroutine(MakeCanvasEnabledFor(1f));
+        StartCoroutine(MakeCanvasEnabledFor(m_timeOfAppearance));
  
     }
 

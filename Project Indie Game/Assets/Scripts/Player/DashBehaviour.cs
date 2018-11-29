@@ -11,6 +11,10 @@ public class DashBehaviour : MonoBehaviour
 	[SerializeField] 
 	private float m_hitOffset = 0.5f;
 	
+	[SerializeField] 
+	private float m_abilityCD = 0.5f;
+	private float m_initAbilityCD;
+
 	private float m_initDashRange;
 
 	
@@ -18,13 +22,16 @@ public class DashBehaviour : MonoBehaviour
 	void Start ()
 	{
 		m_initDashRange = m_dashRange;
+		m_initAbilityCD = m_abilityCD;
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
+		m_abilityCD -= Time.deltaTime;
+		if (Input.GetKeyDown(KeyCode.Space) && m_abilityCD < 0)
 		{
 			Dash();
+			m_abilityCD = m_initAbilityCD;
 		}
 	}
 
