@@ -92,7 +92,7 @@ public class CompanionManager : MonoBehaviour
 	{
 		ACompanion compToSelect = m_companions[index - 1];	// get the companion we need to change to
 
-		if (compToSelect.IsThrown) return null;
+		//if (compToSelect.IsThrown) return null;
 		
 		if (compToSelect != null && !compToSelect.IsThrown) // check if its null and if its thrown
 		{
