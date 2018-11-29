@@ -403,6 +403,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224104949466505066, guid: 6a969578206d82c418e177e189f0e167,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a969578206d82c418e177e189f0e167, type: 2}
   m_IsPrefabParent: 0
@@ -518,7 +523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &506153272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,7 +556,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 506153271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.4, y: 22.12, z: 52.8}
+  m_LocalPosition: {x: 28.4, y: 14.14, z: 52.8}
   m_LocalScale: {x: 80, y: 20, z: 50}
   m_Children:
   - {fileID: 1356848791}
@@ -1802,6 +1807,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224035542245758114, guid: f8b9d206f7eff194d9e0e680208fc307,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8b9d206f7eff194d9e0e680208fc307, type: 2}
   m_IsPrefabParent: 0
@@ -2978,7 +2988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 558408252}
-  damage: 0
+  damage: 10
 --- !u!1 &1918192634
 GameObject:
   m_ObjectHideFlags: 0

@@ -84,7 +84,12 @@ public class EnemyMovement : MonoBehaviour
     }
     public void SetDestination(Vector3 destination)
     {
-        Debug.Log("OnNavMrdh: "+m_navMeshAgent.isOnNavMesh);
+        //Debug.Log("OnNavMrdh: "+m_navMeshAgent.isOnNavMesh);
+        if (!m_navMeshAgent.isOnNavMesh)
+        {
+            Debug.Log(" !!! AGENT IS NOT ON NAV_MESH !!! ");
+            return;
+        }
         m_navMeshAgent.SetDestination(destination);
     }
     public void ResetPath()

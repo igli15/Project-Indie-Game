@@ -40,12 +40,22 @@ public class RushCompanion : Companion {
 		m_collider.enabled = false;
 	}
 
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		base.Update();
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        base.Update();
+
+        // !!! DELETE AFTER GREY BOX, PLEASE !!! 
+        //TODO: FIND BETTER WAY
+        if (m_isThrown)
+        {
+            for (int i = 0; i < m_enemiesCaught.Count; i++)
+            {
+                m_enemiesCaught[i].transform.position = transform.position;
+            }
+        }
+    }
 
 	public override void RangeReached()
 	{
@@ -55,10 +65,12 @@ public class RushCompanion : Companion {
 
 	public void CatchEnemy(GameObject enemy)
 	{
-		
-		enemy.transform.SetParent(transform);
+        enemy.GetComponent<EnemyFSM>().fsm.ChangeState<EnemyDisabledState>();
+        enemy.transform.SetParent(transform);
 		m_enemiesCaught.Add(enemy);
-		Debug.Log("enemy caught " + enemy.name);
+  
+
+        Debug.Log("enemy caught " + enemy.name);
 	}
 
 
@@ -74,7 +86,9 @@ public class RushCompanion : Companion {
 				{
 					m_enemiesCaught[i].transform.SetParent(null);
 					m_enemiesCaught[i].GetComponent<Health>().InflictDamage(m_damageAmount);
-				}
+                    m_enemiesCaught[i].GetComponent<EnemyFSM>().ChangeToInitialState();
+
+                }
 			}
 
 			m_manager.DisableCompanion(this);

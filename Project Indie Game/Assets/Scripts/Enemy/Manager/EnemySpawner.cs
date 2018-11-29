@@ -61,7 +61,15 @@ public class EnemySpawner : MonoBehaviour {
 
     public void SpawnEnemy(string tag)
     {
-        GameObject newEnemy=ObjectPooler.instance.SpawnFromPool(tag, transform.position, transform.rotation);
+        Vector3 spawnPosition;
+        Vector3 distnaceToSpawnPosition;
+        Vector2 randomCircle = Random.insideUnitCircle.normalized * 2;
+        distnaceToSpawnPosition = new Vector3(randomCircle.x, 0, randomCircle.y);
+        spawnPosition = distnaceToSpawnPosition + transform.position;
+
+        spawnPosition.y = transform.position.y;
+
+        GameObject newEnemy=ObjectPooler.instance.SpawnFromPool(tag, spawnPosition, transform.rotation);
         newEnemy.GetComponent<Enemy>().onEnemyDestroyed += OnMyEnemyDestroyed;
         m_enemies.Add(newEnemy.GetComponent<Enemy>());
     }
@@ -83,6 +91,8 @@ public class EnemySpawner : MonoBehaviour {
     public int currentWaveIndex
     {
         get { return m_currentWaveIndex; }
-        set { m_currentWaveIndex = value; }
+        set {
+            if (value < 0) m_currentWaveIndex = 0;
+            else m_currentWaveIndex = value; }
     }
 }
