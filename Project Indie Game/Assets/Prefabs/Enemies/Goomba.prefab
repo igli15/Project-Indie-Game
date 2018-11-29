@@ -849,6 +849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_health: {fileID: 114771605651496016}
   m_slider: {fileID: 114027994960655956}
+  m_timeOfAppearance: 2
 --- !u!114 &114189798247918584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -940,8 +941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a67904b22f5a34a4b9928f08e2758bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 100
-  m_maxHealth: 100
+  m_health: 75
+  m_maxHealth: 75
   m_shouldBeDestroyed: 0
 --- !u!114 &114942262956327980
 MonoBehaviour:
