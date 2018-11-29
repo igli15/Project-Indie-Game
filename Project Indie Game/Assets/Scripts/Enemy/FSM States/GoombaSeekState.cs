@@ -32,6 +32,9 @@ public class GoombaSeekState : EnemySeekState {
     {
 
         base.Enter(pAgent);
+        //OK, so Warp to own position is fuckking updating navMeshPos and puting agent on navmesh
+        m_enemyMovement.navMeshAgent.Warp(transform.position);
+
         m_enemyMovement.navMeshAgent.enabled = true;
         m_enemyMovement.pushIsEnabled = true;
         m_seekTarget = m_enemy.target;
@@ -42,6 +45,8 @@ public class GoombaSeekState : EnemySeekState {
             return;
         }
         StartCoroutine(FollowTarget(m_seekTarget.transform,m_enemyMovement));
+
+
     }
 
     public override void Exit(IAgent pAgent)

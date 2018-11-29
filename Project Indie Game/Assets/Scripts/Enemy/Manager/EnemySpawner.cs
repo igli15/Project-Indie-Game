@@ -72,6 +72,8 @@ public class EnemySpawner : MonoBehaviour {
         GameObject newEnemy=ObjectPooler.instance.SpawnFromPool(tag, spawnPosition, transform.rotation);
         newEnemy.GetComponent<Enemy>().onEnemyDestroyed += OnMyEnemyDestroyed;
         m_enemies.Add(newEnemy.GetComponent<Enemy>());
+
+        newEnemy.GetComponent<EnemyFSM>().ChangeToInitialState();
     }
 
     public void DestroyAllMyEnemies()
