@@ -48,23 +48,7 @@ public class CompanionManager : MonoBehaviour
 	}
 
 	public void SelectNextCompanion()
-	{
-		/*if (m_selectedCompanion.Index >= m_companionCount)
-		{
-			Debug.Log("here");
-			m_selectedCompanion.IsCharged = false;
-			Debug.Log("FIRST AVAIABLE : " + GetTheFirstAvaiableCompanion().Index);
-			SelectCompanion(GetTheFirstAvaiableCompanion().Index );
-			m_selectedCompanion.IsCharged = false;
-		}
-		else
-		{
-			m_selectedCompanion.IsCharged = false;
-			ACompanion comp =  SelectCompanion(m_selectedCompanion.Index + 1);
-			if (comp == null) SelectCompanion(m_selectedCompanion.Index + 2);
-			m_selectedCompanion.IsCharged = false;
-		}*/
-		
+	{	
 		int index = m_selectedCompanion.Index;
 
 		m_selectedCompanion.IsCharged = false;
@@ -86,22 +70,6 @@ public class CompanionManager : MonoBehaviour
 
 	public void SelectPreviousCompanion()
 	{
-		/*Debug.Log(m_selectedCompanion.Index);
-		if (m_selectedCompanion.Index <= 1)
-		{
-			Debug.Log("Last AVAIABLE : " + GetTheLastAvaiableCompanion().Index);
-			m_selectedCompanion.IsCharged = false;
-			SelectCompanion(GetTheLastAvaiableCompanion().Index);
-			m_selectedCompanion.IsCharged = false;
-		}
-		else
-		{
-			m_selectedCompanion.IsCharged = false;
-			ACompanion comp = SelectCompanion(m_selectedCompanion.Index - 1 );
-			if (comp == null) SelectCompanion(m_selectedCompanion.Index - 2);
-			m_selectedCompanion.IsCharged = false;
-		}*/
-
 		int index = m_selectedCompanion.Index;
 
 		m_selectedCompanion.IsCharged = false;
