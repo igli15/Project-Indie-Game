@@ -38,14 +38,10 @@ public class PlayerController : MonoBehaviour
 
 	public void Rotate(Vector3 dir)
 	{
-		if (m_velocity != Vector3.zero)
-		{
-			m_targetRotation = Quaternion.LookRotation(m_velocity);
+			m_targetRotation = Quaternion.LookRotation(dir);
 			m_rb.rotation = m_targetRotation;
 			/*m_rb.rotation =Quaternion.Euler(
 				Vector3.up * Mathf.MoveTowardsAngle(m_rb.rotation.eulerAngles.y, m_targetRotation.eulerAngles.y, 
 													m_rotationSpeed * Time.fixedDeltaTime));*/
-		}
-
 	}
 }

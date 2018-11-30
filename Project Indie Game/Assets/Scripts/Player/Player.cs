@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		m_companionController = GetComponent<CompanionController>();
 		m_playerController = GetComponent<PlayerController>();
 		m_playerController.SetRotationSpeed(m_rotationSpeed);
 
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
 	void Update ()
 	{
 		m_inputDelayCounter -= Time.deltaTime;
+		
 		if (m_inputDelayCounter <= 0)
 		{
 			Vector3 movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -48,7 +50,16 @@ public class Player : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		m_playerController.Rotate(m_vel);
+		if (!m_companionController.IsCharging)
+		{
+			m_playerController.Rotate(m_vel);
+		}
+		else
+		{
+			Debug.Log("mouse dir " + m_companionController.MouseDir);
+			Debug.Log(Vector3.Distance(transform.position,m_companionController.MouseDir.normalized));
+			m_playerController.Rotate(m_companionController.MouseDir.normalized);
+		}
 	}
 
 	public Vector3 GetVelocity()
