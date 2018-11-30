@@ -3,12 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
-    public int waveIndex = -1;
-    public int zoneIndex = -1;
-
     [Header("Stats")]
     [SerializeField]
     private float m_moveSpeed = 5;

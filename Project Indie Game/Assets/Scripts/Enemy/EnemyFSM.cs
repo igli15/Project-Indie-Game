@@ -8,7 +8,7 @@ public class EnemyFSM : MonoBehaviour, IAgent {
     public int ID;
 
     private Fsm<EnemyFSM> m_fsm;
-    public enum EnemyType {GOOMBA,TURRET }
+    public enum EnemyType {GOOMBA,TURRET,CAMOUFLAGE }
     public EnemyType enemyTpe;
 
     void Start() {
@@ -29,6 +29,9 @@ public class EnemyFSM : MonoBehaviour, IAgent {
                 break;
             case EnemyType.TURRET:
                 m_fsm.ChangeState<TurretSeekState>();
+                break;
+            case EnemyType.CAMOUFLAGE:
+                m_fsm.ChangeState<CamoAmbushState>();
                 break;
         }
     }
@@ -57,6 +60,9 @@ public class EnemyFSM : MonoBehaviour, IAgent {
                 break;
             case EnemyType.TURRET:
                 m_fsm.ChangeState<TurretSeekState>();
+                break;
+            case EnemyType.CAMOUFLAGE:
+                m_fsm.ChangeState<CamoAmbushState>();
                 break;
         }
     }
