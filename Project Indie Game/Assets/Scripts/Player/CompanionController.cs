@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,10 @@ public class CompanionController : MonoBehaviour
 	private float m_chargeCount;
 
 	private float m_timeCharging = 0;
+
+	private bool m_isCharging = false;
+
+	private Vector3 m_mouseDir;
 	
 	public static Action<CompanionController, ACompanion> OnMouseCharging;
 	public static Action<CompanionController, ACompanion> OnMouseRelease;
@@ -35,6 +40,9 @@ public class CompanionController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		
+		AssignMouseDirection();
+		
 		HandleScrollWheel();
 		
 		HandleMouseAim();
@@ -111,7 +119,7 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_chargeCount = companion.ChargeTime;
-		
+			m_isCharging = true;
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
 		}
 		if (Input.GetMouseButton(0))
@@ -134,6 +142,7 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonUp(0))
 		{
 			if (OnMouseRelease != null) OnMouseRelease(this, companion);
+			m_isCharging = false;
 			m_timeCharging = 0;
 			if (companion.IsCharged)
 			{
@@ -168,9 +177,33 @@ public class CompanionController : MonoBehaviour
 		}
 	}
 
+	public void AssignMouseDirection()
+	{
+		Ray camRay = m_mainCam.ScreenPointToRay(Input.mousePosition);
+		Plane plane = new Plane(Vector3.up,transform.position);
+
+		float rayDistance;
+		if (plane.Raycast(camRay, out rayDistance))
+		{
+			Vector3 point = camRay.GetPoint(rayDistance);
+			m_mouseDir = point - transform.position;
+		}
+
+	}
+
 	public float TimeCharging
 	{
 		get { return m_timeCharging; }
+	}
+
+	public Vector3 MouseDir
+	{
+		get { return m_mouseDir; }
+	}
+
+	public bool IsCharging
+	{
+		get { return m_isCharging; }
 	}
 
 }
