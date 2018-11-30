@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
 	private float m_inputDelayCounter;
 
 	private Vector3 m_vel;
+
+	private CompanionController m_companionController;
+
 	
 	// Use this for initialization
 	void Start ()
@@ -41,6 +44,11 @@ public class Player : MonoBehaviour
 			m_inputDelayCounter = m_inputDelay;
 		}
 		
+	}
+
+	private void FixedUpdate()
+	{
+		m_playerController.Rotate(m_vel);
 	}
 
 	public Vector3 GetVelocity()

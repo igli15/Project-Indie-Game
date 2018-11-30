@@ -10,6 +10,7 @@ public class CompanionController : MonoBehaviour
 	[SerializeField] 
 	private Transform m_feetPos;
 	
+	
 	private CompanionManager m_manager;
 	private Camera m_mainCam;
 

@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		m_rb.MovePosition(transform.position + m_velocity * Time.fixedDeltaTime);
-		Rotate();
+		//Rotate();
  	}
 
 	public void SetVelocity(Vector3 velocity)
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 		m_rotationSpeed = rotationSpeed;
 	}
 
-	void Rotate()
+	public void Rotate(Vector3 dir)
 	{
 		if (m_velocity != Vector3.zero)
 		{
