@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float m_moveSpeed = 5;
 
+	[SerializeField]
+	private float m_slowedDownMoveSpeed = 3;
+
 	[SerializeField] 
 	private float m_rotationSpeed;
 
@@ -22,6 +25,8 @@ public class Player : MonoBehaviour
 
 	private CompanionController m_companionController;
 
+	private float m_initSpeed;
+
 	
 	// Use this for initialization
 	void Start ()
@@ -31,6 +36,11 @@ public class Player : MonoBehaviour
 		m_playerController.SetRotationSpeed(m_rotationSpeed);
 
 		m_inputDelayCounter = m_inputDelay;
+
+		m_initSpeed = m_moveSpeed;
+		
+		CompanionController.OnMouseCharging += delegate(CompanionController controller, ACompanion companion){m_moveSpeed = m_slowedDownMoveSpeed; };
+		CompanionController.OnMouseRelease += delegate(CompanionController controller, ACompanion companion){m_moveSpeed = m_initSpeed;};
 	}
 	
 	// Update is called once per frame
@@ -56,8 +66,6 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("mouse dir " + m_companionController.MouseDir);
-			Debug.Log(Vector3.Distance(transform.position,m_companionController.MouseDir.normalized));
 			m_playerController.Rotate(m_companionController.MouseDir.normalized);
 		}
 	}
