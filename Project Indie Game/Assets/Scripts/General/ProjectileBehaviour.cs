@@ -6,6 +6,7 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     public string tag;
 
+    [SerializeField]
     private float m_damage=1;
     private Vector3 m_distancePerFrame;
 	void Start () {

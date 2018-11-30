@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: 
+  m_damage: 15
 --- !u!135 &135188840059513302
 SphereCollider:
   m_ObjectHideFlags: 1

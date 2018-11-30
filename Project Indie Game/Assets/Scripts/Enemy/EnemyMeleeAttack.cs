@@ -10,6 +10,7 @@ public class EnemyMeleeAttack : MonoBehaviour
 
     private Enemy m_enemy;
 
+    [SerializeField]
     private float m_damage = 1;
     private float m_reloadTime = 2f;
     private float m_lastTimeAttacked;
