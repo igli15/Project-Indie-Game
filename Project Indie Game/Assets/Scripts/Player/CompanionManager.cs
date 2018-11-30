@@ -38,7 +38,7 @@ public class CompanionManager : MonoBehaviour
 	
 	IEnumerator ReSpawnCooldown(ACompanion companion)
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(companion.RespawnTime);
 		SpawnCompanion(companion);
 	}
 

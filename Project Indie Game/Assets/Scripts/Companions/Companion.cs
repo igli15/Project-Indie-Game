@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 public class Companion : ACompanion
 {
 	[SerializeField] 
-	protected CompanionManager m_manager; 
+	protected CompanionManager m_manager;
 
 	[SerializeField]
 	protected float m_throwSpeed = 20;
@@ -19,7 +19,9 @@ public class Companion : ACompanion
 
 	protected Vector3 m_throwPos = Vector3.zero;
 
-
+	protected float m_initDistance;
+	
+	private LayerMask m_ignoreCollisionMask;
 	
 	// Use this for initialization
 	protected void Awake ()
@@ -32,8 +34,13 @@ public class Companion : ACompanion
 		
 		m_rb = GetComponent<Rigidbody>();
 		m_steering = GetComponent<CompanionSteering>();
+
+		m_ignoreCollisionMask = 1 << 10;
+		
 	}
-	
+
+
+
 	// Update is called once per frame
 	protected void Update ()
 	{
@@ -43,8 +50,24 @@ public class Companion : ACompanion
 		}
 
 		CheckIfOutOfRange();
-		
 
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position + transform.up * 20, -transform.up, out hit, 50,m_ignoreCollisionMask)) 
+		{
+			Debug.Log(hit.distance);
+			if (m_initDistance > hit.distance + 0.4f)
+			{
+				Debug.Log("COLLIDED");
+				OnRaycastCollision();
+			}
+			Debug.DrawRay(transform.position,-transform.up,Color.cyan);
+		}
+
+	}
+
+	public override void OnRaycastCollision()
+	{
+		m_manager.DisableCompanion(this);
 	}
 
 	public override void Throw(Vector3 dir)
@@ -108,6 +131,13 @@ public class Companion : ACompanion
 		if (OnSpawn != null) OnSpawn(this);
 		Reset();
 		m_steering.FindRandomPositionAroundParent();
+		
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position + transform.up * 20 , -transform.up, out hit, 50,m_ignoreCollisionMask))
+		{
+			m_initDistance = hit.distance;
+			Debug.Log("init distance :  " + m_initDistance + "  " + hit.collider.name);
+		}
 	}
 
 /*	private void OnTriggerEnter(Collider other)

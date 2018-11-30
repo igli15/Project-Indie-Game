@@ -13,6 +13,9 @@ public abstract class ACompanion : MonoBehaviour
 
 	[SerializeField]
 	protected Sprite m_iconSprite;
+
+	[SerializeField] 
+	protected float m_respawnTime = 3;
 	
 	[SerializeField]
 	protected float m_chargeTime = 0;
@@ -50,7 +53,8 @@ public abstract class ACompanion : MonoBehaviour
 	public abstract void CheckIfOutOfRange();
 	public abstract void Reset();
 	public abstract void Spawn();
-	public abstract void RangeReached();	
+	public abstract void RangeReached();
+	public abstract void OnRaycastCollision();
 	
 	
 	public int Index
@@ -95,5 +99,10 @@ public abstract class ACompanion : MonoBehaviour
 	public float ThrowRange
 	{
 		get { return m_throwRange; }
+	}
+
+	public float RespawnTime
+	{
+		get { return m_respawnTime; }
 	}
 }
