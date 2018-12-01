@@ -54,13 +54,10 @@ public class Companion : ACompanion
 		RaycastHit hit;
 		if (Physics.Raycast(transform.position + transform.up * 20, -transform.up, out hit, 50,m_ignoreCollisionMask)) 
 		{
-			Debug.Log(hit.distance);
 			if (m_initDistance > hit.distance + 0.4f)
 			{
-				Debug.Log("COLLIDED");
 				OnRaycastCollision();
 			}
-			Debug.DrawRay(transform.position,-transform.up,Color.cyan);
 		}
 
 	}
@@ -140,7 +137,6 @@ public class Companion : ACompanion
 		if (Physics.Raycast(transform.position + transform.up * 20 , -transform.up, out hit, 50,m_ignoreCollisionMask))
 		{
 			m_initDistance = hit.distance;
-			Debug.Log("init distance :  " + m_initDistance + "  " + hit.collider.name);
 		}
 	}
 

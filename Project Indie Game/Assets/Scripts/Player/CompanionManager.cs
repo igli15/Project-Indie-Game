@@ -43,7 +43,6 @@ public class CompanionManager : MonoBehaviour
 		while (companion.RespawnCounter <= companion.RespawnTime)
 		{
 			companion.RespawnCounter += Time.deltaTime;
-			Debug.Log("Counter " + companion.RespawnCounter);
 			yield return null;
 		}
 		

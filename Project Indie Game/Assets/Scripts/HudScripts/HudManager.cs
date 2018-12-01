@@ -61,9 +61,12 @@ public class HudManager : MonoBehaviour
 	public void SelectIcon(ACompanion companion)
 	{
 		m_iconGameObjects[companion.Index - 1].transform.DOScale(m_scaleFactor,m_scaleTime);
+		m_iconGameObjects[companion.Index - 1].GetComponentInChildren<RespawnIconScript>().AssignCompanion(companion);
+		
 	}
 	public void DeselectIcon(ACompanion companion)
 	{
 		m_iconGameObjects[companion.Index - 1].transform.DOScale(1, m_scaleTime);
 	}
+
 }
