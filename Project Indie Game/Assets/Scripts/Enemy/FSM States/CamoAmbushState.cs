@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CamoAmbushState : AbstractState<EnemyFSM>
 {
-
+    private Health m_health;
     private Camouflage m_enemy;
     private EnemyFSM m_enemyFSM;
 
@@ -22,6 +22,7 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
 
     void Start()
     {
+        m_health = GetComponent<Health>();
         m_enemyFSM = GetComponent<EnemyFSM>();
         m_enemy = GetComponent<Camouflage>();
         m_enemy.sphereCollider.OnEnemyTriggerStay += OnSphereTriggerStay;
@@ -31,7 +32,7 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
     {
         if (m_isUnderGround)
         {
-            Debug.Log("TIME " + Time.time+" / "+(m_startTimeOfAmbush + m_minTimeOfAmbush) );
+            //Debug.Log("TIME " + Time.time+" / "+(m_startTimeOfAmbush + m_minTimeOfAmbush) );
         }
     }
 
@@ -50,6 +51,7 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
         m_startTimeOfAmbush = Time.time;
         m_isUnderGround = true;
         m_isCollidedWithPlayer = false;
+        m_health.CanTakeDamage = false;
         Debug.Log("END Transform to ambush: "+Time.time);
     }
 
@@ -60,6 +62,7 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
         dir = new Vector3(dir.x, 0, dir.z);
         dir.Normalize();
 
+        m_health.CanTakeDamage = true;
         m_isUnderGround = false;
 
         yield return new WaitForSeconds(m_timeTransformOutOfAmbush);
@@ -86,7 +89,7 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
             if (m_startTimeOfAmbush + m_minTimeOfAmbush < Time.time)
             {
                 m_isCollidedWithPlayer = true;
-                Debug.Log("COLLIDED WITH " + collider.name + " /?/ " + Time.time);
+                Debug.Log("COLLIDED WITH " + collider.name + " /time/ " + Time.time);
                 StartCoroutine(TransformOutOfAmbush(collider.transform.position));
             }
         }
