@@ -38,8 +38,18 @@ public class CompanionManager : MonoBehaviour
 	
 	IEnumerator ReSpawnCooldown(ACompanion companion)
 	{
-		yield return new WaitForSeconds(companion.RespawnTime);
+		companion.RespawnCounter = 0;
+
+		while (companion.RespawnCounter <= companion.RespawnTime)
+		{
+			companion.RespawnCounter += Time.deltaTime;
+			Debug.Log("Counter " + companion.RespawnCounter);
+			yield return null;
+		}
+		
 		SpawnCompanion(companion);
+
+		yield return null;
 	}
 
 	public ACompanion GetSelectedCompanion()

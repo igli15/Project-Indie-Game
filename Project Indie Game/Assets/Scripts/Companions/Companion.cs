@@ -116,7 +116,11 @@ public class Companion : ACompanion
 	public override void Reset()
 	{
 		transform.SetParent(null,true);
+		
+		m_respawnCounter = m_respawnTime;
+		
 		m_isThrown = false;
+		
 		m_steering.NavMeshAgent.enabled = true;
 		m_rb.isKinematic = false;
 		m_steering.ResumeAgent();

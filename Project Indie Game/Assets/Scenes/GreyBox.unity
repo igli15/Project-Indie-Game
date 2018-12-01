@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_iconSprite: {fileID: 21300000, guid: e25ad9c9e86154e67803eec2fb3a5733, type: 3}
-  m_respawnTime: 0
+  m_respawnTime: 2
   m_chargeTime: 0
   m_throwRange: 22
   m_manager: {fileID: 1720710034}
