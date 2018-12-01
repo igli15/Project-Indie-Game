@@ -263,7 +263,6 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="CameraFollow.cs" t="Include" />
-          <e p="ChargeBar.cs" t="Include" />
           <e p="Companions" t="Include">
             <e p="ACompanion.cs" t="Include" />
             <e p="BlackHole.cs" t="Include" />
@@ -314,7 +313,11 @@
             <e p="ObjectPooler.cs" t="Include" />
             <e p="ProjectileBehaviour.cs" t="Include" />
           </e>
-          <e p="HudManager.cs" t="Include" />
+          <e p="HudScripts" t="Include">
+            <e p="ChargeBar.cs" t="Include" />
+            <e p="HudManager.cs" t="Include" />
+            <e p="RotateTowardsGoal.cs" t="Include" />
+          </e>
           <e p="Player" t="Include">
             <e p="CompanionController.cs" t="Include" />
             <e p="CompanionManager.cs" t="Include" />
