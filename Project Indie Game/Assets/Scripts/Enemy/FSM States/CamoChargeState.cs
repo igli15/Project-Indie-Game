@@ -15,6 +15,8 @@ public class CamoChargeState : AbstractState<EnemyFSM>
     [SerializeField]
     private float m_damage = 1;
     [SerializeField]
+    private float m_pushForce = 2;
+    [SerializeField]
     private float m_speed = 2;
     [SerializeField]
     private float m_distance = 3;
@@ -66,11 +68,21 @@ public class CamoChargeState : AbstractState<EnemyFSM>
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.collider.CompareTag("Obstacle"))
+        {
+            m_enemyFSM.fsm.ChangeState<CamoAmbushState>();
+        }
+        else if (collision.collider.CompareTag("Player"))
+        {
+            Debug.Log("DAMAGE");
+            Vector3 pushDirection = collision.collider.transform.position - transform.position;
+            pushDirection.Normalize();
 
-        if (!collision.collider.CompareTag("Player")) return;
-        Debug.Log("DAMAGE");
-        collision.collider.GetComponent<Health>().InflictDamage(m_damage);
+            collision.collider.GetComponent<Rigidbody>().AddForce(pushDirection*m_pushForce);
+            collision.collider.GetComponent<Health>().InflictDamage(m_damage);
 
+            m_enemyFSM.fsm.ChangeState<CamoAmbushState>();
+        }
     }
     private void OnDrawGizmos()
     {

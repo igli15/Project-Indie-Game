@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -673,8 +673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92382bce60381f147902ac118fa2706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveIndex: -1
-  zoneIndex: -1
   m_moveSpeed: 5
   m_reloadTime: 0.5
   m_pushPower: 5
@@ -1636,7 +1634,7 @@ Prefab:
     - target: {fileID: 224035542245758114, guid: f8b9d206f7eff194d9e0e680208fc307,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 54097956624171444, guid: f8b9d206f7eff194d9e0e680208fc307,
         type: 2}
@@ -1646,6 +1644,10 @@ Prefab:
     - target: {fileID: 54097956624171444, guid: f8b9d206f7eff194d9e0e680208fc307,
         type: 2}
       propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459528790649564, guid: f8b9d206f7eff194d9e0e680208fc307, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2238,6 +2240,7 @@ MonoBehaviour:
   m_throwSpeed: 20
   m_seekRange: 20
   m_bounceAmount: 4
+  m_damageDealt: 20
 --- !u!195 &982909052
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2475,8 +2478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92382bce60381f147902ac118fa2706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveIndex: -1
-  zoneIndex: -1
   m_moveSpeed: 5
   m_reloadTime: 0.5
   m_pushPower: 5
@@ -2806,8 +2807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92382bce60381f147902ac118fa2706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveIndex: -1
-  zoneIndex: -1
   m_moveSpeed: 5
   m_reloadTime: 0.5
   m_pushPower: 5
@@ -3439,6 +3438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_dashRange: 2
   m_hitOffset: 0.5
+  m_abilityCD: 0.5
 --- !u!114 &1774658615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3854,8 +3854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92382bce60381f147902ac118fa2706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveIndex: -1
-  zoneIndex: -1
   m_moveSpeed: 5
   m_reloadTime: 0.5
   m_pushPower: 5

@@ -22,6 +22,7 @@ public class EnemyFSM : MonoBehaviour, IAgent {
 
     public void ChangeToInitialState()
     {
+        Debug.Log("ChangeToInitialState");
         switch (enemyTpe)
         {
             case EnemyType.GOOMBA:
@@ -53,18 +54,7 @@ public class EnemyFSM : MonoBehaviour, IAgent {
     {
         Debug.Log("OnEnabled");
         m_fsm = new Fsm<EnemyFSM>(this);
-        switch (enemyTpe)
-        {
-            case EnemyType.GOOMBA:
-                m_fsm.ChangeState<GoombaSeekState>();
-                break;
-            case EnemyType.TURRET:
-                m_fsm.ChangeState<TurretSeekState>();
-                break;
-            case EnemyType.CAMOUFLAGE:
-                m_fsm.ChangeState<CamoAmbushState>();
-                break;
-        }
+        ChangeToInitialState();
     }
     
 }
