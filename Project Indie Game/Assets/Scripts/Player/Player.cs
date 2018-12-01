@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
 	{
 		if (!m_companionController.IsCharging)
 		{
+			if(m_vel != Vector3.zero)
 			m_playerController.Rotate(m_vel);
 		}
 		else
