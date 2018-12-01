@@ -315,6 +315,7 @@
           </e>
           <e p="HudScripts" t="Include">
             <e p="ChargeBar.cs" t="Include" />
+            <e p="Cursor.cs" t="Include" />
             <e p="HudManager.cs" t="Include" />
             <e p="RespawnIconScript.cs" t="Include" />
             <e p="RotateTowardsGoal.cs" t="Include" />
