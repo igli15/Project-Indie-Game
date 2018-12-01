@@ -170,7 +170,7 @@ public class CompanionController : MonoBehaviour
 	{
 		if (other.transform.CompareTag("PickupSphere"))
 		{
-			if (!other.transform.parent.GetComponent<Companion>().IsInParty && Input.GetKeyDown(KeyCode.P))
+			if (!other.transform.parent.GetComponent<Companion>().IsInParty && Input.GetKeyDown(KeyCode.E))
 			{
 				m_manager.PickCompanion(other.transform.parent.GetComponent<Companion>());
 			}
