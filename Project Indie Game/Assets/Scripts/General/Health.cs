@@ -19,6 +19,8 @@ public class Health : MonoBehaviour
 	
 	[SerializeField] 
 	private bool m_shouldBeDestroyed;
+
+    private bool m_canTakeDamage = true;
 	
 	void Start ()
 	{
@@ -27,8 +29,11 @@ public class Health : MonoBehaviour
 
 	public void InflictDamage(float damageAmount)
 	{
-		if(OnHealthDecreased != null) OnHealthDecreased(this);
-		m_health -= damageAmount;
+        if (m_canTakeDamage)
+        {
+            if (OnHealthDecreased != null) OnHealthDecreased(this);
+            m_health -= damageAmount;
+        }
 	}
 	
 	public void HealUp(float healAmount)
@@ -41,6 +46,8 @@ public class Health : MonoBehaviour
 	{
 		m_health = m_initialHealth;
 	}
+
+
 
     public float HP { get { return m_health; } }
 	
@@ -62,6 +69,8 @@ public class Health : MonoBehaviour
 			m_health = m_maxHealth;
 		}
 	}
+
+    public bool CanTakeDamage { get { return m_canTakeDamage; }set { m_canTakeDamage = value; } }
 
 	public float MaxHealth
 	{
