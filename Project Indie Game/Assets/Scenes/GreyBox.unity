@@ -1038,7 +1038,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 42
+  field of view: 20
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1063,11 +1063,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 155185492}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -43.12, y: 221.43, z: -21.050003}
+  m_LocalPosition: {x: -43.12, y: 160.03, z: -71.8}
   m_LocalScale: {x: 0.5, y: 0.50000024, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &155185497
 MonoBehaviour:
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_target: {fileID: 1720710040}
-  m_smoothSpeed: 2
+  m_smoothSpeed: 10
   m_lookAtTarget: 1
 --- !u!4 &160144120 stripped
 Transform:
@@ -3673,7 +3673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_noneSelectedIcon: {fileID: 21300000, guid: 96dd5ab95a72345d2828171cd36ffaba, type: 3}
   m_companionManager: {fileID: 1720710034}
-  m_scaleFactor: 1.2
+  m_scaleFactor: 1.08
   m_scaleTime: 0.2
   m_iconGameObjects:
   - {fileID: 1084495951}
@@ -4034,7 +4034,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &275728205
 Prefab:
@@ -10718,7 +10718,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1947963745
 GameObject:
