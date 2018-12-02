@@ -31,6 +31,8 @@ public class CompanionController : MonoBehaviour
 	private Vector3 m_mouseDir;
 
 	private Vector3 m_initPivotPos;
+
+	private Projector m_projector;
 	
 	public static Action<CompanionController, ACompanion> OnMouseCharging;
 	public static Action<CompanionController, ACompanion> OnMouseRelease;
@@ -39,6 +41,7 @@ public class CompanionController : MonoBehaviour
 	void Start ()
 	{
 		m_aimIndicatorPivot.gameObject.SetActive(false);
+		m_projector = m_aimIndicatorPivot.GetComponentInChildren<Projector>();
 		
 		m_mainCam = Camera.main;
 		m_manager = GetComponent<CompanionManager>();
@@ -127,7 +130,7 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_aimIndicatorPivot.gameObject.SetActive(true);
-			m_aimIndicatorPivot.position += transform.forward * companion.ThrowRange/4;
+			//m_aimIndicatorPivot.position += transform.forward * companion.ThrowRange/4;
 			m_chargeCount = companion.ChargeTime;
 			m_isCharging = true;
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
@@ -138,10 +141,25 @@ public class CompanionController : MonoBehaviour
 			m_timeCharging += Time.deltaTime;
 			
 			m_aimIndicatorPivot.transform.rotation = Quaternion.LookRotation(m_mouseDir,transform.up);
-			Projector p = m_aimIndicatorPivot.GetComponentInChildren<Projector>();
+
+
+			float width = 0;
+			if (m_mouseDir.magnitude >= companion.ThrowRange)
+			{
+				width = companion.ThrowRange;
+			}
+			else
+			{
+				Debug.Log("hello");
+				width = m_mouseDir.magnitude;
+			}
 			
-			float height = p.orthographicSize * 2;
-			p.aspectRatio = companion.ThrowRange / height;
+			Vector3 localForward = transform.worldToLocalMatrix.MultiplyVector(m_aimIndicatorPivot.forward);
+			
+			float height = m_projector.orthographicSize * 2;
+			m_projector.aspectRatio = width/ height;
+			
+			m_aimIndicatorPivot.localPosition = localForward * width/2  ;
 			
 
 			if (OnMouseCharging != null) OnMouseCharging(this, companion);
