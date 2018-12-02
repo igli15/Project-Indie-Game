@@ -127,7 +127,7 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_aimIndicatorPivot.gameObject.SetActive(true);
-			m_aimIndicatorPivot.position += transform.forward * companion.ThrowRange/3;
+			m_aimIndicatorPivot.position += transform.forward * companion.ThrowRange/4;
 			m_chargeCount = companion.ChargeTime;
 			m_isCharging = true;
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
