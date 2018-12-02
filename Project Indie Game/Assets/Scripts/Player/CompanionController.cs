@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CompanionManager))]
 public class CompanionController : MonoBehaviour
 {
 	[SerializeField] 
 	private Transform m_feetPos;
+
+    [SerializeField] 
+	private Transform m_aimIndicatorPivot;
 	
 	private CompanionManager m_manager;
 	private Camera m_mainCam;
@@ -32,6 +36,7 @@ public class CompanionController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		m_aimIndicatorPivot.gameObject.SetActive(false);
 		m_mainCam = Camera.main;
 		m_manager = GetComponent<CompanionManager>();
 
@@ -118,6 +123,7 @@ public class CompanionController : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
+			m_aimIndicatorPivot.gameObject.SetActive(true);
 			m_chargeCount = companion.ChargeTime;
 			m_isCharging = true;
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
@@ -126,6 +132,8 @@ public class CompanionController : MonoBehaviour
 		{
 			m_chargeCount -= Time.deltaTime;
 			m_timeCharging += Time.deltaTime;
+			
+			m_aimIndicatorPivot.transform.rotation = Quaternion.LookRotation(m_mouseDir,transform.up);
 
 			if (OnMouseCharging != null) OnMouseCharging(this, companion);
 			if(companion.OnCharging != null) companion.OnCharging(companion,m_timeCharging);	
@@ -141,6 +149,7 @@ public class CompanionController : MonoBehaviour
 		
 		if (Input.GetMouseButtonUp(0))
 		{
+			m_aimIndicatorPivot.gameObject.SetActive(false);
 			if (OnMouseRelease != null) OnMouseRelease(this, companion);
 			m_isCharging = false;
 			m_timeCharging = 0;
