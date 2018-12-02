@@ -29,6 +29,8 @@ public class CompanionController : MonoBehaviour
 	private bool m_isCharging = false;
 
 	private Vector3 m_mouseDir;
+
+	private Vector3 m_initPivotPos;
 	
 	public static Action<CompanionController, ACompanion> OnMouseCharging;
 	public static Action<CompanionController, ACompanion> OnMouseRelease;
@@ -37,6 +39,7 @@ public class CompanionController : MonoBehaviour
 	void Start ()
 	{
 		m_aimIndicatorPivot.gameObject.SetActive(false);
+		
 		m_mainCam = Camera.main;
 		m_manager = GetComponent<CompanionManager>();
 
@@ -124,6 +127,7 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			m_aimIndicatorPivot.gameObject.SetActive(true);
+			m_aimIndicatorPivot.position += transform.forward * companion.ThrowRange/3;
 			m_chargeCount = companion.ChargeTime;
 			m_isCharging = true;
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
@@ -134,6 +138,10 @@ public class CompanionController : MonoBehaviour
 			m_timeCharging += Time.deltaTime;
 			
 			m_aimIndicatorPivot.transform.rotation = Quaternion.LookRotation(m_mouseDir,transform.up);
+			Projector p = m_aimIndicatorPivot.GetComponentInChildren<Projector>();
+			float height = p.orthographicSize * 2;
+			p.aspectRatio = companion.ThrowRange / height;
+			
 
 			if (OnMouseCharging != null) OnMouseCharging(this, companion);
 			if(companion.OnCharging != null) companion.OnCharging(companion,m_timeCharging);	
@@ -150,6 +158,7 @@ public class CompanionController : MonoBehaviour
 		if (Input.GetMouseButtonUp(0))
 		{
 			m_aimIndicatorPivot.gameObject.SetActive(false);
+			m_aimIndicatorPivot.localPosition = Vector3.zero;
 			if (OnMouseRelease != null) OnMouseRelease(this, companion);
 			m_isCharging = false;
 			m_timeCharging = 0;
