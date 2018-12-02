@@ -139,6 +139,7 @@ public class CompanionController : MonoBehaviour
 			
 			m_aimIndicatorPivot.transform.rotation = Quaternion.LookRotation(m_mouseDir,transform.up);
 			Projector p = m_aimIndicatorPivot.GetComponentInChildren<Projector>();
+			
 			float height = p.orthographicSize * 2;
 			p.aspectRatio = companion.ThrowRange / height;
 			
