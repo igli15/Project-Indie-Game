@@ -44,18 +44,22 @@ public class AimProjector : MonoBehaviour
 		
 		if (companion is SeekerCompanion)
 		{
+			m_projector.orthographicSize = 3;
 			m_projector.material = m_seekerAimMat;
 		}
 		else if (companion is RushCompanion)
 		{
+			m_projector.orthographicSize = 3;
 			m_projector.material = m_rusherAimMat;
 		}
 		else if (companion is SniperCompanion)
 		{
+			m_projector.orthographicSize = 3;
 			m_projector.material = m_sniperAimMat;
 		}
 		else if (companion is BlackHoleCompanion)
 		{
+			m_projector.orthographicSize = 6;
 			m_projector.material = m_blackholeAimMat;
 		}
 	}
