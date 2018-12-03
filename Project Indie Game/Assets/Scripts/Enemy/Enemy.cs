@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private float m_reloadTime = 0.5f;
     [SerializeField]
     private float m_pushPower = 5;
+    [SerializeField]
     [Range(0, 100)]
     private float m_percantageOfDropingLoot = 10;
 
