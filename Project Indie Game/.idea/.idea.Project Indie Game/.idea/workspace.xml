@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a49c528-e2bc-4868-93d9-6fc86404f55c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Companions/CompanionAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Companions/CompanionAnimation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GreyBox.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GreyBox.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,13 +36,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="cs" value="67" />
+          <entry key="cs" value="68" />
           <entry key="shader" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="C#" value="67" />
+          <entry key="C#" value="68" />
           <entry key="ShaderLab" value="2" />
         </counts>
       </usages-collector>
@@ -50,35 +50,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/Companion.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <marker date="1543840867394" expanded="false" signature="6:87" ph="..." />
-                <marker date="1543840867394" expanded="true" signature="250:3155" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="577:999" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="635:868" ph="/* OnSelected += delegate(ACompanion companion)&#9;{companion.GetComponent&lt;Renderer&gt;().material.color = Color.red;}; ... */" />
-                <marker date="1543840867394" expanded="true" signature="1064:1378" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="1086:1128" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="1285:1374" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="1334:1370" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="1422:1464" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="1506:1963" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="2020:2070" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="2113:2270" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="2134:2267" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="2233:2263" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="2308:2401" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="2432:2687" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="2720:2999" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="2954:2996" ph="{...}" />
-                <marker date="1543840867394" expanded="true" signature="3001:3152" ph="/* private void OnTriggerEnter(Collider other) ... */" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/AchievementPopUp.cs">
           <provider selected="true" editor-type-id="text-editor">
@@ -264,7 +235,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/CompanionAnimation.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="551">
@@ -274,6 +245,25 @@
                 <marker date="1543871508214" expanded="true" signature="127:741" ph="{...}" />
                 <marker date="1543871508214" expanded="true" signature="284:598" ph="{...}" />
                 <marker date="1543871508214" expanded="true" signature="652:739" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/RushHitbox.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-293">
+              <folding>
+                <marker date="1543588173944" expanded="false" signature="6:78" ph="..." />
+                <marker date="1543588173944" expanded="true" signature="119:899" ph="{...}" />
+                <marker date="1543588173944" expanded="true" signature="280:356" ph="{...}" />
+                <marker date="1543588173944" expanded="true" signature="410:707" ph="{...}" />
+                <marker date="1543588173944" expanded="true" signature="565:704" ph="{...}" />
+                <marker date="1543588173944" expanded="true" signature="656:700" ph="{...}" />
+                <marker date="1543588173944" expanded="true" signature="753:897" ph="{...}" />
+                <marker date="1543588173944" expanded="true" signature="790:894" ph="{...}" />
+                <marker date="1543588173944" expanded="true" signature="828:890" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -509,7 +499,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174872000" />
+    <option name="totallyTimeSpent" value="175026000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -620,13 +610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="175" column="6" selection-start-line="175" selection-start-column="6" selection-end-line="175" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/RushHitbox.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1173,6 +1156,23 @@
             <marker date="1543871508214" expanded="true" signature="127:741" ph="{...}" />
             <marker date="1543871508214" expanded="true" signature="284:598" ph="{...}" />
             <marker date="1543871508214" expanded="true" signature="652:739" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/RushHitbox.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-293">
+          <folding>
+            <marker date="1543588173944" expanded="false" signature="6:78" ph="..." />
+            <marker date="1543588173944" expanded="true" signature="119:899" ph="{...}" />
+            <marker date="1543588173944" expanded="true" signature="280:356" ph="{...}" />
+            <marker date="1543588173944" expanded="true" signature="410:707" ph="{...}" />
+            <marker date="1543588173944" expanded="true" signature="565:704" ph="{...}" />
+            <marker date="1543588173944" expanded="true" signature="656:700" ph="{...}" />
+            <marker date="1543588173944" expanded="true" signature="753:897" ph="{...}" />
+            <marker date="1543588173944" expanded="true" signature="790:894" ph="{...}" />
+            <marker date="1543588173944" expanded="true" signature="828:890" ph="{...}" />
           </folding>
         </state>
       </provider>
