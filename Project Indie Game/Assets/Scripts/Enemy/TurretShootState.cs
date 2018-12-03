@@ -9,7 +9,8 @@ public class TurretShootState : AbstractState<EnemyFSM> {
 
     private bool m_attackIsAllowed = false;
 
-    private float m_reloadTime = 0.1f;
+    [SerializeField]
+    private float m_reloadTime = 0.7f;
 
     [SerializeField]
     private float m_transferTime = 0.5f;

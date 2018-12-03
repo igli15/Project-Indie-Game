@@ -1703,6 +1703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_moveSpeed: 5
   m_pushPower: 2
+  m_percantageOfDropingLoot: 10
   m_enemyDamageCollider: {fileID: 0}
   m_sphereCollider: {fileID: 114290756505003632}
 --- !u!114 &114282755678158842
@@ -1933,6 +1934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  m_reloadTime: 0.7
   m_transferTime: 0.5
 --- !u!135 &135300918908218188
 SphereCollider:
