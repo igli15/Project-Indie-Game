@@ -408,6 +408,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224847373242580400, guid: 6a969578206d82c418e177e189f0e167,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a969578206d82c418e177e189f0e167, type: 2}
   m_IsPrefabParent: 0
@@ -597,7 +602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &506153272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,6 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2b88f705ae6b740b5e144d1eea3433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_destroyEnemiesAfterPlayerLeaves: 0
   isZoneCleared: 0
   isPlayerInsideZone: 0
 --- !u!65 &506153273
@@ -995,6 +1001,10 @@ Prefab:
     - target: {fileID: 224620538829691820, guid: c2d1f445158606040b420da4955296c2,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359071363875950, guid: c2d1f445158606040b420da4955296c2, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1321,7 +1331,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 987780887}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02125001, y: 0.044999983, z: -0.24599998}
+  m_LocalPosition: {x: 0.02125001, y: -0.00999999, z: -0.24599998}
   m_LocalScale: {x: 0.025, y: 0.2, z: 0.04}
   m_Children: []
   m_Father: {fileID: 506153274}
@@ -1383,17 +1393,105 @@ MonoBehaviour:
   m_enemyZone: {fileID: 506153272}
   m_waves:
   - numberOfGoombas: 0
-    numberOfTurrets: 0
+    numberOfTurrets: 1
   - numberOfGoombas: 0
-    numberOfTurrets: 0
-  - numberOfGoombas: 5
-    numberOfTurrets: 3
-  - numberOfGoombas: 6
-    numberOfTurrets: 6
-  - numberOfGoombas: 20
-    numberOfTurrets: 20
-  - numberOfGoombas: 20
-    numberOfTurrets: 20
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
 --- !u!1 &1026078954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,7 +1802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1320421833
 Transform:
   m_ObjectHideFlags: 0
@@ -1779,7 +1877,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1356848790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02125001, y: 0.044999983, z: 0.34000006}
+  m_LocalPosition: {x: 0.02125001, y: -0.01, z: 0.34000006}
   m_LocalScale: {x: 0.025, y: 0.2, z: 0.04}
   m_Children: []
   m_Father: {fileID: 506153274}
@@ -1840,18 +1938,106 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemyZone: {fileID: 506153272}
   m_waves:
-  - numberOfGoombas: 3
-    numberOfTurrets: 3
   - numberOfGoombas: 0
-    numberOfTurrets: 0
+    numberOfTurrets: 1
   - numberOfGoombas: 0
-    numberOfTurrets: 0
-  - numberOfGoombas: 6
-    numberOfTurrets: 6
-  - numberOfGoombas: 20
-    numberOfTurrets: 20
-  - numberOfGoombas: 20
-    numberOfTurrets: 20
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
 --- !u!1 &1378054572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,6 +2285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2b88f705ae6b740b5e144d1eea3433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_destroyEnemiesAfterPlayerLeaves: 0
   isZoneCleared: 0
   isPlayerInsideZone: 0
 --- !u!65 &1487550563
@@ -2338,7 +2525,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1692288018}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.13775001, y: 0.044999983, z: 0.059400022}
+  m_LocalPosition: {x: -0.13775001, y: -0.00999999, z: 0.059400022}
   m_LocalScale: {x: 0.025, y: 0.2, z: 0.04}
   m_Children: []
   m_Father: {fileID: 506153274}
@@ -2400,17 +2587,105 @@ MonoBehaviour:
   m_enemyZone: {fileID: 506153272}
   m_waves:
   - numberOfGoombas: 0
-    numberOfTurrets: 0
-  - numberOfGoombas: 3
-    numberOfTurrets: 4
+    numberOfTurrets: 1
   - numberOfGoombas: 0
-    numberOfTurrets: 0
-  - numberOfGoombas: 6
-    numberOfTurrets: 6
-  - numberOfGoombas: 20
-    numberOfTurrets: 20
-  - numberOfGoombas: 20
-    numberOfTurrets: 20
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
+  - numberOfGoombas: 0
+    numberOfTurrets: 1
 --- !u!1001 &1763326257
 Prefab:
   m_ObjectHideFlags: 0
@@ -2798,7 +3073,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1911351399}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.33, y: 11.84, z: 75.62}
+  m_LocalPosition: {x: 47.9, y: 11.84, z: 52.21}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 558408253}

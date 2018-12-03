@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [Header("Stats")]
     [SerializeField]
     private float m_moveSpeed = 5;
-    [SerializeField]
+    //[SerializeField]
     private float m_reloadTime = 0.5f;
     [SerializeField]
     private float m_pushPower = 5;

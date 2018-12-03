@@ -1618,7 +1618,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &65120268164799246
 BoxCollider:
@@ -1700,10 +1700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92382bce60381f147902ac118fa2706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveIndex: 0
-  zoneIndex: -1
   m_moveSpeed: 5
-  m_reloadTime: 0.7
   m_pushPower: 2
   m_enemyDamageCollider: {fileID: 0}
   m_sphereCollider: {fileID: 114290756505003632}
@@ -1922,6 +1919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  m_reloadTime: 0.7
   m_startShooting: 0.5
 --- !u!135 &135300918908218188
 SphereCollider:

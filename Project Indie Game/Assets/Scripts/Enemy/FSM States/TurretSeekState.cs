@@ -28,7 +28,7 @@ public class TurretSeekState : EnemySeekState {
 
     public override void Enter(IAgent pAgent)
     {
-
+        Debug.Log("ENTER SEEK STATE");
         base.Enter(pAgent);
         m_enemyMovement.navMeshAgent.enabled = true;
         m_enemyMovement.pushIsEnabled = true;
