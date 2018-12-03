@@ -24,7 +24,11 @@ public class EnemyZone : MonoBehaviour {
 
         if (m_numberOfActiveEnemies <= 0&&isPlayerInsideZone)
         {
-            Debug.Log("ALL ENEMIES ARE DEAD, CALLING A NEW WAVE");
+            if (currentWaveIndex != -1)
+            {
+                AchievementPopUp.QueueAchievement("Wave" + (currentWaveIndex + 1));
+            }
+
             CallNextWave();
         }
 	}
@@ -39,12 +43,10 @@ public class EnemyZone : MonoBehaviour {
             if (temp == -1)
             {
                 isZoneCleared = true;
-                Debug.Log("Zone: " + name + " is cleared");
                 return;
             }
             m_numberOfActiveEnemies += temp;
         }
-        Debug.Log("New Wave: " + m_numberOfActiveEnemies);
     }
 
     public void AddSpawner(EnemySpawner spawner)
@@ -55,7 +57,8 @@ public class EnemyZone : MonoBehaviour {
     private void OnTriggerEnter(Collider collider)
     {
         if (!collider.CompareTag("Player")) return;
-        Debug.Log("Player entered ZONE: " + name);
+        
+        CallNextWave();
         isPlayerInsideZone = true;
 
     }
@@ -63,12 +66,17 @@ public class EnemyZone : MonoBehaviour {
     private void OnTriggerExit(Collider collider)
     {
         if (!collider.CompareTag("Player")) return;
-        Debug.Log("Player left ZONE: " + name);
         isPlayerInsideZone = false;
+       
         foreach (EnemySpawner spawner in m_spawners)
         {
             if(m_destroyEnemiesAfterPlayerLeaves)spawner.DestroyAllMyEnemies();
             spawner.currentWaveIndex--;
+        }
+        
+        for (int i = 0; i < 3; i++)
+        {
+            AchievementPopUp.ResetAchievement("Wave" + (i+1));
         }
     }
 
@@ -77,4 +85,11 @@ public class EnemyZone : MonoBehaviour {
         get { return m_numberOfActiveEnemies; }
         set { m_numberOfActiveEnemies = value; }
     }
+
+    public int currentWaveIndex{
+        get{
+            return m_spawners[0].currentWaveIndex;
+        }
+    }
+    
 }

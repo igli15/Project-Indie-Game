@@ -20,16 +20,13 @@ public class ChargeBar : MonoBehaviour
 
 	public void ChargeSlider(CompanionController controller,ACompanion companion)
 	{
-		if (companion is BlackHoleCompanion)
+		/*if (companion is BlackHoleCompanion)
 		{
 			BlackHoleCompanion blackHoleCompanion = (companion as BlackHoleCompanion); 
 			m_slider.value = (blackHoleCompanion.ThrowRange - blackHoleCompanion.MinDistance) /
 			                 (blackHoleCompanion.MaxDistance - blackHoleCompanion.MinDistance);
 
-		}
-		else
-		{
-
+		}*/
 			m_timeCharging = controller.TimeCharging;
 
 			if (m_timeCharging > companion.ChargeTime)
@@ -42,7 +39,7 @@ public class ChargeBar : MonoBehaviour
 			{
 				m_slider.value = m_timeCharging / companion.ChargeTime;
 			}
-		}
+		
 	}
 
 	public void RestoreSlider(CompanionController controller,ACompanion companion)
