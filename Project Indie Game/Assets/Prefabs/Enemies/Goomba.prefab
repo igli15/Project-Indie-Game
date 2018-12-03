@@ -873,9 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92382bce60381f147902ac118fa2706e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveIndex: 0
-  zoneIndex: -1
-  m_moveSpeed: 5
+  m_moveSpeed: 3.5
   m_reloadTime: 1
   m_pushPower: 2
   m_enemyDamageCollider: {fileID: 114942262956327980}

@@ -12,7 +12,7 @@ public class TurretShootState : AbstractState<EnemyFSM> {
     private float m_reloadTime = 0.1f;
 
     [SerializeField]
-    private float m_startShooting = 0.5f;
+    private float m_transferTime = 0.5f;
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class TurretShootState : AbstractState<EnemyFSM> {
         if (collider.CompareTag("Player"))
         {
             Debug.Log("EXIT OF PLAYER");
-            StartCoroutine(MoveToPortableMode(m_startShooting));
+            StartCoroutine(MoveToPortableMode(m_transferTime));
   
         }
     }
@@ -38,7 +38,7 @@ public class TurretShootState : AbstractState<EnemyFSM> {
     {
         base.Enter(pAgent);
         m_attackIsAllowed = false;
-        StartCoroutine( MoveToStaticMode(m_startShooting) );
+        StartCoroutine( MoveToStaticMode(m_transferTime) );
     }
 
     public override void Exit(IAgent pAgent)
