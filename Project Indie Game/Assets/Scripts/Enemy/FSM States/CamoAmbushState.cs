@@ -36,6 +36,16 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
         }
     }
 
+    void HideUnderground()
+    {
+        transform.position += transform.up * 0.6f;
+    }
+
+    void LeaveUnderground()
+    {
+        transform.position += -transform.up * 0.6f;
+    }
+
     public override void Enter(IAgent pAgent)
     {
         base.Enter(pAgent);
@@ -52,7 +62,10 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
         m_isUnderGround = true;
         m_isCollidedWithPlayer = false;
         m_health.CanTakeDamage = false;
-        Debug.Log("END Transform to ambush: "+Time.time);
+        Debug.Log("END Transform to ambush: " + Time.time);
+
+        HideFromCompanions(false);
+
     }
 
     IEnumerator TransformOutOfAmbush(Vector3 destinationPos)
@@ -64,6 +77,7 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
 
         m_health.CanTakeDamage = true;
         m_isUnderGround = false;
+        HideFromCompanions(true);
 
         yield return new WaitForSeconds(m_timeTransformOutOfAmbush);
         Debug.Log("END Transform OUT OF ambush");
@@ -73,6 +87,16 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
         yield return null;
     }
 
+    void HideFromCompanions(bool hide)
+    {
+        GetComponent<BoxCollider>().enabled = hide;
+        GetComponent<CapsuleCollider>().enabled = hide;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().useGravity = hide;
+
+        if (hide) HideUnderground();
+        else LeaveUnderground();
+    }
 
     public override void Exit(IAgent pAgent)
     {
@@ -98,7 +122,7 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
 
     private void OnDrawGizmos()
     {
-        if(m_isUnderGround) Gizmos.color = Color.green;
+        if (m_isUnderGround) Gizmos.color = Color.green;
         else Gizmos.color = Color.yellow;
         if (enabled)
             Gizmos.DrawWireSphere(transform.position + transform.up * 1.5f, 1f);
