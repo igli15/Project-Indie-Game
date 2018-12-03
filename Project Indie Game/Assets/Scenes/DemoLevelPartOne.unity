@@ -322,7 +322,7 @@ MonoBehaviour:
   m_enemyZone: {fileID: 1937393835}
   m_waves:
   - numberOfGoombas: 1
-    numberOfTurrets: 0
+    numberOfTurrets: 3
 --- !u!23 &113073373
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5013,9 +5013,6 @@ MonoBehaviour:
   m_blackHole: {fileID: 1986207357161808, guid: 8d3f45e8a415b49ea8a1dbfaffd9bcc8,
     type: 2}
   m_pullForce: 2
-  m_maxChargeTime: 2.5
-  m_minDistance: 5.5
-  m_maxDistance: 5.6
   m_destroyBlackholeTimer: 3
 --- !u!195 &944245192
 NavMeshAgent:
@@ -6678,6 +6675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2b88f705ae6b740b5e144d1eea3433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_destroyEnemiesAfterPlayerLeaves: 1
   isZoneCleared: 0
   isPlayerInsideZone: 0
 --- !u!65 &1937393836
