@@ -120,11 +120,6 @@ public class AchievementPopUp : MonoBehaviour
 				Show(achievementQueue.Dequeue());
 			}
 		}
-
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			AchievementPopUp.QueueAchievement("Wave1");
-		}
 	}
 
 	public static void QueueAchievement(string achievementName)

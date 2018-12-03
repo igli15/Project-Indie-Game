@@ -4452,6 +4452,18 @@ MonoBehaviour:
     mainImage: {fileID: 0}
     background: {fileID: 21300000, guid: d0e959dcec0e446fb9856ec6bbc0a940, type: 3}
     isCompleted: 0
+  - achievementName: Wave2
+    title: 
+    description: 
+    mainImage: {fileID: 0}
+    background: {fileID: 21300000, guid: 3cd50d3fe3d8349f79355947e12410f6, type: 3}
+    isCompleted: 0
+  - achievementName: Wave3
+    title: 
+    description: 
+    mainImage: {fileID: 0}
+    background: {fileID: 21300000, guid: b3001f42320e84247b4e0691d73de974, type: 3}
+    isCompleted: 0
 --- !u!4 &333889083 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 7cbb1fbf8d53051459dbe65c4761f10c, type: 3}
