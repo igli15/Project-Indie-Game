@@ -17,9 +17,10 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
 
     private bool m_isCollidedWithPlayer = false;
     private bool m_isUnderGround = false;
+    private bool m_isPlayerOnTopOfMe = false;
 
     private float m_startTimeOfAmbush;
-
+   
     void Start()
     {
         m_health = GetComponent<Health>();
@@ -68,18 +69,21 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
 
     }
 
-    IEnumerator TransformOutOfAmbush(Vector3 destinationPos)
+    IEnumerator TransformOutOfAmbush(Transform targetTransform)
     {
         Debug.Log("START Transform OUT OF ambush: " + Time.time);
-        Vector3 dir = destinationPos - transform.position;
-        dir = new Vector3(dir.x, 0, dir.z);
-        dir.Normalize();
+
 
         m_health.CanTakeDamage = true;
         m_isUnderGround = false;
         HideFromCompanions(true);
 
         yield return new WaitForSeconds(m_timeTransformOutOfAmbush);
+
+        Vector3 dir = targetTransform.position - transform.position;
+        dir = new Vector3(dir.x, 0, dir.z);
+        dir.Normalize();
+
         Debug.Log("END Transform OUT OF ambush");
         m_enemy.direction = dir;
 
@@ -114,11 +118,13 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
             {
                 m_isCollidedWithPlayer = true;
                 Debug.Log("COLLIDED WITH " + collider.name + " /time/ " + Time.time);
-                StartCoroutine(TransformOutOfAmbush(collider.transform.position));
+                StartCoroutine(TransformOutOfAmbush(collider.transform));
             }
         }
 
     }
+
+    
 
     private void OnDrawGizmos()
     {
