@@ -263,6 +263,7 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="AchievementPopUp.cs" t="Include" />
+          <e p="AimProjector.cs" t="Include" />
           <e p="CameraFollow.cs" t="Include" />
           <e p="Companions" t="Include">
             <e p="ACompanion.cs" t="Include" />
@@ -279,6 +280,7 @@
             <e p="DummyMoveScript.cs" t="Include" />
           </e>
           <e p="Enemy" t="Include">
+            <e p="Camouflage.cs" t="Include" />
             <e p="Enemy.cs" t="Include" />
             <e p="EnemyDamageCollider.cs" t="Include" />
             <e p="EnemyFSM.cs" t="Include" />
@@ -287,6 +289,8 @@
             <e p="EnemyMovement.cs" t="Include" />
             <e p="EnemyRangedAttack.cs" t="Include" />
             <e p="FSM States" t="Include">
+              <e p="CamoAmbushState.cs" t="Include" />
+              <e p="CamoChargeState.cs" t="Include" />
               <e p="EnemyDisabledState.cs" t="Include" />
               <e p="EnemyMeleeState.cs" t="Include" />
               <e p="EnemySeekState.cs" t="Include" />
@@ -335,6 +339,18 @@
         </e>
         <e p="Shaders" t="Include">
           <e p="SkirtShader.shader" t="Include" />
+          <e p="XRay Demo Assets" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Spinner.cs" t="Include" />
+              <e p="XRayReplacement.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="Grass.shader" t="Include" />
+              <e p="Normal-Diffuse-Stencil-Write.shader" t="Include" />
+              <e p="Normal-Diffuse-XRay-Replaceable.shader" t="Include" />
+              <e p="XRay-ColoredOutline.shader" t="Include" />
+            </e>
+          </e>
         </e>
         <e p="Standard Assets" t="Include">
           <e p="Effects" t="Include">

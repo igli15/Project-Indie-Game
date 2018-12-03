@@ -157,9 +157,9 @@ public class CompanionController : MonoBehaviour
 			Vector3 localForward = transform.worldToLocalMatrix.MultiplyVector(m_aimIndicatorPivot.forward);
 			
 			float height = m_projector.orthographicSize * 2;
-			m_projector.aspectRatio = companion.ThrowRange/ height;
+			m_projector.aspectRatio = companion.ThrowRange * 2/ height;
 			
-			m_aimIndicatorPivot.localPosition = localForward * companion.ThrowRange/2 ;
+			m_aimIndicatorPivot.localPosition = localForward * companion.ThrowRange/2;
 			
 
 			if (OnMouseCharging != null) OnMouseCharging(this, companion);

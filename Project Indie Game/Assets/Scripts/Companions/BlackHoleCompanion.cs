@@ -12,7 +12,7 @@ public class BlackHoleCompanion : Companion
 	[Range(0.1f,2)]
 	private float m_pullForce = 1;
 	
-	[SerializeField]
+	/*[SerializeField]
 	private float m_maxChargeTime = 3;
 
 	[SerializeField]
@@ -20,7 +20,8 @@ public class BlackHoleCompanion : Companion
 	
 	[SerializeField]
 	private float m_maxDistance = 12;
-	
+	*/
+
 
 	[SerializeField] 
 	private float m_destroyBlackholeTimer = 2;
@@ -35,7 +36,7 @@ public class BlackHoleCompanion : Companion
 	// Use this for initialization
 	void Start ()
 	{
-		OnCharging += Charging;
+		//OnCharging += Charging;
 	}
 	
 	// Update is called once per frame
@@ -83,13 +84,13 @@ public class BlackHoleCompanion : Companion
 	}
 
 
-	public void Charging(ACompanion companion,float chargeCount)
+	/*public void Charging(ACompanion companion,float chargeCount)
 	{
 		if (chargeCount > m_maxChargeTime) chargeCount = m_maxChargeTime;
 		m_throwRange = chargeCount / m_maxChargeTime * (m_maxDistance - m_minDistance) + m_minDistance;
-	}
+	}*/
 
-	public float MinDistance
+	/*public float MinDistance
 	{
 		get { return m_minDistance; }
 	}
@@ -102,6 +103,6 @@ public class BlackHoleCompanion : Companion
 	public float MaxChargeTime
 	{
 		get { return m_maxChargeTime; }
-	}
+	}*/
 	
 }
