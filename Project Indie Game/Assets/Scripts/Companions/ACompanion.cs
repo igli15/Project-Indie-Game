@@ -33,6 +33,8 @@ public abstract class ACompanion : MonoBehaviour
 
 	protected bool m_isInParty = false;
 	
+	protected float m_respawnCounter = 0;
+	
 	public Action<ACompanion> OnSpawn;
 	public Action<ACompanion> OnDisable;
 	public Action<ACompanion> OnActivate;
@@ -104,5 +106,11 @@ public abstract class ACompanion : MonoBehaviour
 	public float RespawnTime
 	{
 		get { return m_respawnTime; }
+	}
+
+	public float RespawnCounter
+	{
+		get { return m_respawnCounter; }
+		set { m_respawnCounter = value; }
 	}
 }

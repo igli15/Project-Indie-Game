@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CompanionManager))]
 public class CompanionController : MonoBehaviour
 {
 	[SerializeField] 
 	private Transform m_feetPos;
+
+    [SerializeField] 
+	private Transform m_aimIndicatorPivot;
 	
 	private CompanionManager m_manager;
 	private Camera m_mainCam;
@@ -25,6 +29,10 @@ public class CompanionController : MonoBehaviour
 	private bool m_isCharging = false;
 
 	private Vector3 m_mouseDir;
+
+	private Vector3 m_initPivotPos;
+
+	private Projector m_projector;
 	
 	public static Action<CompanionController, ACompanion> OnMouseCharging;
 	public static Action<CompanionController, ACompanion> OnMouseRelease;
@@ -32,6 +40,9 @@ public class CompanionController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		m_aimIndicatorPivot.gameObject.SetActive(false);
+		m_projector = m_aimIndicatorPivot.GetComponentInChildren<Projector>();
+		
 		m_mainCam = Camera.main;
 		m_manager = GetComponent<CompanionManager>();
 
@@ -118,6 +129,8 @@ public class CompanionController : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
+			m_aimIndicatorPivot.gameObject.SetActive(true);
+			//m_aimIndicatorPivot.position += transform.forward * companion.ThrowRange/4;
 			m_chargeCount = companion.ChargeTime;
 			m_isCharging = true;
 			if (companion.OnStartCharging != null) companion.OnStartCharging(companion);
@@ -126,6 +139,28 @@ public class CompanionController : MonoBehaviour
 		{
 			m_chargeCount -= Time.deltaTime;
 			m_timeCharging += Time.deltaTime;
+			
+			m_aimIndicatorPivot.transform.rotation = Quaternion.LookRotation(m_mouseDir,transform.up);
+
+
+			float width = 0;
+			if (m_mouseDir.magnitude >= companion.ThrowRange)
+			{
+				width = companion.ThrowRange;
+			}
+			else
+			{
+				Debug.Log("hello");
+				width = m_mouseDir.magnitude;
+			}
+			
+			Vector3 localForward = transform.worldToLocalMatrix.MultiplyVector(m_aimIndicatorPivot.forward);
+			
+			float height = m_projector.orthographicSize * 2;
+			m_projector.aspectRatio = width/ height;
+			
+			m_aimIndicatorPivot.localPosition = localForward * width/2  ;
+			
 
 			if (OnMouseCharging != null) OnMouseCharging(this, companion);
 			if(companion.OnCharging != null) companion.OnCharging(companion,m_timeCharging);	
@@ -141,6 +176,8 @@ public class CompanionController : MonoBehaviour
 		
 		if (Input.GetMouseButtonUp(0))
 		{
+			m_aimIndicatorPivot.gameObject.SetActive(false);
+			m_aimIndicatorPivot.localPosition = Vector3.zero;
 			if (OnMouseRelease != null) OnMouseRelease(this, companion);
 			m_isCharging = false;
 			m_timeCharging = 0;
@@ -170,7 +207,7 @@ public class CompanionController : MonoBehaviour
 	{
 		if (other.transform.CompareTag("PickupSphere"))
 		{
-			if (!other.transform.parent.GetComponent<Companion>().IsInParty && Input.GetKeyDown(KeyCode.P))
+			if (!other.transform.parent.GetComponent<Companion>().IsInParty && Input.GetKeyDown(KeyCode.E))
 			{
 				m_manager.PickCompanion(other.transform.parent.GetComponent<Companion>());
 			}
