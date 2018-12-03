@@ -17,12 +17,15 @@ public class CompanionAnimation : MonoBehaviour
 		m_steering = GetComponent<CompanionSteering>();
 		m_animator = GetComponentInChildren<Animator>();
 		m_companion = GetComponent<ACompanion>();
+		
+		m_companion.OnThrow += companion =>  m_animator.SetBool("isThrown",true);
+		m_companion.OnRangeReached += companion =>  m_animator.SetBool("isThrown",false);
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		m_animator.SetFloat("velocity",m_steering.NavMeshAgent.velocity.magnitude);
-		m_animator.SetBool("isThrown",m_companion.IsThrown);
+		
 	}
 }

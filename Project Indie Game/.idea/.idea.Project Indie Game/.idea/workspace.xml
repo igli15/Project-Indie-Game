@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a49c528-e2bc-4868-93d9-6fc86404f55c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Indie Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Indie Game/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project Indie Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project Indie Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GreyBox.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GreyBox.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GreyBox/NavMesh.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GreyBox/NavMesh.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Companions/CompanionAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Companions/CompanionAnimation.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,13 +24,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cs" value="35578" />
+          <entry key="cs" value="35618" />
           <entry key="shader" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="C#" value="35578" />
+          <entry key="C#" value="35618" />
           <entry key="ShaderLab" value="13" />
         </counts>
       </usages-collector>
@@ -270,13 +267,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/CompanionAnimation.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="24" column="83" selection-start-line="24" selection-start-column="83" selection-end-line="24" selection-end-column="83" />
+            <state relative-caret-position="551">
+              <caret line="21" column="87" selection-start-line="21" selection-start-column="87" selection-end-line="21" selection-end-column="87" />
               <folding>
-                <marker date="1543868987255" expanded="false" signature="6:78" ph="..." />
-                <marker date="1543868987255" expanded="true" signature="127:630" ph="{...}" />
-                <marker date="1543868987255" expanded="true" signature="284:435" ph="{...}" />
-                <marker date="1543868987255" expanded="true" signature="489:628" ph="{...}" />
+                <marker date="1543871508214" expanded="false" signature="6:78" ph="..." />
+                <marker date="1543871508214" expanded="true" signature="127:741" ph="{...}" />
+                <marker date="1543871508214" expanded="true" signature="284:598" ph="{...}" />
+                <marker date="1543871508214" expanded="true" signature="652:739" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -512,7 +509,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="174515000" />
+    <option name="totallyTimeSpent" value="174872000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1169,13 +1166,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Companions/CompanionAnimation.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="24" column="83" selection-start-line="24" selection-start-column="83" selection-end-line="24" selection-end-column="83" />
+        <state relative-caret-position="551">
+          <caret line="21" column="87" selection-start-line="21" selection-start-column="87" selection-end-line="21" selection-end-column="87" />
           <folding>
-            <marker date="1543868987255" expanded="false" signature="6:78" ph="..." />
-            <marker date="1543868987255" expanded="true" signature="127:630" ph="{...}" />
-            <marker date="1543868987255" expanded="true" signature="284:435" ph="{...}" />
-            <marker date="1543868987255" expanded="true" signature="489:628" ph="{...}" />
+            <marker date="1543871508214" expanded="false" signature="6:78" ph="..." />
+            <marker date="1543871508214" expanded="true" signature="127:741" ph="{...}" />
+            <marker date="1543871508214" expanded="true" signature="284:598" ph="{...}" />
+            <marker date="1543871508214" expanded="true" signature="652:739" ph="{...}" />
           </folding>
         </state>
       </provider>
