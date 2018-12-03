@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour {
 
     [SerializeField]
+    private float m_spawnRadius = 1f;
+
+    [SerializeField]
     private EnemyZone m_enemyZone;
     [SerializeField]
     private List<Wave> m_waves;
@@ -63,15 +66,18 @@ public class EnemySpawner : MonoBehaviour {
     {
         Vector3 spawnPosition;
         Vector3 distnaceToSpawnPosition;
-        Vector2 randomCircle = Random.insideUnitCircle.normalized * 2;
+        Vector2 randomCircle = Random.insideUnitCircle.normalized * m_spawnRadius;
         distnaceToSpawnPosition = new Vector3(randomCircle.x, 0, randomCircle.y);
         spawnPosition = distnaceToSpawnPosition + transform.position;
 
         spawnPosition.y = transform.position.y;
 
         GameObject newEnemy=ObjectPooler.instance.SpawnFromPool(tag, spawnPosition, transform.rotation);
+       
         newEnemy.GetComponent<Enemy>().onEnemyDestroyed += OnMyEnemyDestroyed;
         m_enemies.Add(newEnemy.GetComponent<Enemy>());
+
+        newEnemy.GetComponent<EnemyMovement>().WarpToCurrentPosition();
 
         newEnemy.GetComponent<EnemyFSM>().ChangeToInitialState();
     }

@@ -82,6 +82,11 @@ public class EnemyMovement : MonoBehaviour
         m_navMeshAgent.speed = moveSpeed;
         m_initialSpeed = moveSpeed;
     }
+
+    public void WarpToCurrentPosition()
+    {
+         m_navMeshAgent.Warp(transform.position);
+    }
     public void SetDestination(Vector3 destination)
     {
         //Debug.Log("OnNavMrdh: "+m_navMeshAgent.isOnNavMesh);
