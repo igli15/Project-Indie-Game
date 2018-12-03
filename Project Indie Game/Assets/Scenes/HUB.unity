@@ -3654,6 +3654,7 @@ GameObject:
   - component: {fileID: 568114591}
   - component: {fileID: 568114590}
   - component: {fileID: 568114589}
+  - component: {fileID: 568114593}
   m_Layer: 0
   m_Name: TavernTriggerZone
   m_TagString: Untagged
@@ -3671,8 +3672,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2, z: 0.999999}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!23 &568114590
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3728,6 +3729,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 74.091, z: 0}
+--- !u!114 &568114593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 568114588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12de4c2bece097748ba3cf8aaad5fe30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_compedexHUD: {fileID: 2144071899}
 --- !u!1 &572697856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4388,9 +4401,6 @@ MonoBehaviour:
   m_blackHole: {fileID: 1986207357161808, guid: 8d3f45e8a415b49ea8a1dbfaffd9bcc8,
     type: 2}
   m_pullForce: 2
-  m_maxChargeTime: 2.5
-  m_minDistance: 7.98
-  m_maxDistance: 8.02
   m_destroyBlackholeTimer: 4
 --- !u!195 &944245192
 NavMeshAgent:
@@ -6200,7 +6210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2144071900
 MonoBehaviour:
   m_ObjectHideFlags: 0
