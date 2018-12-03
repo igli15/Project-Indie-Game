@@ -1657,9 +1657,6 @@ MonoBehaviour:
   m_blackHole: {fileID: 1986207357161808, guid: 8d3f45e8a415b49ea8a1dbfaffd9bcc8,
     type: 2}
   m_pullForce: 2
-  m_maxChargeTime: 3
-  m_minDistance: 5
-  m_maxDistance: 12
   m_destroyBlackholeTimer: 5
 --- !u!195 &705245480
 NavMeshAgent:
@@ -2039,29 +2036,6 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54097956624171444, guid: f8b9d206f7eff194d9e0e680208fc307,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54097956624171444, guid: f8b9d206f7eff194d9e0e680208fc307,
-        type: 2}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459528790649564, guid: f8b9d206f7eff194d9e0e680208fc307, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459528790649564, guid: f8b9d206f7eff194d9e0e680208fc307, type: 2}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 54097956624171444, guid: f8b9d206f7eff194d9e0e680208fc307,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8b9d206f7eff194d9e0e680208fc307, type: 2}

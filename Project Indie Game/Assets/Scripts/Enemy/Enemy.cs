@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     private float m_reloadTime = 0.5f;
     [SerializeField]
     private float m_pushPower = 5;
+    [Range(0, 100)]
+    private float m_percantageOfDropingLoot = 10;
 
     [Header("Other")]
     [SerializeField]
@@ -73,7 +75,7 @@ public class Enemy : MonoBehaviour
                 tag = "Turret";
                 break;
         }
-        GetComponent<EnemyLoot>().DropItem(50);
+        GetComponent<EnemyLoot>().DropItem(m_percantageOfDropingLoot);
         ObjectPooler.instance.DestroyFromPool(tag,gameObject);
     }
 
