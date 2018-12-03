@@ -73,6 +73,7 @@ public class Enemy : MonoBehaviour
                 tag = "Turret";
                 break;
         }
+        GetComponent<EnemyLoot>().DropItem(50);
         ObjectPooler.instance.DestroyFromPool(tag,gameObject);
     }
 
