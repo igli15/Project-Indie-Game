@@ -6,7 +6,11 @@ public class EnemyZone : MonoBehaviour {
 
     private List<EnemySpawner> m_spawners;
 
+
     private int m_numberOfActiveEnemies = 0;
+    [Header("Safe to edit next varaibles")]
+    public bool m_destroyEnemiesAfterPlayerLeaves = true;
+    [Header("Dont edit next varaibles")]
     public bool isZoneCleared = false;
     public bool isPlayerInsideZone = false;
 	void Awake () {
@@ -63,7 +67,7 @@ public class EnemyZone : MonoBehaviour {
         isPlayerInsideZone = false;
         foreach (EnemySpawner spawner in m_spawners)
         {
-            spawner.DestroyAllMyEnemies();
+            if(m_destroyEnemiesAfterPlayerLeaves)spawner.DestroyAllMyEnemies();
             spawner.currentWaveIndex--;
         }
     }

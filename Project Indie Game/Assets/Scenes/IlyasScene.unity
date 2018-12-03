@@ -614,6 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2b88f705ae6b740b5e144d1eea3433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_destroyEnemiesAfterPlayerLeaves: 0
   isZoneCleared: 0
   isPlayerInsideZone: 0
 --- !u!65 &506153273
@@ -2284,6 +2285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2b88f705ae6b740b5e144d1eea3433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_destroyEnemiesAfterPlayerLeaves: 0
   isZoneCleared: 0
   isPlayerInsideZone: 0
 --- !u!65 &1487550563
