@@ -262,6 +262,7 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="AchievementPopUp.cs" t="Include" />
           <e p="CameraFollow.cs" t="Include" />
           <e p="Companions" t="Include">
             <e p="ACompanion.cs" t="Include" />
