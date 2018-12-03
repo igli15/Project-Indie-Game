@@ -142,8 +142,7 @@ public class CompanionController : MonoBehaviour
 			
 			m_aimIndicatorPivot.transform.rotation = Quaternion.LookRotation(m_mouseDir,transform.up);
 
-
-			float width = 0;
+			/*float width = 0;
 			if (m_mouseDir.magnitude >= companion.ThrowRange)
 			{
 				width = companion.ThrowRange;
@@ -153,13 +152,14 @@ public class CompanionController : MonoBehaviour
 				Debug.Log("hello");
 				width = m_mouseDir.magnitude;
 			}
-			
+			*/
+
 			Vector3 localForward = transform.worldToLocalMatrix.MultiplyVector(m_aimIndicatorPivot.forward);
 			
 			float height = m_projector.orthographicSize * 2;
-			m_projector.aspectRatio = width/ height;
+			m_projector.aspectRatio = companion.ThrowRange/ height;
 			
-			m_aimIndicatorPivot.localPosition = localForward * width/2  ;
+			m_aimIndicatorPivot.localPosition = localForward * companion.ThrowRange/2 ;
 			
 
 			if (OnMouseCharging != null) OnMouseCharging(this, companion);
