@@ -131,6 +131,11 @@ public class AchievementPopUp : MonoBehaviour
 		}
 	}
 
+	public static void ResetAchievement(string achievementName)
+	{
+		achievementDictionary[achievementName].isCompleted = false;
+	}
+
 	public static AchievementData GetAchievement(string achievementName)
 	{
 		if (achievementDictionary.ContainsKey(achievementName))
