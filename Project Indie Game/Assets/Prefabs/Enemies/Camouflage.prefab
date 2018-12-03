@@ -152,7 +152,6 @@ GameObject:
   - component: {fileID: 114827836726348972}
   - component: {fileID: 114013383621315424}
   - component: {fileID: 114001036403546292}
-  - component: {fileID: 143707188696834904}
   m_Layer: 12
   m_Name: Camouflage
   m_TagString: Enemy
@@ -1742,23 +1741,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.052204847, y: -0.4034822, z: 0.10758805}
     m_Extent: {x: 2.7069266, y: 1.9242909, z: 2.7303388}
   m_DirtyAABB: 0
---- !u!143 &143707188696834904
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1359071363875950}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222176875919166852
 CanvasRenderer:
   m_ObjectHideFlags: 1
