@@ -6,21 +6,19 @@ public class TurretShootState : AbstractState<EnemyFSM> {
     private Enemy m_enemy;
     private EnemyFSM m_enemyFSM;
     private EnemyRangedAttack m_rangedAttack;
-    private Rigidbody m_rigidbody;
+
     private bool m_attackIsAllowed = false;
 
-    [SerializeField]
     private float m_reloadTime = 0.1f;
 
     [SerializeField]
-    private float m_startShooting = 0.5f;
+    private float m_transferTime = 0.5f;
 
     private void Start()
     {
         m_enemy = GetComponent<Enemy>();
         m_enemyFSM = GetComponent<EnemyFSM>();
         m_rangedAttack = GetComponent<EnemyRangedAttack>();
-        m_rigidbody = GetComponent<Rigidbody>();
 
         m_reloadTime = m_rangedAttack.reloadTime;
         m_enemy.sphereCollider.OnEnemyTriggerExit += OnPlayerExitSpehere;
@@ -31,7 +29,7 @@ public class TurretShootState : AbstractState<EnemyFSM> {
         if (collider.CompareTag("Player"))
         {
             Debug.Log("EXIT OF PLAYER");
-            StartCoroutine(MoveToPortableMode(m_startShooting));
+            StartCoroutine(MoveToPortableMode(m_transferTime));
   
         }
     }
@@ -40,8 +38,7 @@ public class TurretShootState : AbstractState<EnemyFSM> {
     {
         base.Enter(pAgent);
         m_attackIsAllowed = false;
-        StopAllCoroutines();
-        StartCoroutine( MoveToStaticMode(m_startShooting) );
+        StartCoroutine( MoveToStaticMode(m_transferTime) );
     }
 
     public override void Exit(IAgent pAgent)
@@ -58,10 +55,9 @@ public class TurretShootState : AbstractState<EnemyFSM> {
 
     IEnumerator Shoot()
     {
-        Debug.Log("REALOAD TIME: " + m_reloadTime);
         while (m_attackIsAllowed)
         {
-            yield return new WaitForSecondsRealtime(m_reloadTime);
+            yield return new WaitForSeconds(m_reloadTime);
             m_rangedAttack.ShootTo(m_enemy.target.transform.position,"TurretProjectile");
         }
         yield return null;
