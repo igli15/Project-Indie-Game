@@ -58,6 +58,7 @@ public class CamoAmbushState : AbstractState<EnemyFSM>
     IEnumerator TransformToAmbush()
     {
         Debug.Log("START Transform to ambush");
+        m_isCollidedWithPlayer = true;
         yield return new WaitForSeconds(m_timeTransformToAmbsuh);
         m_startTimeOfAmbush = Time.time;
         m_isUnderGround = true;
