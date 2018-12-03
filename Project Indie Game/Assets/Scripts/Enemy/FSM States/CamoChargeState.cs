@@ -21,6 +21,8 @@ public class CamoChargeState : AbstractState<EnemyFSM>
     [SerializeField]
     private float m_distance = 3;
 
+    private bool m_isCollidedWithplayer = false;
+
     void Awake()
     {
         Debug.Log("CHARGE");
@@ -56,6 +58,7 @@ public class CamoChargeState : AbstractState<EnemyFSM>
         m_departurePos = transform.position;
 
         m_rigidbody.velocity = m_direction * m_speed;
+        m_isCollidedWithplayer = false;
     }
 
     public override void Exit(IAgent pAgent)
@@ -65,24 +68,29 @@ public class CamoChargeState : AbstractState<EnemyFSM>
     }
 
 
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.collider.CompareTag("Obstacle"))
         {
             m_enemyFSM.fsm.ChangeState<CamoAmbushState>();
         }
-        else if (collision.collider.CompareTag("Player"))
+
+        if (collision.collider.CompareTag("Player")&&!m_isCollidedWithplayer)
         {
             Debug.Log("DAMAGE");
+            m_isCollidedWithplayer = true;
             Vector3 pushDirection = collision.collider.transform.position - transform.position;
             pushDirection.Normalize();
 
-            collision.collider.GetComponent<Rigidbody>().AddForce(pushDirection*m_pushForce);
+            collision.collider.GetComponent<Rigidbody>().AddForce(pushDirection * m_pushForce);
             collision.collider.GetComponent<Health>().InflictDamage(m_damage);
 
             m_enemyFSM.fsm.ChangeState<CamoAmbushState>();
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+
     }
     private void OnDrawGizmos()
     {
