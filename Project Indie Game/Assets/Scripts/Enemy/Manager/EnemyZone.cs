@@ -73,4 +73,11 @@ public class EnemyZone : MonoBehaviour {
         get { return m_numberOfActiveEnemies; }
         set { m_numberOfActiveEnemies = value; }
     }
+
+    public int currentWaveIndex{
+        get{
+            return m_spawners[0].currentWaveIndex;
+        }
+    }
+    
 }
