@@ -537,7 +537,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1359071363875950, guid: c2d1f445158606040b420da4955296c2, type: 2}
       propertyPath: m_Layer
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2d1f445158606040b420da4955296c2, type: 2}
@@ -701,7 +701,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1359071363875950, guid: c2d1f445158606040b420da4955296c2, type: 2}
       propertyPath: m_Layer
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2d1f445158606040b420da4955296c2, type: 2}
@@ -2400,28 +2400,6 @@ MonoBehaviour:
   - {fileID: 2086712637}
   - {fileID: 1746861180}
   - {fileID: 828250389}
---- !u!1 &976765831 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1359071363875950, guid: c2d1f445158606040b420da4955296c2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1877863457}
---- !u!143 &976765841
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 976765831}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &982909049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3352,7 +3330,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1359071363875950, guid: c2d1f445158606040b420da4955296c2, type: 2}
       propertyPath: m_Layer
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2d1f445158606040b420da4955296c2, type: 2}
@@ -3803,6 +3781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_feetPos: {fileID: 368805044}
+  m_aimIndicatorPivot: {fileID: 0}
 --- !u!114 &1774658614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3973,50 +3952,6 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 54704177537148438, guid: c2d1f445158606040b420da4955296c2,
-        type: 2}
-      propertyPath: m_Mass
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001036403546292, guid: c2d1f445158606040b420da4955296c2,
-        type: 2}
-      propertyPath: m_speed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001036403546292, guid: c2d1f445158606040b420da4955296c2,
-        type: 2}
-      propertyPath: m_distance
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114001036403546292, guid: c2d1f445158606040b420da4955296c2,
-        type: 2}
-      propertyPath: m_pushForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114013383621315424, guid: c2d1f445158606040b420da4955296c2,
-        type: 2}
-      propertyPath: m_timeTransformToAmbsuh
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114013383621315424, guid: c2d1f445158606040b420da4955296c2,
-        type: 2}
-      propertyPath: m_timeTransformOutOfAmbush
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 135966335620989268, guid: c2d1f445158606040b420da4955296c2,
-        type: 2}
-      propertyPath: m_Radius
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114013383621315424, guid: c2d1f445158606040b420da4955296c2,
-        type: 2}
-      propertyPath: m_minTimeOfAmbush
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1359071363875950, guid: c2d1f445158606040b420da4955296c2, type: 2}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2d1f445158606040b420da4955296c2, type: 2}
   m_IsPrefabParent: 0
@@ -4132,7 +4067,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1359071363875950, guid: c2d1f445158606040b420da4955296c2, type: 2}
       propertyPath: m_Layer
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2d1f445158606040b420da4955296c2, type: 2}
@@ -4249,7 +4184,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1359071363875950, guid: c2d1f445158606040b420da4955296c2, type: 2}
       propertyPath: m_Layer
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2d1f445158606040b420da4955296c2, type: 2}
