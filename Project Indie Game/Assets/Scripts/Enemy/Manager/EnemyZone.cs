@@ -59,7 +59,7 @@ public class EnemyZone : MonoBehaviour {
     {
         if (!collider.CompareTag("Player")) return;
         
-        CallNextWave();
+        if(!isZoneCleared) CallNextWave();
         isPlayerInsideZone = true;
 
     }
