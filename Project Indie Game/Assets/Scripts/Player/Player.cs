@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
 
 	private float m_initSpeed;
 
+	private bool m_inputIsGiven;
+
+	private Vector3 m_movementInput;
 	
 	// Use this for initialization
 	void Start ()
@@ -50,11 +53,21 @@ public class Player : MonoBehaviour
 		
 		if (m_inputDelayCounter <= 0)
 		{
-			Vector3 movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-			m_vel = movementInput.normalized * m_moveSpeed;
+			m_movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+			m_vel = m_movementInput.normalized * m_moveSpeed;
 			m_playerController.SetVelocity(m_vel);
 			m_inputDelayCounter = m_inputDelay;
 		}
+
+		if ( m_movementInput.magnitude <= 0.1f)
+		{
+			m_inputIsGiven = false;
+		}
+		else
+		{
+			m_inputIsGiven = true;
+		}
+		
 		
 	}
 
@@ -80,6 +93,12 @@ public class Player : MonoBehaviour
 	{
 		get { return m_moveSpeed; }
 		set { m_moveSpeed = value; }
+	}
+
+	public bool InputIsGiven
+	{
+		get { return m_inputIsGiven; }
+		set { m_inputIsGiven = value; }
 	}
 
 }

@@ -56,7 +56,7 @@ public class Health : MonoBehaviour
 		if (m_health <= 0)
 		{
 			if(OnDeath != null)	OnDeath(this);
-			
+			m_canTakeDamage = false;
 			if (m_shouldBeDestroyed)
 			{
 				Destroy(gameObject);
