@@ -35,6 +35,7 @@ public class CompanionController : MonoBehaviour
 	private Projector m_projector;
 	
 	public static Action<CompanionController, ACompanion> OnMouseCharging;
+	public static Action<CompanionController, ACompanion> OnCompanionThrown;
 	public static Action<CompanionController, ACompanion> OnMouseRelease;
 
 	// Use this for initialization
@@ -112,7 +113,7 @@ public class CompanionController : MonoBehaviour
 		if (plane.Raycast(camRay, out rayDistance))
 		{
 			Vector3 point = camRay.GetPoint(rayDistance);
-			dir = point - companion.transform.position;
+			dir = point - transform.position;
 		}
 
 		if (dir != Vector3.negativeInfinity)
@@ -183,6 +184,7 @@ public class CompanionController : MonoBehaviour
 			m_timeCharging = 0;
 			if (companion.IsCharged)
 			{
+				if (OnCompanionThrown != null) OnCompanionThrown(this, companion);
 				TeleportCompanion(companion);
 				ThrowAtMousePos(companion);
 			}

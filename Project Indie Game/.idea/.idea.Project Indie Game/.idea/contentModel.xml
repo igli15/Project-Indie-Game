@@ -270,6 +270,7 @@
             <e p="BlackHole.cs" t="Include" />
             <e p="BlackHoleCompanion.cs" t="Include" />
             <e p="Companion.cs" t="Include" />
+            <e p="CompanionAnimation.cs" t="Include" />
             <e p="CompanionSteering.cs" t="Include" />
             <e p="RushCompanion.cs" t="Include" />
             <e p="RushHitbox.cs" t="Include" />
@@ -331,6 +332,7 @@
             <e p="DashBehaviour.cs" t="Include" />
             <e p="Healthbar.cs" t="Include" />
             <e p="Player.cs" t="Include" />
+            <e p="PlayerAnimations.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
           </e>
         </e>

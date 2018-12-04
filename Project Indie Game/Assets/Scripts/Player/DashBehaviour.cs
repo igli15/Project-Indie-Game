@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class DashBehaviour : MonoBehaviour
 	private float m_initAbilityCD;
 
 	private float m_initDashRange;
+
+	public Action<DashBehaviour> OnDash;
 
 	
 	// Use this for initialization
@@ -38,6 +41,9 @@ public class DashBehaviour : MonoBehaviour
 	public void Dash()
 	{
 		RaycastHit hit;
+		
+		if (OnDash != null) OnDash(this);
+		
 		if (Physics.Raycast(transform.position, transform.forward * m_dashRange, out hit))
 		{
 			if(hit.transform != transform && hit.distance <= m_dashRange)
