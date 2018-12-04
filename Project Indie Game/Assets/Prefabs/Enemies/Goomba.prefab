@@ -889,6 +889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_moveSpeed: 5
   m_pushPower: 2
+  m_percantageOfDropingLoot: 15
   m_enemyDamageCollider: {fileID: 114942262956327980}
   m_sphereCollider: {fileID: 114487993383754268}
 --- !u!114 &114362976301065484
@@ -929,7 +930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced798689c0052648b2dda0c012d355f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 25
+  m_damage: 20
 --- !u!114 &114662749665000274
 MonoBehaviour:
   m_ObjectHideFlags: 1
