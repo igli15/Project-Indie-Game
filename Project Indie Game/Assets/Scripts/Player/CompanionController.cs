@@ -112,7 +112,7 @@ public class CompanionController : MonoBehaviour
 		if (plane.Raycast(camRay, out rayDistance))
 		{
 			Vector3 point = camRay.GetPoint(rayDistance);
-			dir = point - companion.transform.position;
+			dir = point - transform.position;
 		}
 
 		if (dir != Vector3.negativeInfinity)
