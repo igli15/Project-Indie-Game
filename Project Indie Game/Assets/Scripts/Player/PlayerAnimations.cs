@@ -9,6 +9,8 @@ public class PlayerAnimations : MonoBehaviour
 	private Animator m_animator;
 
 	private Health m_health;
+
+	private DashBehaviour m_dashBehaviour;
 	
 	// Use this for initialization
 	void Start ()
@@ -16,9 +18,13 @@ public class PlayerAnimations : MonoBehaviour
 		m_animator = GetComponentInChildren<Animator>();
 		m_player = GetComponent<Player>();
 		m_health = GetComponent<Health>();
-
-		m_health.OnHealthDecreased += health => Debug.Log("hit");
+		m_dashBehaviour = GetComponent<DashBehaviour>();
+		
 		m_health.OnHealthDecreased += health => m_animator.SetTrigger("isDamaged");
+		m_health.OnDeath += health => m_animator.SetTrigger("isDead"); 
+		m_dashBehaviour.OnDash += behaviour => m_animator.SetTrigger("dash");
+		
+		CompanionController.OnCompanionThrown += (controller, companion) => m_animator.SetTrigger("attackCommand");
 	}
 	
 	// Update is called once per frame
