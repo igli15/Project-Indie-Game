@@ -10,6 +10,7 @@ public class EnemyZone : MonoBehaviour {
     private int m_numberOfActiveEnemies = 0;
     [Header("Safe to edit next varaibles")]
     public bool m_destroyEnemiesAfterPlayerLeaves = true;
+    public bool m_showPopUps = true;
     [Header("Dont edit next varaibles")]
     public bool isZoneCleared = false;
     public bool isPlayerInsideZone = false;
@@ -22,7 +23,7 @@ public class EnemyZone : MonoBehaviour {
 	void Update () {
         if (isZoneCleared) return;
 
-        if (m_numberOfActiveEnemies <= 0&&isPlayerInsideZone)
+        if (m_numberOfActiveEnemies <= 0&&isPlayerInsideZone&& m_showPopUps)
         {
             if (currentWaveIndex != -1)
             {
