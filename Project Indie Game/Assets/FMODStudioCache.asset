@@ -11,48 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: 114230554454383378}
-  - {fileID: 114187745836168136}
+  EditorBanks: []
   EditorEvents: []
-  MasterBankRef: {fileID: 114187745836168136}
-  StringsBankRef: {fileID: 114230554454383378}
-  stringsBankWriteTime: 636795311386505278
+  MasterBankRef: {fileID: 0}
+  StringsBankRef: {fileID: 0}
+  stringsBankWriteTime: 0
   cacheVersion: 2
---- !u!114 &114187745836168136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: D:\Den Haag\Program Files (x86)\IndieGame\Project Indie Game\Assets\FMOD\Build\Desktop\Master
-    Bank.bank
-  lastModified: 636795311386450708
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 12474
-  Exists: 1
---- !u!114 &114230554454383378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Path: Assets\FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636795311386505278
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 672
-  Exists: 1
